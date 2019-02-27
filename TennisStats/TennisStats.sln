@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisStats", "TennisStats.csproj", "{1DA8B151-98C7-461F-8456-8516599E13B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DA8B151-98C7-461F-8456-8516599E13B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DA8B151-98C7-461F-8456-8516599E13B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DA8B151-98C7-461F-8456-8516599E13B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DA8B151-98C7-461F-8456-8516599E13B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
