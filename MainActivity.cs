@@ -1,6 +1,8 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Widget;
 using Android.OS;
+using TennisStats.Service;
 
 namespace TennisStats
 {
@@ -18,9 +20,12 @@ namespace TennisStats
 
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.myButton);
+            Button button = FindViewById<Button>(Resource.Id.btnContinue3);
 
-            button.Click += delegate { button.Text = $"{count++} clicks!"; };
+            button.Click += delegate
+            {
+                NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
+            };
         }
     }
 }
