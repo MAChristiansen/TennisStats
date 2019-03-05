@@ -74,10 +74,32 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\MatchSetup.axml" />
     <AndroidResource Include="Resources\layout\MatchSetupCategory.axml" />
+    <AndroidResource Include="Resources\drawable\ace.png" />
+    <AndroidResource Include="Resources\drawable\approach.png" />
+    <AndroidResource Include="Resources\drawable\backhand.PNG" />
+    <AndroidResource Include="Resources\drawable\baseline.png" />
+    <AndroidResource Include="Resources\drawable\dropshot.png" />
+    <AndroidResource Include="Resources\drawable\fault.png" />
+    <AndroidResource Include="Resources\drawable\footfault.png" />
+    <AndroidResource Include="Resources\drawable\forced_error.png" />
+    <AndroidResource Include="Resources\drawable\forehand.png" />
+    <AndroidResource Include="Resources\drawable\in_play.png" />
+    <AndroidResource Include="Resources\drawable\lob.png" />
+    <AndroidResource Include="Resources\drawable\return_pic.png" />
+    <AndroidResource Include="Resources\drawable\service_winner.png" />
+    <AndroidResource Include="Resources\drawable\smash.png" />
+    <AndroidResource Include="Resources\drawable\unforced_error.png" />
+    <AndroidResource Include="Resources\drawable\volley.png" />
+    <AndroidResource Include="Resources\drawable\winner.png" />
+    <AndroidResource Include="Resources\anim\enter_from_left.xml" />
+    <AndroidResource Include="Resources\anim\enter_from_right.xml" />
+    <AndroidResource Include="Resources\anim\exit_to_left.xml" />
+    <AndroidResource Include="Resources\anim\exit_to_right.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
     <Folder Include="Service\" />
+    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\values\colors.xml" />
