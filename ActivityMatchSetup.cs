@@ -1,15 +1,8 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using TennisStats.Service;
 
 namespace TennisStats
 {
@@ -22,7 +15,13 @@ namespace TennisStats
 
             // Create your application here
             SetContentView(Resource.Layout.MatchSetup);
-
+            
+            if (savedInstanceState == null) {
+               
+                NavigationService.NavigateToFragment(FragmentManager, 
+                    FindViewById(Resource.Id.fragmentContainer),
+                    FragmentMatchSetupCategory.NewInstance());
+            }
         }
     }
 }
