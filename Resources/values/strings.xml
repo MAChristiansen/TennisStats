@@ -2,4 +2,20 @@
 <resources>
     <string name="hello">Hello World, Click Me!</string>
     <string name="app_name">TennisStats</string>
+    <string-array name="spinner_Match_Category">
+        <item>Single</item>
+        <item>Double</item>
+    </string-array>
+    <string-array name="spinner_Match_Form">
+        <item>Best of 1 Set</item>
+        <item>Best of 3 Sets</item>
+        <item>Best of 5 Sets</item>
+        <item>MatchTiebreak (Not Available)</item>
+        <item>Tiebreak (Not Available)</item>
+    </string-array>
+    <string-array name="spinner_Match_Type">
+        <item>Tournament Match</item>
+        <item>Team Match</item>
+        <item>Training Match</item>
+    </string-array>
 </resources>
