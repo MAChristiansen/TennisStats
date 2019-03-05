@@ -224,8 +224,14 @@ namespace TennisStats
 			// aapt resource value: 0x7f050016
 			public const int btnContinue3 = 2131034134;
 			
+			// aapt resource value: 0x7f05001b
+			public const int btnDouble = 2131034139;
+			
 			// aapt resource value: 0x7f050017
 			public const int btnLogIn = 2131034135;
+			
+			// aapt resource value: 0x7f050019
+			public const int btnSingle = 2131034137;
 			
 			// aapt resource value: 0x7f05000f
 			public const int chains = 2131034127;
@@ -236,11 +242,14 @@ namespace TennisStats
 			// aapt resource value: 0x7f050011
 			public const int direct = 2131034129;
 			
+			// aapt resource value: 0x7f05001a
+			public const int divider4 = 2131034138;
+			
 			// aapt resource value: 0x7f050001
 			public const int end = 2131034113;
 			
-			// aapt resource value: 0x7f050019
-			public const int fragmentContainer = 2131034137;
+			// aapt resource value: 0x7f050018
+			public const int fragmentContainer = 2131034136;
 			
 			// aapt resource value: 0x7f050006
 			public const int gone = 2131034118;
@@ -287,9 +296,6 @@ namespace TennisStats
 			// aapt resource value: 0x7f050005
 			public const int top = 2131034117;
 			
-			// aapt resource value: 0x7f050018
-			public const int tvMatchSetup = 2131034136;
-			
 			// aapt resource value: 0x7f05000b
 			public const int wrap = 2131034123;
 			
@@ -311,6 +317,9 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f030001
 			public const int MatchSetup = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int MatchSetupCategory = 2130903042;
 			
 			static Layout()
 			{
