@@ -34,7 +34,7 @@ namespace TennisStats
         {
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.MatchSetupCategory, container, false);
-            Console.WriteLine("Jeg er her!!");
+            
             return view;
         }
     }
