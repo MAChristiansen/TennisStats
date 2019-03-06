@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tennistats.Model
+namespace TennisStats.Model
 {
     public class Team
     {

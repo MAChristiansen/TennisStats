@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Tennistats.Model
+namespace TennisStats.Model
 {
     public class Club
     {

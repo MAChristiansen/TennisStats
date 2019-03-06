@@ -1,9 +1,8 @@
-﻿using System;
 using Android.App;
 using Android.OS;
-using TennisStats.Service;
+using TennisStats.control;
 
-namespace TennisStats
+namespace TennisStats.view
 {
     [Activity(Label = "MatchSetup")]
     public class ActivityMatchSetup : Activity

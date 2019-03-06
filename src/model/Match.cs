@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static Tennistats.Enum.MatchTypeEnum;
+using static TennisStats.Enum.MatchTypeEnum;
 
-namespace Tennistats.Model
+namespace TennisStats.Model
 {
     public class Match
     {

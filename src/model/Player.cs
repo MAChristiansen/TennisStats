@@ -1,8 +1,8 @@
 ﻿using System;
-using static Tennistats.Enum.GenderEnum;
-using static Tennistats.Enum.HandEnum;
+using static TennisStats.Enum.GenderEnum;
+using static TennisStats.Enum.HandEnum;
 
-namespace Tennistats.Model
+namespace TennisStats.Model
 {
     public class Player
     {

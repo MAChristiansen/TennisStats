@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using static Tennistats.Enum.SetTypeEnum;
+using static TennisStats.Enum.SetTypeEnum;
 
-namespace Tennistats.Model
+namespace TennisStats.Model
 {
     public class Set
     {

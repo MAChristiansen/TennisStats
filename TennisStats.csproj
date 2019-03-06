@@ -58,6 +58,14 @@
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="FragmentMatchSetupCategory.cs" />
     <Compile Include="FragmentMatchSetupTeam.cs" />
+    <Compile Include="src\enum\Enums.cs" />
+    <Compile Include="src\model\Club.cs" />
+    <Compile Include="src\model\Game.cs" />
+    <Compile Include="src\model\Match.cs" />
+    <Compile Include="src\model\Player.cs" />
+    <Compile Include="src\model\Point.cs" />
+    <Compile Include="src\model\Set.cs" />
+    <Compile Include="src\model\Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -102,6 +110,9 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Service\" />
     <Folder Include="Resources\anim\" />
+    <Folder Include="src\control" />
+    <Folder Include="src\view\activity" />
+    <Folder Include="src\view\fragment" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\values\colors.xml" />

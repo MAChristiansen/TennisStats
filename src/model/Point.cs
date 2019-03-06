@@ -1,10 +1,10 @@
 ﻿using System;
-using static Tennistats.Enum.HandPositionEnum;
-using static Tennistats.Enum.ServeStatusEnum;
-using static Tennistats.Enum.StrokeTypeEnum;
-using static Tennistats.Enum.WinReasonEnum;
+using static TennisStats.Enum.HandPositionEnum;
+using static TennisStats.Enum.ServeStatusEnum;
+using static TennisStats.Enum.StrokeTypeEnum;
+using static TennisStats.Enum.WinReasonEnum;
 
-namespace Tennistats.Model
+namespace TennisStats.Model
 {
     public class Point
     {
