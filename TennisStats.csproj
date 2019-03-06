@@ -57,6 +57,7 @@
     <Compile Include="ActivityMatchSetup.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="FragmentMatchSetupCategory.cs" />
+    <Compile Include="FragmentMatchSetupTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -95,6 +96,7 @@
     <AndroidResource Include="Resources\anim\enter_from_right.xml" />
     <AndroidResource Include="Resources\anim\exit_to_left.xml" />
     <AndroidResource Include="Resources\anim\exit_to_right.xml" />
+    <AndroidResource Include="Resources\layout\MatchSetupTeam.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -350,8 +350,23 @@ namespace TennisStats
 			// aapt resource value: 0x7f080019
 			public const int divider4 = 2131230745;
 			
+			// aapt resource value: 0x7f080028
+			public const int divider6 = 2131230760;
+			
 			// aapt resource value: 0x7f080001
 			public const int end = 2131230721;
+			
+			// aapt resource value: 0x7f080027
+			public const int etTeam1Player1 = 2131230759;
+			
+			// aapt resource value: 0x7f080024
+			public const int etTeam1Player2 = 2131230756;
+			
+			// aapt resource value: 0x7f080026
+			public const int etTeam2Player1 = 2131230758;
+			
+			// aapt resource value: 0x7f080025
+			public const int etTeam2Player2 = 2131230757;
 			
 			// aapt resource value: 0x7f080018
 			public const int fragmentContainer = 2131230744;
@@ -361,6 +376,9 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f080007
 			public const int invisible = 2131230727;
+			
+			// aapt resource value: 0x7f080020
+			public const int ivNext = 2131230752;
 			
 			// aapt resource value: 0x7f080002
 			public const int left = 2131230722;
@@ -401,11 +419,23 @@ namespace TennisStats
 			// aapt resource value: 0x7f080004
 			public const int start = 2131230724;
 			
+			// aapt resource value: 0x7f080021
+			public const int textView2 = 2131230753;
+			
 			// aapt resource value: 0x7f080014
 			public const int textView4 = 2131230740;
 			
+			// aapt resource value: 0x7f080023
+			public const int textView7 = 2131230755;
+			
+			// aapt resource value: 0x7f080022
+			public const int textView9 = 2131230754;
+			
 			// aapt resource value: 0x7f080005
 			public const int top = 2131230725;
+			
+			// aapt resource value: 0x7f08001f
+			public const int tvHeader = 2131230751;
 			
 			// aapt resource value: 0x7f08001d
 			public const int tvLabelCategory = 2131230749;
@@ -440,6 +470,9 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f040002
 			public const int MatchSetupCategory = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int MatchSetupTeam = 2130968579;
 			
 			static Layout()
 			{
