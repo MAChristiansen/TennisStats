@@ -18,10 +18,7 @@ namespace TennisStats.Service
             if (tag != null)
             {
                 fragmentManager.BeginTransaction()
-                                .SetCustomAnimations(Resource.Animation.enter_from_right,
-                                                    Resource.Animation.exit_to_left,
-                                                    Resource.Animation.enter_from_left,
-                                                    Resource.Animation.exit_to_right)
+                                .SetTransition(FragmentTransit.FragmentFade)
                                 .AddToBackStack(tag)
                                 .Replace(container.Id, newFragment, tag)
                                 .Commit();
