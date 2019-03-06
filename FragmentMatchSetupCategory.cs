@@ -11,11 +11,18 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using TennisStats.Service;
 
 namespace TennisStats
 {
     public class FragmentMatchSetupCategory : Fragment
     {
+        private Spinner sCategory;
+        private Spinner sForm;
+        private Spinner sType;
+
+        private ImageView ivNext;
+        
         public static FragmentMatchSetupCategory NewInstance() 
         {
             var bundle = new Bundle();
@@ -35,9 +42,11 @@ namespace TennisStats
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.MatchSetupCategory, container, false);
 
-            Spinner sCategory = view.FindViewById<Spinner>(Resource.Id.sCategory);
-            Spinner sForm = view.FindViewById<Spinner>(Resource.Id.sForm);
-            Spinner sType = view.FindViewById<Spinner>(Resource.Id.sType);
+            sCategory = view.FindViewById<Spinner>(Resource.Id.sCategory);
+            sForm = view.FindViewById<Spinner>(Resource.Id.sForm);
+            sType = view.FindViewById<Spinner>(Resource.Id.sType);
+            ivNext = view.FindViewById<ImageView>(Resource.Id.ivNext);
+            
             
             //Match Category spinner
             sCategory.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
@@ -59,6 +68,14 @@ namespace TennisStats
                 Activity, Resource.Array.spinner_Match_Type, Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
             sType.Adapter = adapterType;
+            
+            //Click listener
+            ivNext.Click += delegate
+            {
+                NavigationService.NavigateToFragment(Activity.FragmentManager, 
+                    Activity.FindViewById(Resource.Id.fragmentContainer), 
+                    FragmentMatchSetupTeam.NewInstance());
+            };
             
             return view;
         }
