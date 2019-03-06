@@ -110,7 +110,6 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Service\" />
     <Folder Include="Resources\anim\" />
-    <Folder Include="src\control" />
     <Folder Include="src\view\activity" />
     <Folder Include="src\view\fragment" />
   </ItemGroup>
