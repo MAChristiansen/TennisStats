@@ -18,7 +18,7 @@ namespace TennisStats
             
             if (savedInstanceState == null) {
                
-                NavigationService.NavigateToFragment(FragmentManager, 
+                NavigationService.AddFragment(FragmentManager, 
                     FindViewById(Resource.Id.fragmentContainer),
                     FragmentMatchSetupCategory.NewInstance());
             }

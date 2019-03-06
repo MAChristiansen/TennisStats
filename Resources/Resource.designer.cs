@@ -28,6 +28,53 @@ namespace TennisStats
 		{
 		}
 		
+		public partial class Animation
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int enter_from_left = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int enter_from_right = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int exit_to_left = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int exit_to_right = 2131034115;
+			
+			static Animation()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Animation()
+			{
+			}
+		}
+		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int spinner_Match_Category = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int spinner_Match_Form = 2131165185;
+			
+			// aapt resource value: 0x7f070002
+			public const int spinner_Match_Type = 2131165186;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -212,92 +259,195 @@ namespace TennisStats
 			}
 		}
 		
+		public partial class Drawable
+		{
+			
+			// aapt resource value: 0x7f020000
+			public const int ace = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int approach = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int backhand = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int baseline = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int dropshot = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int fault = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int footfault = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int forced_error = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int forehand = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int in_play = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int lob = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int return_pic = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int service_winner = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int smash = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int unforced_error = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int volley = 2130837519;
+			
+			// aapt resource value: 0x7f020010
+			public const int winner = 2130837520;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Drawable()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f05000e
-			public const int barrier = 2131034126;
+			// aapt resource value: 0x7f08000e
+			public const int barrier = 2131230734;
 			
-			// aapt resource value: 0x7f050000
-			public const int bottom = 2131034112;
+			// aapt resource value: 0x7f080000
+			public const int bottom = 2131230720;
 			
-			// aapt resource value: 0x7f050016
-			public const int btnContinue3 = 2131034134;
+			// aapt resource value: 0x7f080016
+			public const int btnContinue3 = 2131230742;
 			
-			// aapt resource value: 0x7f05001b
-			public const int btnDouble = 2131034139;
+			// aapt resource value: 0x7f080017
+			public const int btnLogIn = 2131230743;
 			
-			// aapt resource value: 0x7f050017
-			public const int btnLogIn = 2131034135;
+			// aapt resource value: 0x7f08000f
+			public const int chains = 2131230735;
 			
-			// aapt resource value: 0x7f050019
-			public const int btnSingle = 2131034137;
+			// aapt resource value: 0x7f080010
+			public const int dimensions = 2131230736;
 			
-			// aapt resource value: 0x7f05000f
-			public const int chains = 2131034127;
+			// aapt resource value: 0x7f080011
+			public const int direct = 2131230737;
 			
-			// aapt resource value: 0x7f050010
-			public const int dimensions = 2131034128;
+			// aapt resource value: 0x7f080019
+			public const int divider4 = 2131230745;
 			
-			// aapt resource value: 0x7f050011
-			public const int direct = 2131034129;
+			// aapt resource value: 0x7f080028
+			public const int divider6 = 2131230760;
 			
-			// aapt resource value: 0x7f05001a
-			public const int divider4 = 2131034138;
+			// aapt resource value: 0x7f080001
+			public const int end = 2131230721;
 			
-			// aapt resource value: 0x7f050001
-			public const int end = 2131034113;
+			// aapt resource value: 0x7f080027
+			public const int etTeam1Player1 = 2131230759;
 			
-			// aapt resource value: 0x7f050018
-			public const int fragmentContainer = 2131034136;
+			// aapt resource value: 0x7f080024
+			public const int etTeam1Player2 = 2131230756;
 			
-			// aapt resource value: 0x7f050006
-			public const int gone = 2131034118;
+			// aapt resource value: 0x7f080026
+			public const int etTeam2Player1 = 2131230758;
 			
-			// aapt resource value: 0x7f050007
-			public const int invisible = 2131034119;
+			// aapt resource value: 0x7f080025
+			public const int etTeam2Player2 = 2131230757;
 			
-			// aapt resource value: 0x7f050002
-			public const int left = 2131034114;
+			// aapt resource value: 0x7f080018
+			public const int fragmentContainer = 2131230744;
 			
-			// aapt resource value: 0x7f050012
-			public const int none = 2131034130;
+			// aapt resource value: 0x7f080006
+			public const int gone = 2131230726;
 			
-			// aapt resource value: 0x7f05000c
-			public const int packed = 2131034124;
+			// aapt resource value: 0x7f080007
+			public const int invisible = 2131230727;
 			
-			// aapt resource value: 0x7f050008
-			public const int parent = 2131034120;
+			// aapt resource value: 0x7f080020
+			public const int ivNext = 2131230752;
 			
-			// aapt resource value: 0x7f050009
-			public const int percent = 2131034121;
+			// aapt resource value: 0x7f080002
+			public const int left = 2131230722;
 			
-			// aapt resource value: 0x7f050003
-			public const int right = 2131034115;
+			// aapt resource value: 0x7f080012
+			public const int none = 2131230738;
 			
-			// aapt resource value: 0x7f05000a
-			public const int spread = 2131034122;
+			// aapt resource value: 0x7f08000c
+			public const int packed = 2131230732;
 			
-			// aapt resource value: 0x7f05000d
-			public const int spread_inside = 2131034125;
+			// aapt resource value: 0x7f080008
+			public const int parent = 2131230728;
 			
-			// aapt resource value: 0x7f050013
-			public const int standard = 2131034131;
+			// aapt resource value: 0x7f080009
+			public const int percent = 2131230729;
 			
-			// aapt resource value: 0x7f050004
-			public const int start = 2131034116;
+			// aapt resource value: 0x7f080003
+			public const int right = 2131230723;
 			
-			// aapt resource value: 0x7f050014
-			public const int textView4 = 2131034132;
+			// aapt resource value: 0x7f08001c
+			public const int sCategory = 2131230748;
 			
-			// aapt resource value: 0x7f050015
-			public const int textView5 = 2131034133;
+			// aapt resource value: 0x7f08001b
+			public const int sForm = 2131230747;
 			
-			// aapt resource value: 0x7f050005
-			public const int top = 2131034117;
+			// aapt resource value: 0x7f08001e
+			public const int sType = 2131230750;
 			
-			// aapt resource value: 0x7f05000b
-			public const int wrap = 2131034123;
+			// aapt resource value: 0x7f08000a
+			public const int spread = 2131230730;
+			
+			// aapt resource value: 0x7f08000d
+			public const int spread_inside = 2131230733;
+			
+			// aapt resource value: 0x7f080013
+			public const int standard = 2131230739;
+			
+			// aapt resource value: 0x7f080004
+			public const int start = 2131230724;
+			
+			// aapt resource value: 0x7f080021
+			public const int textView2 = 2131230753;
+			
+			// aapt resource value: 0x7f080014
+			public const int textView4 = 2131230740;
+			
+			// aapt resource value: 0x7f080023
+			public const int textView7 = 2131230755;
+			
+			// aapt resource value: 0x7f080022
+			public const int textView9 = 2131230754;
+			
+			// aapt resource value: 0x7f080005
+			public const int top = 2131230725;
+			
+			// aapt resource value: 0x7f08001f
+			public const int tvHeader = 2131230751;
+			
+			// aapt resource value: 0x7f08001d
+			public const int tvLabelCategory = 2131230749;
+			
+			// aapt resource value: 0x7f08001a
+			public const int tvLabelForm = 2131230746;
+			
+			// aapt resource value: 0x7f080015
+			public const int tvLabelType = 2131230741;
+			
+			// aapt resource value: 0x7f08000b
+			public const int wrap = 2131230731;
 			
 			static Id()
 			{
@@ -312,14 +462,17 @@ namespace TennisStats
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			// aapt resource value: 0x7f040000
+			public const int Main = 2130968576;
 			
-			// aapt resource value: 0x7f030001
-			public const int MatchSetup = 2130903041;
+			// aapt resource value: 0x7f040001
+			public const int MatchSetup = 2130968577;
 			
-			// aapt resource value: 0x7f030002
-			public const int MatchSetupCategory = 2130903042;
+			// aapt resource value: 0x7f040002
+			public const int MatchSetupCategory = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int MatchSetupTeam = 2130968579;
 			
 			static Layout()
 			{
@@ -334,8 +487,8 @@ namespace TennisStats
 		public partial class Mipmap
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			// aapt resource value: 0x7f030000
+			public const int Icon = 2130903040;
 			
 			static Mipmap()
 			{
@@ -350,11 +503,11 @@ namespace TennisStats
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			// aapt resource value: 0x7f060001
+			public const int app_name = 2131099649;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			// aapt resource value: 0x7f060000
+			public const int hello = 2131099648;
 			
 			static String()
 			{

@@ -5,30 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <Button
-            android:id="@+id/btnSingle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            android:stateListAnimator="@null"
-            android:text="Single"
-            app:layout_constraintBottom_toTopOf="@+id/divider4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-            android:id="@+id/btnDouble"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:stateListAnimator="@null"
-            android:text="Double"
-            app:layout_constraintEnd_toEndOf="@+id/btnSingle"
-            app:layout_constraintStart_toStartOf="@+id/btnSingle"
-            app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
     <View
             android:id="@+id/divider4"
             android:layout_width="395dp"
@@ -43,5 +19,63 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-      
+    <TextView
+            android:text="Match Form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLabelForm" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/divider4" app:layout_constraintStart_toStartOf="@+id/divider4"
+            android:layout_marginStart="32dp"/>
+    <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sForm" app:layout_constraintStart_toStartOf="@+id/tvLabelForm"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/divider4" android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"/>
+    <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sCategory" app:layout_constraintStart_toStartOf="@+id/sForm"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="@+id/sForm"
+            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvLabelForm"/>
+    <TextView
+            android:text="Match Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLabelCategory" app:layout_constraintStart_toStartOf="@+id/tvLabelForm"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/sCategory"/>
+    <TextView
+            android:text="Match Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLabelType" app:layout_constraintStart_toStartOf="@+id/tvLabelForm"
+            android:layout_marginTop="64dp"
+            app:layout_constraintTop_toBottomOf="@+id/sForm"/>
+    <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sType" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelType" app:layout_constraintStart_toStartOf="@+id/sForm"
+            app:layout_constraintEnd_toEndOf="@+id/sForm"/>
+    <TextView
+            android:text="Match Confirguration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvHeader" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvLabelCategory" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+    <ImageView
+            android:src="@drawable/ace"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/ivNext" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/sType" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+
 </android.support.constraint.ConstraintLayout>
