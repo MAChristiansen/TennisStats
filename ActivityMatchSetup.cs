@@ -19,7 +19,7 @@ namespace TennisStats
                
                 NavigationService.AddFragment(FragmentManager, 
                     FindViewById(Resource.Id.fragmentContainer),
-                    FragmentMatchSetupCategory.NewInstance());
+                    FragmentMatchSetupTeam.NewInstance());
             }
         }
     }
