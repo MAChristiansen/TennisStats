@@ -70,6 +70,8 @@
     <Compile Include="FragmentServeScenario.cs" />
     <Compile Include="FragmentScore.cs" />
     <Compile Include="FragmentWhoWon.cs" />
+    <Compile Include="FragmentHowWin.cs" />
+    <Compile Include="FragmentStrokeType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -113,6 +115,8 @@
     <AndroidResource Include="Resources\layout\ServScenario.axml" />
     <AndroidResource Include="Resources\layout\Score.axml" />
     <AndroidResource Include="Resources\layout\WhoWin.axml" />
+    <AndroidResource Include="Resources\layout\HowWin.axml" />
+    <AndroidResource Include="Resources\layout\StrokeType.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
