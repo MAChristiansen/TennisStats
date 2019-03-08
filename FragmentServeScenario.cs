@@ -59,10 +59,12 @@ namespace TennisStats
 
             ivFault.Click += delegate
             {
-                if (serve != 2)
+                if (serve == 2)
                 {
-                    Navigate(NewInstance(2));
+                    Navigate(FragmentScore.NewInstance());
+                    return;
                 }
+                Navigate(NewInstance(2));
             };
 
             ivAce.Click += delegate
@@ -77,10 +79,12 @@ namespace TennisStats
 
             ivFootFault.Click += delegate
             {
-                if (serve != 2)
+                if (serve == 2)
                 {
-                    Navigate(NewInstance(2));
+                    Navigate(FragmentScore.NewInstance());
+                    return;
                 }
+                Navigate(NewInstance(2));
             };
 
             ivServiceWinner.Click += delegate
