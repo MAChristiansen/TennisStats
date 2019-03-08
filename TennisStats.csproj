@@ -56,7 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActivityMatchSetup.cs" />
     <Compile Include="FragmentMatchSetupCategory.cs" />
-    <Compile Include="FragmentMatchSetupTeam.cs" />
+    <Compile Include="FragmentQuickMatchSetup.cs" />
     <Compile Include="src\enum\Enums.cs" />
     <Compile Include="src\model\Club.cs" />
     <Compile Include="src\model\Game.cs" />
@@ -67,6 +67,8 @@
     <Compile Include="src\model\Team.cs" />
     <Compile Include="src\Service\NavigationService.cs" />
     <Compile Include="ActivityMatch.cs" />
+    <Compile Include="FragmentServeScenario.cs" />
+    <Compile Include="FragmentScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -107,6 +109,8 @@
     <AndroidResource Include="Resources\anim\exit_to_right.xml" />
     <AndroidResource Include="Resources\layout\MatchSetupTeam.axml" />
     <AndroidResource Include="Resources\layout\Match.axml" />
+    <AndroidResource Include="Resources\layout\ServScenario.axml" />
+    <AndroidResource Include="Resources\layout\Score.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
