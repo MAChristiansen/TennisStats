@@ -72,9 +72,6 @@ namespace TennisStats
             //Click listener
             ivNext.Click += delegate
             {
-                NavigationService.NavigateToFragment(Activity.FragmentManager, 
-                    Activity.FindViewById(Resource.Id.fragmentContainer), 
-                    FragmentMatchSetupTeam.NewInstance());
             };
             
             return view;
