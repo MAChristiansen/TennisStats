@@ -49,21 +49,21 @@ namespace TennisStats
             
             
             //Match Category spinner
-            sCategory.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+            sCategory.ItemSelected += spinner_ItemSelected;
             var adapterCategory = ArrayAdapter.CreateFromResource (
               Activity, Resource.Array.spinner_Match_Category, Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
             sCategory.Adapter = adapterCategory;
             
             //Match Form spinner
-            sForm.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+            sForm.ItemSelected += spinner_ItemSelected;
             var adapterForm = ArrayAdapter.CreateFromResource (
                 Activity, Resource.Array.spinner_Match_Form, Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
             sForm.Adapter = adapterForm;
             
             //Match Type spinner
-            sType.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+            sType.ItemSelected += spinner_ItemSelected;
             var adapterType = ArrayAdapter.CreateFromResource (
                 Activity, Resource.Array.spinner_Match_Type, Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
