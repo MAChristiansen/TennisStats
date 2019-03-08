@@ -54,7 +54,7 @@ namespace TennisStats
             etTeam2Player2.Visibility = ViewStates.Invisible;
 
             //Match Category spinner
-            sCategory.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+            sCategory.ItemSelected += spinner_ItemSelected;
             var adapterCategory = ArrayAdapter.CreateFromResource (
                 Activity, Resource.Array.spinner_Match_Category, Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
@@ -71,9 +71,6 @@ namespace TennisStats
         private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
-            string toast = string.Format ("The Category is {0}", spinner.GetItemAtPosition (e.Position));
-            Toast.MakeText (Activity, toast, ToastLength.Long).Show ();
-
             if (spinner.GetItemAtPosition(e.Position).ToString().Equals("Single"))
             {
                 etTeam1Player2.Visibility = ViewStates.Invisible;
