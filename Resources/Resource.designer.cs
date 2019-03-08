@@ -341,6 +341,12 @@ namespace TennisStats
 			// aapt resource value: 0x7f080015
 			public const int btnQuickMatch = 2131230741;
 			
+			// aapt resource value: 0x7f08003f
+			public const int btnTeam1 = 2131230783;
+			
+			// aapt resource value: 0x7f080040
+			public const int btnTeam2 = 2131230784;
+			
 			// aapt resource value: 0x7f08000f
 			public const int chains = 2131230735;
 			
@@ -548,6 +554,9 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f040006
 			public const int ServScenario = 2130968582;
+			
+			// aapt resource value: 0x7f040007
+			public const int WhoWin = 2130968583;
 			
 			static Layout()
 			{

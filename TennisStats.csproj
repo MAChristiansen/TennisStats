@@ -69,6 +69,7 @@
     <Compile Include="ActivityMatch.cs" />
     <Compile Include="FragmentServeScenario.cs" />
     <Compile Include="FragmentScore.cs" />
+    <Compile Include="FragmentWhoWon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -111,6 +112,7 @@
     <AndroidResource Include="Resources\layout\Match.axml" />
     <AndroidResource Include="Resources\layout\ServScenario.axml" />
     <AndroidResource Include="Resources\layout\Score.axml" />
+    <AndroidResource Include="Resources\layout\WhoWin.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
