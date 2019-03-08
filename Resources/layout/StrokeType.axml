@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:id="@+id/layout"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context=".View.Activities.Login_Menu_Act"
+                                             tools:layout_editor_absoluteY="81dp">
+
+
+    <TextView
+            android:id="@+id/tvHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Stroke Type"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    
+    <ImageView
+            android:id="@+id/ivBaseline"
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/baseline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivApproach" />
+
+    <ImageView
+            android:id="@+id/ivApproach"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/approach"
+            app:layout_constraintEnd_toEndOf="@+id/ivSmash"
+            app:layout_constraintStart_toStartOf="@+id/ivSmash"
+            app:layout_constraintTop_toBottomOf="@+id/ivSmash" />
+
+    <ImageView
+            android:id="@+id/ivLob"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/lob"
+            app:layout_constraintEnd_toEndOf="@+id/ivDropShot"
+            app:layout_constraintStart_toStartOf="@+id/ivDropShot"
+            app:layout_constraintTop_toBottomOf="@+id/ivDropShot" />
+
+    <ImageView
+            android:id="@+id/ivReturn"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/"
+            app:layout_constraintEnd_toEndOf="@+id/ivVolley"
+            app:layout_constraintStart_toStartOf="@+id/ivVolley"
+            app:layout_constraintTop_toBottomOf="@+id/ivVolley" />
+
+    <ImageView
+            android:id="@+id/ivSmash"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/smash"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDropShot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivDropShot" />
+
+    <ImageView
+            android:id="@+id/ivVolley"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/volley"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivSmash"
+            app:layout_constraintTop_toTopOf="@+id/ivDropShot" />
+
+    <ImageView
+            android:id="@+id/ivDropShot"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/dropshot"
+            app:layout_constraintEnd_toStartOf="@+id/ivSmash"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+
+</android.support.constraint.ConstraintLayout>
