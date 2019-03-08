@@ -15,7 +15,7 @@ using TennisStats.Service;
 
 namespace TennisStats
 {
-    public class FragmentMatchSetupTeam : Fragment
+    public class FragmentQuickMatchSetup : Fragment
     {
         private Spinner sCategory;
 
@@ -23,11 +23,11 @@ namespace TennisStats
 
         private ImageView ivNext;
 
-        public static FragmentMatchSetupTeam NewInstance()
+        public static FragmentQuickMatchSetup NewInstance()
         {
             Bundle bundle = new Bundle();
             
-            return new FragmentMatchSetupTeam();
+            return new FragmentQuickMatchSetup();
         }
 
         public override void OnCreate(Bundle savedInstanceState)
