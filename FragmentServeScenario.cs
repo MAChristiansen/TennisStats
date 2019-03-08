@@ -72,7 +72,7 @@ namespace TennisStats
 
             ivInPlay.Click += delegate
             {
-                
+                Navigate(FragmentWhoWon.NewInstance());
             };
 
             ivFootFault.Click += delegate
