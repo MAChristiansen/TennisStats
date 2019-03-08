@@ -26,10 +26,12 @@ namespace TennisStats
 
             // Create your application here
             SetContentView(Resource.Layout.Match);
-
-            fragmentContainer = FindViewById<FrameLayout>(Resource.Id.fragmentContainer);
             
-           //NavigationService.AddFragment(FragmentManager, fragmentContainer,);
+            //Creating first serve scenario
+            NavigationService.AddFragment(
+                FragmentManager, 
+                FindViewById<FrameLayout>(Resource.Id.fragmentContainer), 
+                FragmentServeScenario.NewInstance(1));
         }
     }
 }
