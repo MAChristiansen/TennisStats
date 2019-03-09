@@ -66,6 +66,7 @@
     <Compile Include="src\model\Point.cs" />
     <Compile Include="src\model\Set.cs" />
     <Compile Include="src\model\Team.cs" />
+    <Compile Include="LoginActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -105,6 +106,7 @@
     <AndroidResource Include="Resources\anim\exit_to_left.xml" />
     <AndroidResource Include="Resources\anim\exit_to_right.xml" />
     <AndroidResource Include="Resources\layout\MatchSetupTeam.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
