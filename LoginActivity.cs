@@ -19,6 +19,7 @@ namespace TennisStats
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.Login);
 
             // Create your application here
         }
