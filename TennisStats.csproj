@@ -119,6 +119,7 @@
     <AndroidResource Include="Resources\layout\HowWin.axml" />
     <AndroidResource Include="Resources\layout\StrokeType.axml" />
     <AndroidResource Include="Resources\layout\WhichHand.axml" />
+    <AndroidResource Include="Resources\layout\MatchStatistics.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
