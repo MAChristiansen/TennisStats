@@ -18,9 +18,11 @@ namespace TennisStats
 
             // Get our button from the layout resource,
             // and attach an event to it
+            Button button = FindViewById<Button>(Resource.Id.btnQuickMatch);
+
             Button button = FindViewById<Button>(Resource.Id.btnContinue3);
             Button btnLogin = FindViewById<Button>(Resource.Id.btnLogIn);
-            
+
             button.Click += delegate
             {
                 NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
@@ -30,4 +32,3 @@ namespace TennisStats
         }
     }
 }
-
