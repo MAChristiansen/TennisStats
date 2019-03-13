@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
@@ -27,7 +27,7 @@ namespace TennisStats
                 NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
             };
 
-            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(LoginActivity)); };
+            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLogin)); };
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using Android.Widget;
 namespace TennisStats
 {
     [Activity(Label = "LoginActivity")]
-    public class LoginActivity : Activity
+    public class ActivityLogin : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

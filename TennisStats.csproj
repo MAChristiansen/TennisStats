@@ -73,7 +73,7 @@
     <Compile Include="FragmentHowWin.cs" />
     <Compile Include="FragmentStrokeType.cs" />
     <Compile Include="FragmentWhichHand.cs" />
-    <Compile Include="LoginActivity.cs" />
+    <Compile Include="ActivityLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
