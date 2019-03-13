@@ -7,27 +7,46 @@ using static TennisStats.Enum.ServeStatusEnum;
 
 namespace TennisStats.src.Controller
 {
-    public class MatchController
+    public sealed class MatchController
     {
         private Match currentMatch;
         private Set currentSet;
         private Game currentGame;
+        public static MatchController instance = null;
+        private static readonly object padlock = new object();
 
-        public MatchController()
+        MatchController(){}
+
+        public static MatchController Instance
         {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new MatchController();
+                    }
+                    return instance;
+                }
+            }
         }
+
 
         /*
          *  Creates a new match.
          *  Instantializes a match, set and game.        
-         */        
-        public void CreateMatch(string matchId, string team1Id, string team2Id, MatchParticipants participants)
+         */
+        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants)
         {
-            //TODO generer et matchid
+            //TODO generer bedre id
+            string matchId = team1Id + team2Id;
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).build();
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
+
+            Console.WriteLine("Match created: {0}", matchId);
         }
 
         /*
@@ -52,6 +71,8 @@ namespace TennisStats.src.Controller
             {
                 GivePointToTeam(currentMatch.Team2Id);
             }
+
+            Console.WriteLine("ACE!! Server: {0}, team1: {1}, team2: {2}", currentGame.ServerId, currentGame.lastScoreTeam1, currentGame.lastScoreTeam2);
 
             //Add the point to the game.
             currentGame.Points.Add(p);
