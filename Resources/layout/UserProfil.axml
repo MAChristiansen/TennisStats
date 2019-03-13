@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityUserProfil">
+
+    <TextView
+        android:id="@+id/tvProfilName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ProfilName"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btOverall"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Overall"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfilName" />
+
+    <Button
+        android:id="@+id/btLastYear"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:text="Last Year"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btOverall"
+        app:layout_constraintStart_toEndOf="@+id/btOverall"
+        app:layout_constraintTop_toTopOf="@+id/btOverall"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btLastMonth"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:text="Last Month"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btLastYear"
+        app:layout_constraintEnd_toStartOf="@+id/btMatch"
+        app:layout_constraintTop_toTopOf="@+id/btLastYear"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btMatch"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:text="Match"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btLastMonth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btLastMonth" />
+
+    <FrameLayout
+        android:id="@+id/FramelayoutProfil"
+        android:layout_width="377dp"
+        android:layout_height="390dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btLastYear"></FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

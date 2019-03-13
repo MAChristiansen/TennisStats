@@ -73,6 +73,7 @@
     <Compile Include="FragmentHowWin.cs" />
     <Compile Include="FragmentStrokeType.cs" />
     <Compile Include="FragmentWhichHand.cs" />
+    <Compile Include="ActivityUserProfil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -119,6 +120,7 @@
     <AndroidResource Include="Resources\layout\HowWin.axml" />
     <AndroidResource Include="Resources\layout\StrokeType.axml" />
     <AndroidResource Include="Resources\layout\WhichHand.axml" />
+    <AndroidResource Include="Resources\layout\UserProfil.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
