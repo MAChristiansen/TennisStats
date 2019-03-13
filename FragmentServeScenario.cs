@@ -12,12 +12,15 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
 
 namespace TennisStats
 {
     public class FragmentServeScenario : Fragment
     {
         private TextView tvHeader;
+
+        private static MatchController matchController;
 
         private ImageView ivAce, ivFault, ivInPlay, ivFootFault, ivServiceWinner;
 
@@ -27,7 +30,7 @@ namespace TennisStats
             bundle.PutInt("serve", serve);
 
             FragmentServeScenario newFragment = new FragmentServeScenario {Arguments = bundle};
-            
+            matchController = MatchController.Instance;
             return newFragment;
         }
 
@@ -61,7 +64,7 @@ namespace TennisStats
             {
                 if (serve == 2)
                 {
-                    Navigate(FragmentScore.NewInstance());
+                    Navigate(FragmentScore.NewInstance(new Bundle()));
                     return;
                 }
                 Navigate(NewInstance(2));
@@ -69,7 +72,13 @@ namespace TennisStats
 
             ivAce.Click += delegate
             {
-                Navigate(FragmentScore.NewInstance());
+                matchController.Ace();
+                Bundle bundle = new Bundle();
+                bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+                bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                Navigate(FragmentScore.NewInstance(bundle));
+
+
             };
 
             ivInPlay.Click += delegate
@@ -81,7 +90,7 @@ namespace TennisStats
             {
                 if (serve == 2)
                 {
-                    Navigate(FragmentScore.NewInstance());
+                    Navigate(FragmentScore.NewInstance(new Bundle()));
                     return;
                 }
                 Navigate(NewInstance(2));
@@ -89,7 +98,7 @@ namespace TennisStats
 
             ivServiceWinner.Click += delegate
             {
-                Navigate(FragmentScore.NewInstance());
+                Navigate(FragmentScore.NewInstance(new Bundle()));
             };
             
             return view;
