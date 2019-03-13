@@ -26,9 +26,12 @@ namespace TennisStats.Model
         public List<int> Team1Score { get { return _team1Score; } set { _team1Score = value; } }
         public List<int> Team2Score { get { return _team2Score; } set { _team2Score = value; } }
         public List<Point> Points { get { return _points; } set { _points = value; } }
+        public int lastScoreTeam1 { get { return _team1Score[_team1Score.Count - 1]; } }
+        public int lastScoreTeam2 { get { return _team2Score[_team2Score.Count - 1]; } }
+
 
         //Builder pattern
-        class GameBuilder {
+        public class GameBuilder {
 
             public string _winnerId;
             public string _serverId;
