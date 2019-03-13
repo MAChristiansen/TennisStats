@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app1="http://schemas.android.com/apk/res/com.grp42.tennisstats"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,6 +21,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+            android:id="@+id/txtLoginUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="User name"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/txtLoginPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     
     <EditText
             android:id="@+id/txtLoginPassword"
@@ -36,20 +51,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-            android:id="@+id/txtLoginUsername"
+    
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="User name"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/txtLoginPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintLeft_toLeftOf="@+id/txtLoginPassword"
+            app:layout_constraintRight_toRightOf="@+id/txtLoginPassword"
+            app:layout_constraintTop_toBottomOf="@+id/txtLoginPassword"
+            android:text="Create an account if you do not already have one"/>
 
     <Button
             android:id="@+id/btnLogin"
