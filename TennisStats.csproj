@@ -74,6 +74,7 @@
     <Compile Include="FragmentStrokeType.cs" />
     <Compile Include="FragmentWhichHand.cs" />
     <Compile Include="ActivityLogin.cs" />
+    <Compile Include="ActivityCreateAccount.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -121,6 +122,7 @@
     <AndroidResource Include="Resources\layout\StrokeType.axml" />
     <AndroidResource Include="Resources\layout\WhichHand.axml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\CreateAccount.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
