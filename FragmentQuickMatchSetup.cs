@@ -17,7 +17,7 @@ namespace TennisStats
 {
     public class FragmentQuickMatchSetup : Fragment
     {
-        private Spinner sCategory;
+        private Spinner sCategory, sType;
 
         private EditText etTeam1Player1, etTeam1Player2, etTeam2Player1, etTeam2Player2;
 
@@ -38,14 +38,15 @@ namespace TennisStats
 
             // Create your fragment here
         }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            View view = inflater.Inflate(Resource.Layout.MatchSetupTeam, container, false);
+            View view = inflater.Inflate(Resource.Layout.QuickMatchSetup, container, false);
 
+            Activity.ActionBar.Title = "Quick Match Setup"; 
             
             sCategory = view.FindViewById<Spinner>(Resource.Id.sCategory);
+            sType = view.FindViewById<Spinner>(Resource.Id.sType);
             etTeam1Player1 = view.FindViewById<EditText>(Resource.Id.etTeam1Player1);
             etTeam1Player2 = view.FindViewById<EditText>(Resource.Id.etTeam1Player2);
             etTeam2Player1 = view.FindViewById<EditText>(Resource.Id.etTeam2Player1);
@@ -57,11 +58,22 @@ namespace TennisStats
             ivNext = view.FindViewById<ImageView>(Resource.Id.ivNext);
 
             //Match Category spinner
-            sCategory.ItemSelected += spinner_ItemSelected;
+            sCategory.ItemSelected += spinner_ItemSelected_Match_Category;
             var adapterCategory = ArrayAdapter.CreateFromResource (
-                Activity, Resource.Array.spinner_Match_Category, Android.Resource.Layout.SimpleSpinnerItem);
+                Activity, 
+                Resource.Array.spinner_Match_Category, 
+                Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
             sCategory.Adapter = adapterCategory;
+            
+            //Match Form spinner
+            sType.ItemSelected += spinner_ItemSelected_Match_Type;
+            var adapterForm = ArrayAdapter.CreateFromResource (
+                Activity, 
+                Resource.Array.spinner_Match_Form, 
+                Android.Resource.Layout.SimpleSpinnerItem);
+            adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            sType.Adapter = adapterForm;
 
             ivNext.Click += delegate
             {
@@ -71,7 +83,7 @@ namespace TennisStats
             return view;
         }
         
-        private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+        private void spinner_ItemSelected_Match_Category (object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
             if (spinner.GetItemAtPosition(e.Position).ToString().Equals("Single"))
@@ -88,6 +100,14 @@ namespace TennisStats
                 etTeam2Player2.Visibility = ViewStates.Visible;
                 tvChoosePlayer2Team2.Visibility = ViewStates.Visible;
             }
+        }
+
+        private void spinner_ItemSelected_Match_Type(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner) sender;
+
+            //TODO: Do something when choosing match type.
+
         }
     }
 }
