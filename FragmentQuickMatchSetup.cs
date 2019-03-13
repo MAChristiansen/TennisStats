@@ -23,6 +23,8 @@ namespace TennisStats
 
         private ImageView ivNext;
 
+        private TextView tvChoosePlayer1Team1, tvChoosePlayer2Team1, tvChoosePlayer1Team2, tvChoosePlayer2Team2;
+
         public static FragmentQuickMatchSetup NewInstance()
         {
             Bundle bundle = new Bundle();
@@ -48,10 +50,11 @@ namespace TennisStats
             etTeam1Player2 = view.FindViewById<EditText>(Resource.Id.etTeam1Player2);
             etTeam2Player1 = view.FindViewById<EditText>(Resource.Id.etTeam2Player1);
             etTeam2Player2 = view.FindViewById<EditText>(Resource.Id.etTeam2Player2);
+            tvChoosePlayer1Team1 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer1Team1);
+            tvChoosePlayer2Team1 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer2Team1);
+            tvChoosePlayer1Team2 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer1Team2);
+            tvChoosePlayer2Team2 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer2Team2);
             ivNext = view.FindViewById<ImageView>(Resource.Id.ivNext);
-            
-            etTeam1Player2.Visibility = ViewStates.Invisible;
-            etTeam2Player2.Visibility = ViewStates.Invisible;
 
             //Match Category spinner
             sCategory.ItemSelected += spinner_ItemSelected;
@@ -61,7 +64,7 @@ namespace TennisStats
             sCategory.Adapter = adapterCategory;
 
             ivNext.Click += delegate
-            {
+            {                
                 NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
             };
 
@@ -74,12 +77,16 @@ namespace TennisStats
             if (spinner.GetItemAtPosition(e.Position).ToString().Equals("Single"))
             {
                 etTeam1Player2.Visibility = ViewStates.Invisible;
+                tvChoosePlayer2Team1.Visibility = ViewStates.Invisible;
                 etTeam2Player2.Visibility = ViewStates.Invisible;
+                tvChoosePlayer2Team2.Visibility = ViewStates.Invisible;
             }
             else
             {
                 etTeam1Player2.Visibility = ViewStates.Visible;
+                tvChoosePlayer2Team1.Visibility = ViewStates.Visible;
                 etTeam2Player2.Visibility = ViewStates.Visible;
+                tvChoosePlayer2Team2.Visibility = ViewStates.Visible;
             }
         }
     }
