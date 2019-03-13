@@ -37,14 +37,12 @@ namespace TennisStats.Service
             if (tag != null)
             {
                 fragmentManager.BeginTransaction()
-                    .AddToBackStack(tag)
                     .Add(container.Id, newFragment, tag)
                     .Commit();
                 return;
             }
             
             fragmentManager.BeginTransaction()
-                .AddToBackStack(null)
                 .Add(container.Id, newFragment, tag)
                 .Commit();
         }

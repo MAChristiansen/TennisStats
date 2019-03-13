@@ -23,8 +23,10 @@
             android:text="Match Form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLabelForm" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/divider4" app:layout_constraintStart_toStartOf="@+id/divider4"
+            android:id="@+id/tvLabelForm" 
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/divider4" 
+            app:layout_constraintStart_toStartOf="@+id/divider4"
             android:layout_marginStart="32dp"/>
     <Spinner
             android:layout_width="0dp"
