@@ -75,6 +75,7 @@
     <Compile Include="FragmentWhichHand.cs" />
     <Compile Include="ActivityLogin.cs" />
     <Compile Include="ActivityCreateAccount.cs" />
+    <Compile Include="ActivityProfileSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -123,6 +124,7 @@
     <AndroidResource Include="Resources\layout\WhichHand.axml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
     <AndroidResource Include="Resources\layout\CreateAccount.axml" />
+    <AndroidResource Include="Resources\layout\ProfileSettings.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

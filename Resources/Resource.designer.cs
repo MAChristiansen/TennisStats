@@ -344,14 +344,17 @@ namespace TennisStats
 			// aapt resource value: 0x7f080021
 			public const int btnLogin = 2131230753;
 			
+			// aapt resource value: 0x7f080049
+			public const int btnProfileSettingsBirthday = 2131230793;
+			
 			// aapt resource value: 0x7f080022
 			public const int btnQuickMatch = 2131230754;
 			
-			// aapt resource value: 0x7f080055
-			public const int btnTeam1 = 2131230805;
+			// aapt resource value: 0x7f08005b
+			public const int btnTeam1 = 2131230811;
 			
-			// aapt resource value: 0x7f080056
-			public const int btnTeam2 = 2131230806;
+			// aapt resource value: 0x7f08005c
+			public const int btnTeam2 = 2131230812;
 			
 			// aapt resource value: 0x7f08000f
 			public const int chains = 2131230735;
@@ -365,8 +368,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f080019
 			public const int divider = 2131230745;
 			
-			// aapt resource value: 0x7f080053
-			public const int divider2 = 2131230803;
+			// aapt resource value: 0x7f080059
+			public const int divider2 = 2131230809;
 			
 			// aapt resource value: 0x7f08001b
 			public const int divider3 = 2131230747;
@@ -401,50 +404,50 @@ namespace TennisStats
 			// aapt resource value: 0x7f080007
 			public const int invisible = 2131230727;
 			
-			// aapt resource value: 0x7f080048
-			public const int ivAce = 2131230792;
-			
-			// aapt resource value: 0x7f08004c
-			public const int ivApproach = 2131230796;
+			// aapt resource value: 0x7f08004e
+			public const int ivAce = 2131230798;
 			
 			// aapt resource value: 0x7f080052
-			public const int ivBackHand = 2131230802;
+			public const int ivApproach = 2131230802;
 			
-			// aapt resource value: 0x7f08004b
-			public const int ivBaseline = 2131230795;
+			// aapt resource value: 0x7f080058
+			public const int ivBackHand = 2131230808;
+			
+			// aapt resource value: 0x7f080051
+			public const int ivBaseline = 2131230801;
+			
+			// aapt resource value: 0x7f080055
+			public const int ivDropShot = 2131230805;
+			
+			// aapt resource value: 0x7f08004c
+			public const int ivFault = 2131230796;
 			
 			// aapt resource value: 0x7f08004f
-			public const int ivDropShot = 2131230799;
-			
-			// aapt resource value: 0x7f080046
-			public const int ivFault = 2131230790;
-			
-			// aapt resource value: 0x7f080049
-			public const int ivFootFault = 2131230793;
+			public const int ivFootFault = 2131230799;
 			
 			// aapt resource value: 0x7f08001c
 			public const int ivForcedError = 2131230748;
 			
+			// aapt resource value: 0x7f08005a
+			public const int ivForeHand = 2131230810;
+			
+			// aapt resource value: 0x7f08004d
+			public const int ivInPlay = 2131230797;
+			
 			// aapt resource value: 0x7f080054
-			public const int ivForeHand = 2131230804;
-			
-			// aapt resource value: 0x7f080047
-			public const int ivInPlay = 2131230791;
-			
-			// aapt resource value: 0x7f08004e
-			public const int ivLob = 2131230798;
+			public const int ivLob = 2131230804;
 			
 			// aapt resource value: 0x7f08003d
 			public const int ivNext = 2131230781;
 			
+			// aapt resource value: 0x7f080056
+			public const int ivReturn = 2131230806;
+			
 			// aapt resource value: 0x7f080050
-			public const int ivReturn = 2131230800;
+			public const int ivServiceWinner = 2131230800;
 			
-			// aapt resource value: 0x7f08004a
-			public const int ivServiceWinner = 2131230794;
-			
-			// aapt resource value: 0x7f08004d
-			public const int ivSmash = 2131230797;
+			// aapt resource value: 0x7f080053
+			public const int ivSmash = 2131230803;
 			
 			// aapt resource value: 0x7f080029
 			public const int ivTeam1Serving = 2131230761;
@@ -455,20 +458,23 @@ namespace TennisStats
 			// aapt resource value: 0x7f08001d
 			public const int ivUnforcedError = 2131230749;
 			
-			// aapt resource value: 0x7f080051
-			public const int ivVolley = 2131230801;
+			// aapt resource value: 0x7f080057
+			public const int ivVolley = 2131230807;
 			
 			// aapt resource value: 0x7f08001a
 			public const int ivWinner = 2131230746;
 			
-			// aapt resource value: 0x7f080045
-			public const int layout = 2131230789;
+			// aapt resource value: 0x7f08004b
+			public const int layout = 2131230795;
 			
 			// aapt resource value: 0x7f080014
 			public const int lblCreateAccountHeader = 2131230740;
 			
 			// aapt resource value: 0x7f08001e
 			public const int lblLoginHeader = 2131230750;
+			
+			// aapt resource value: 0x7f080044
+			public const int lblPersonalInfo = 2131230788;
 			
 			// aapt resource value: 0x7f080002
 			public const int left = 2131230722;
@@ -512,6 +518,12 @@ namespace TennisStats
 			// aapt resource value: 0x7f080004
 			public const int start = 2131230724;
 			
+			// aapt resource value: 0x7f080048
+			public const int switchProfileSettingsGender = 2131230792;
+			
+			// aapt resource value: 0x7f080047
+			public const int switchProfileSettingsHand = 2131230791;
+			
 			// aapt resource value: 0x7f080026
 			public const int textView6 = 2131230758;
 			
@@ -542,8 +554,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f08002e
 			public const int tvPoints = 2131230766;
 			
-			// aapt resource value: 0x7f080044
-			public const int tvScore = 2131230788;
+			// aapt resource value: 0x7f08004a
+			public const int tvScore = 2131230794;
 			
 			// aapt resource value: 0x7f08002c
 			public const int tvSets = 2131230764;
@@ -583,6 +595,12 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f08001f
 			public const int txtLoginUsername = 2131230751;
+			
+			// aapt resource value: 0x7f080046
+			public const int txtProfileSettingsClub = 2131230790;
+			
+			// aapt resource value: 0x7f080045
+			public const int txtProfileSettingsName = 2131230789;
 			
 			// aapt resource value: 0x7f08000b
 			public const int wrap = 2131230731;
@@ -625,19 +643,22 @@ namespace TennisStats
 			public const int MatchSetupTeam = 2130968583;
 			
 			// aapt resource value: 0x7f040008
-			public const int Score = 2130968584;
+			public const int ProfileSettings = 2130968584;
 			
 			// aapt resource value: 0x7f040009
-			public const int ServScenario = 2130968585;
+			public const int Score = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int StrokeType = 2130968586;
+			public const int ServScenario = 2130968586;
 			
 			// aapt resource value: 0x7f04000b
-			public const int WhichHand = 2130968587;
+			public const int StrokeType = 2130968587;
 			
 			// aapt resource value: 0x7f04000c
-			public const int WhoWin = 2130968588;
+			public const int WhichHand = 2130968588;
+			
+			// aapt resource value: 0x7f04000d
+			public const int WhoWin = 2130968589;
 			
 			static Layout()
 			{
