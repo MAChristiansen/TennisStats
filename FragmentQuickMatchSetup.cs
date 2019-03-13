@@ -64,7 +64,7 @@ namespace TennisStats
             sCategory.Adapter = adapterCategory;
 
             ivNext.Click += delegate
-            {                
+            {
                 NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
             };
 
