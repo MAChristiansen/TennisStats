@@ -44,7 +44,10 @@ namespace TennisStats.Model
             public FaultCount _faultCount;
 
             //Mandatory variables
-            public PointBuilder() { }
+            public PointBuilder() 
+            {
+                _faultCount = FaultCount.DEFAULTSERVE;
+            }
 
             //optional variables
             public PointBuilder winnderId (string winnderId){ _winnerId = winnderId; return this; }

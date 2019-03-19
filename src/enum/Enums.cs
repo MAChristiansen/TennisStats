@@ -36,7 +36,7 @@ namespace TennisStats.Enum
 
     public class FaultCountEnum
     {
-        public enum FaultCount { FIRSTSERVE, SECONDSERVE }
+        public enum FaultCount { FIRSTSERVE, SECONDSERVE, DEFAULTSERVE }
     }
 
     public class WinReasonEnum {
