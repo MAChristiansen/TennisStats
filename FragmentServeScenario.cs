@@ -12,12 +12,16 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
+using static TennisStats.Enum.FaultCountEnum;
 
 namespace TennisStats
 {
     public class FragmentServeScenario : Fragment
     {
         private TextView tvHeader;
+
+        private static MatchController matchController;
 
         private ImageView ivAce, ivFault, ivInPlay, ivFootFault, ivServiceWinner;
 
@@ -27,7 +31,7 @@ namespace TennisStats
             bundle.PutInt("serve", serve);
 
             FragmentServeScenario newFragment = new FragmentServeScenario {Arguments = bundle};
-            
+            matchController = MatchController.Instance;
             return newFragment;
         }
 
@@ -59,17 +63,38 @@ namespace TennisStats
 
             ivFault.Click += delegate
             {
-                if (serve == 2)
+                // Run logic for the fault scenario
+                FaultCount currentFaultCount = matchController.Fault();
+
+                // Check the fault count - Second or First serve
+                if (currentFaultCount == FaultCount.SECONDSERVE)
                 {
-                    Navigate(FragmentScore.NewInstance());
+                    //Run code for the second serve scenario
+                    Bundle bundle = new Bundle();
+                    bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+                    bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                    Navigate(FragmentScore.NewInstance(bundle));
                     return;
                 }
+
+                /*
+                 *   It was a first serve, so reset the activity,
+                 *   but set the serve count to 2. This is used
+                 *   to set the header of the activity
+                 */
                 Navigate(NewInstance(2));
             };
 
             ivAce.Click += delegate
             {
-                Navigate(FragmentScore.NewInstance());
+                // Run logic for ace scenario
+                matchController.Ace();
+                Bundle bundle = new Bundle();
+                bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+                bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                Navigate(FragmentScore.NewInstance(bundle));
+
+
             };
 
             ivInPlay.Click += delegate
@@ -81,7 +106,7 @@ namespace TennisStats
             {
                 if (serve == 2)
                 {
-                    Navigate(FragmentScore.NewInstance());
+                    Navigate(FragmentScore.NewInstance(new Bundle()));
                     return;
                 }
                 Navigate(NewInstance(2));
@@ -89,7 +114,7 @@ namespace TennisStats
 
             ivServiceWinner.Click += delegate
             {
-                Navigate(FragmentScore.NewInstance());
+                Navigate(FragmentScore.NewInstance(new Bundle()));
             };
             
             return view;

@@ -12,12 +12,16 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
+using static TennisStats.Enum.MatchParticipantsEnum;
 
 namespace TennisStats
 {
     public class FragmentQuickMatchSetup : Fragment
     {
         private Spinner sCategory;
+
+        private static MatchController matchController;
 
         private EditText etTeam1Player1, etTeam1Player2, etTeam2Player1, etTeam2Player2;
 
@@ -26,6 +30,7 @@ namespace TennisStats
         public static FragmentQuickMatchSetup NewInstance()
         {
             Bundle bundle = new Bundle();
+            matchController = MatchController.Instance;
             
             return new FragmentQuickMatchSetup();
         }
@@ -62,6 +67,7 @@ namespace TennisStats
 
             ivNext.Click += delegate
             {
+                matchController.CreateMatch(etTeam1Player1.Text, etTeam2Player1.Text, MatchParticipants.SINGLE);
                 NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
             };
 
