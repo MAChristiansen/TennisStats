@@ -45,8 +45,6 @@ namespace TennisStats.src.Controller
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
-
-            Console.WriteLine("Match created: {0}", matchId);
         }
 
         /*
@@ -72,8 +70,6 @@ namespace TennisStats.src.Controller
                 GivePointToTeam(currentMatch.Team2Id);
             }
 
-            Console.WriteLine("ACE!! Server: {0}, team1: {1}, team2: {2}", currentGame.ServerId, currentGame.lastScoreTeam1, currentGame.lastScoreTeam2);
-
             //Add the point to the game.
             currentGame.Points.Add(p);
         }
@@ -83,7 +79,7 @@ namespace TennisStats.src.Controller
          *  This method is handles the "fault"-action
          * 
          */
-        public void Fault()
+        public FaultCount Fault()
         {
             FaultCount currentFaultCount = findFaultCount();
             //Create point descriping the action
@@ -93,13 +89,13 @@ namespace TennisStats.src.Controller
             pb.serveStatus(ServeStatus.FAULT);
 
             //Check if first serve
-            if (currentFaultCount==FaultCount.FIRSTSERVE)
+            if (currentFaultCount == FaultCount.FIRSTSERVE)
             {
                 pb.faultCount(FaultCount.FIRSTSERVE);
 
                 GiveEmptyPoints();
                 currentGame.Points.Add(pb.build());
-                return;
+                return currentFaultCount;
             }
 
 
@@ -120,8 +116,9 @@ namespace TennisStats.src.Controller
 
             //Add the point to the game
             currentGame.Points.Add(pb.build());
-        }
 
+            return currentFaultCount;
+        }
 
         /*
          *   Get the current score of the current set.
@@ -167,6 +164,7 @@ namespace TennisStats.src.Controller
          */        
          private void GivePointToTeam(string winnerId)
         {
+            // Check on which team the winner is, and give points accordingly
             if (winnerId.Equals(currentMatch.Team1Id))
             {
                 currentGame.Team1Score.Add(currentGame.lastScoreTeam1 + 1);
@@ -174,8 +172,8 @@ namespace TennisStats.src.Controller
             }
             else
             {
-                currentGame.Team1Score.Add(currentGame.lastScoreTeam1 + 1);
-                currentGame.Team2Score.Add(currentGame.lastScoreTeam2);
+                currentGame.Team1Score.Add(currentGame.lastScoreTeam1);
+                currentGame.Team2Score.Add(currentGame.lastScoreTeam2 + 1);
             }
         }
 
@@ -191,10 +189,14 @@ namespace TennisStats.src.Controller
 
         /*
          *   Service method that find out it is a first serve or second serve
+         * 
+         *   - If it is the first point given, it is a first serve
+         *   - If the former point (point.count - 1) was a first serve, the current is a secondserve
+         *   - If the former was a defaultserve (neither first, nor second serve) the current is firstserve
          */
         private FaultCount findFaultCount()
         {
-            //Check if last point was a firste serve point.
+
             if (currentGame.Points.Count > 0)
             {
                 if (currentGame.Points[currentGame.Points.Count - 1].FaultCount == FaultCount.FIRSTSERVE)

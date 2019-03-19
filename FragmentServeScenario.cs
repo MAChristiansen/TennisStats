@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
 using TennisStats.src.Controller;
+using static TennisStats.Enum.FaultCountEnum;
 
 namespace TennisStats
 {
@@ -62,16 +63,27 @@ namespace TennisStats
 
             ivFault.Click += delegate
             {
-                if (serve == 2)
+                // Run logic for the fault scenario
+                FaultCount currentFaultCount = matchController.Fault();
+
+                // Check the fault count - Second or First serve
+                if (currentFaultCount == FaultCount.SECONDSERVE)
                 {
-                    Navigate(FragmentScore.NewInstance(new Bundle()));
+                    //Run code for the second serve scenario
+                    Bundle bundle = new Bundle();
+                    bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+                    bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                    Navigate(FragmentScore.NewInstance(bundle));
                     return;
                 }
+
+                //Run code for the First serve scenario
                 Navigate(NewInstance(2));
             };
 
             ivAce.Click += delegate
             {
+                // Run logic for ace scenario
                 matchController.Ace();
                 Bundle bundle = new Bundle();
                 bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
