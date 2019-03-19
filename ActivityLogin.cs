@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using TennisStats.Service;
 
 namespace TennisStats
 {
@@ -21,7 +22,11 @@ namespace TennisStats
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Login);
 
-            // Create your application here
+            Button btnCreateAccount = FindViewById<Button>(Resource.Id.btnCreateAccount);
+            Button btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
+
+            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings)); };
+            btnCreateAccount.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityCreateAccount)); };
         }
     }
 }
