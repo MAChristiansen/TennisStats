@@ -52,7 +52,7 @@ namespace TennisStats
             NavigationService.NavigateToFragment(
                 FragmentManager,
                 Activity.FindViewById<FrameLayout>(Resource.Id.fragmentContainer),
-                FragmentScore.NewInstance());
+                FragmentScore.NewInstance(new Bundle()));
         }
     }
 }

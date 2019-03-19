@@ -17,11 +17,12 @@ namespace TennisStats
 {
     public class FragmentScore : Fragment
     {
-        public static FragmentScore NewInstance()
+        public static FragmentScore NewInstance(Bundle bundle)
         {
-            Bundle bundle = new Bundle();
-            
-            return new FragmentScore();
+            FragmentScore fragmentScore = new FragmentScore();
+            fragmentScore.Arguments = bundle;
+
+            return fragmentScore;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -36,7 +37,12 @@ namespace TennisStats
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.Score, container, false);
 
+            TextView tvScore = view.FindViewById<TextView>(Resource.Id.tvScore);
+
+            tvScore.Text = Arguments.GetInt("team1", 0)*15 + " - " + Arguments.GetInt("team2", 0)*15;
             Task.Delay(1000).ContinueWith(t=> FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive));
+
+
 
             return view;
         }
