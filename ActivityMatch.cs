@@ -109,7 +109,5 @@ namespace TennisStats
             tvTeam2Points.Text = matchController.GetCurrentGameScore()[1]*15 + "";
 
         }
-
-
     }
 }

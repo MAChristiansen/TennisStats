@@ -249,12 +249,97 @@ namespace TennisStats.src.Controller
             return FaultCount.FIRSTSERVE;
         }
 
+        /*
+         *   Helping method used to notify all observers
+         * 
+         */        
         private void updateObservers()
         {
+            //Update game status before notifying observers
+            updateGameStatus();
+
+            // If the game is not finished, notify with OnNext
             foreach (IObserver<Match> observer in matchObservers)
             {
                 observer.OnNext(currentMatch);
             }
+
+            // If the game is finished, notify with OnCompleted
+            //foreach (IObserver<Match> observer in matchObservers)
+            //{
+            //    observer.OnComplete(currentMatch);
+            //}
+        }
+
+        private void updateGameStatus()
+        {
+            /*
+             *   Checking if someone has won the current game:
+             * 
+             *   If someone has more than 1 score we check:
+             *   - Is the absolute value from the subtraction,
+             *     of the team scores more/equal than 2
+             *   - Who has the more points wins
+             *   
+             */
+            if (currentGame.lastScoreTeam1 > 0 || currentGame.lastScoreTeam2 > 0)
+            {
+                if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) > 2)
+                {
+                    if (currentGame.lastScoreTeam1 > currentGame.lastScoreTeam2)
+                    {
+                        //Team 1 has won this game
+                        registerGameWinner(currentMatch.Team1Id);
+                    }
+                    else
+                    {
+                        //Team 2 has won this game
+                        registerGameWinner(currentMatch.Team2Id);
+                    }
+                }
+            }
+
+            // Has somebody won the current Set?
+
+            // Has somebody won the match?
+        }
+        /*             
+         *   Following is executed when registering a winner:
+         *   - Set the winner id of current game
+         *   - Add the finished game to the current set
+         *   - Add a point to the winner in the set
+         *   - Create a new game
+         *   - find the new server of that game 
+         */            
+        private void registerGameWinner(string winnerId)
+        {
+
+            // Register the winner of the current game
+            currentGame.WinnerId = winnerId;
+            currentSet.Games.Add(currentGame);
+
+            // Give a point to the right team
+            if (winnerId.Equals(currentMatch.Team1Id))
+            {
+                currentSet.Team1Score += 1;
+            }
+            else
+            {
+                currentSet.Team2Score += 1;
+            }
+
+
+            // Create a new game
+            string newServer;
+            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+            {
+                newServer = currentMatch.Team2Id;
+            }
+            else
+            {
+                newServer = currentMatch.Team1Id;
+            }
+            currentGame = new Game.GameBuilder(newServer).build();
         }
     }
 }
