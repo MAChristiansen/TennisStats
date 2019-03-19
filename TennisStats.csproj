@@ -74,6 +74,7 @@
     <Compile Include="FragmentStrokeType.cs" />
     <Compile Include="FragmentWhichHand.cs" />
     <Compile Include="src\Controller\MatchController.cs" />
+    <Compile Include="Unsubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

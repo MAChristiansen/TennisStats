@@ -7,12 +7,14 @@ using static TennisStats.Enum.ServeStatusEnum;
 
 namespace TennisStats.src.Controller
 {
-    public sealed class MatchController
+    public sealed class MatchController : IObservable<Match>
     {
+        private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
+
         private Match currentMatch;
         private Set currentSet;
         private Game currentGame;
-        public static MatchController instance = null;
+        private static MatchController instance = null;
         private static readonly object padlock = new object();
 
         MatchController(){}
@@ -45,6 +47,9 @@ namespace TennisStats.src.Controller
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
+
+            // Update the observers
+            updateObservers();
         }
 
         /*
@@ -72,6 +77,9 @@ namespace TennisStats.src.Controller
 
             //Add the point to the game.
             currentGame.Points.Add(p);
+
+            //Update the observers
+            updateObservers();
         }
 
         /*
@@ -117,6 +125,9 @@ namespace TennisStats.src.Controller
             //Add the point to the game
             currentGame.Points.Add(pb.build());
 
+            //Update the observers
+            updateObservers();
+
             return currentFaultCount;
         }
 
@@ -156,13 +167,43 @@ namespace TennisStats.src.Controller
             return currentScore;
         }
 
+        /*
+         *   Get the current team names.
+         * 
+         *   First entry in the list is team1
+         *   Second entry in the list is team2        
+         * 
+         */        
+         public List<string> GetTeamNames()
+        {
+            List<string> teamNames = new List<string>();
+            teamNames.Add(currentMatch.Team1Id);
+            teamNames.Add(currentMatch.Team2Id);
+            return teamNames;
+        }
+
+        /*
+         *   Subscribe method used by the observerpattern
+         * 
+         */        
+        public IDisposable Subscribe(IObserver<Match> observer)
+        {
+            // Check whether observer is already registered. If not, add it
+            if (!matchObservers.Contains(observer))
+            {
+                matchObservers.Add(observer);
+                // Provide observer with existing data.
+                observer.OnNext(currentMatch);
+            }
+            return new Unsubscriber<Match>(matchObservers, observer);
+        }
 
 
         /*
          *  Helping method to provide points to teams.
          * 
-         */        
-         private void GivePointToTeam(string winnerId)
+         */
+        private void GivePointToTeam(string winnerId)
         {
             // Check on which team the winner is, and give points accordingly
             if (winnerId.Equals(currentMatch.Team1Id))
@@ -206,6 +247,14 @@ namespace TennisStats.src.Controller
             }
 
             return FaultCount.FIRSTSERVE;
+        }
+
+        private void updateObservers()
+        {
+            foreach (IObserver<Match> observer in matchObservers)
+            {
+                observer.OnNext(currentMatch);
+            }
         }
     }
 }
