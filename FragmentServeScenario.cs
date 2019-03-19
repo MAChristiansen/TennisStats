@@ -77,7 +77,11 @@ namespace TennisStats
                     return;
                 }
 
-                //Run code for the First serve scenario
+                /*
+                 *   It was a first serve, so reset the activity,
+                 *   but set the serve count to 2. This is used
+                 *   to set the header of the activity
+                 */
                 Navigate(NewInstance(2));
             };
 

@@ -67,8 +67,8 @@ namespace TennisStats
 
             ivNext.Click += delegate
             {
-                NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
                 matchController.CreateMatch(etTeam1Player1.Text, etTeam2Player1.Text, MatchParticipants.SINGLE);
+                NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
             };
 
             return view;
