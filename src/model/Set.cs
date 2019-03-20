@@ -8,6 +8,8 @@ namespace TennisStats.Model
     {
         private string _winnerId;
         private List<Game> _games;
+
+        //TODO HUSK AT SÆTTE DEM HER NÅR MAN TILFØJER GAMES
         private int _team1Score;
         private int _team2Score;
         private SetType _setType;
@@ -29,7 +31,7 @@ namespace TennisStats.Model
         public SetType SetType { get { return _setType; } set { _setType = value; } }
 
 
-        class SetBuilder {
+        public class SetBuilder {
             public string _winnerId;
             public List<Game> _games;
             public int _team1Score;

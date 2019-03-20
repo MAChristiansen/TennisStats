@@ -73,6 +73,8 @@
     <Compile Include="FragmentHowWin.cs" />
     <Compile Include="FragmentStrokeType.cs" />
     <Compile Include="FragmentWhichHand.cs" />
+    <Compile Include="src\Controller\MatchController.cs" />
+    <Compile Include="Unsubscriber.cs" />
     <Compile Include="src\Service\SetupService.cs" />
     <Compile Include="src\Service\PointService.cs" />
   </ItemGroup>
@@ -125,6 +127,7 @@
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\anim\" />
+    <Folder Include="src\Controller\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\drawable\navigate_next_black.png" />

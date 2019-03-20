@@ -14,6 +14,11 @@ namespace TennisStats.Enum
         public enum Gender { MALE, FEMALE }
     }
 
+    public class MatchParticipantsEnum
+    {
+        public enum MatchParticipants { SINGLE, DOUBLE }
+    }
+
     public class MatchTypeEnum
     {
         public enum MatchType { ONESETTER, THREESETTER, FIVESETTER, MATCHTIEBREAK, TIEBREAK }
@@ -27,6 +32,11 @@ namespace TennisStats.Enum
     // These enums are used in the Point class to express how a point is won.
     public class ServeStatusEnum {
         public enum ServeStatus { ACE, SERVEWINNER, FOOTFAULT, FAULT, INPLAY };
+    }
+
+    public class FaultCountEnum
+    {
+        public enum FaultCount { FIRSTSERVE, SECONDSERVE, DEFAULTSERVE }
     }
 
     public class WinReasonEnum {

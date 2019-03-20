@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using static TennisStats.Enum.MatchTypeEnum;
-
+using static TennisStats.Enum.MatchParticipantsEnum;
 namespace TennisStats.Model
 {
     public class Match
@@ -15,7 +15,12 @@ namespace TennisStats.Model
         private long _startTime;
         private long _endTime;
 
+        //TODO HUSK AT SÆTTE DEN HER NÅR MAN TILFØJER SETS!!
+        private int _team1score;
+        private int _team2score;
+
         private MatchType _type;
+        private MatchParticipants _participants;
 
         private List<Set> _sets;
 
@@ -30,6 +35,7 @@ namespace TennisStats.Model
             _startTime = mb._startTime;
             _endTime = mb._endTime;
             _type = mb._matchType;
+            _participants = mb._participants;
             _sets = mb._sets;
         }
 
@@ -41,10 +47,13 @@ namespace TennisStats.Model
         public string WinnerId { get { return _winnerId; } set { _winnerId = value; } }
         public long StartTime { get { return _startTime; } set { _startTime = value; } }
         public long EndTime { get { return _endTime; } set { _endTime = value; } }
+        public int Team1Score { get { return _team1score; } set { _team1score = value; } }
+        public int Team2Score { get { return _team2score; } set { _team2score = value; } }
         public MatchType Type { get { return _type; } set { _type = value; } }
+        public MatchParticipants Participants { get { return _participants; } set { _participants = value; } }
         public List<Set> Sets { get { return _sets; } set { _sets = value; } }
 
-        class MatchBuilder {
+        public class MatchBuilder {
             public string _matchId;
             public string _team1Id;
             public string _team2Id;
@@ -56,14 +65,17 @@ namespace TennisStats.Model
             public long _endTime;
 
             public MatchType _matchType;
+            public MatchParticipants _participants;
 
             public List<Set> _sets;
 
             //Mandatory variables
-            public MatchBuilder(string matchId, string team1Id, string team2Id) {
+            public MatchBuilder(string matchId, string team1Id, string team2Id, MatchParticipants participants) {
                 _matchId = matchId;
                 _team1Id = team1Id;
                 _team2Id = team2Id;
+
+                _participants = participants;
 
                 //Initialize list
                 _sets = new List<Set>();
