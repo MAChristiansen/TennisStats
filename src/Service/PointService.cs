@@ -1,6 +1,7 @@
 ﻿using System;
 using TennisStats.Enum;
 using TennisStats.Model;
+using static TennisStats.Enum.GameTypeEnum;
 using static TennisStats.Enum.MatchTypeEnum;
 
 namespace TennisStats.src.Service
@@ -26,8 +27,11 @@ namespace TennisStats.src.Service
         }
         public PointService() { }
 
-        public string convertPoints(int pointToConvert, int opponent) {
-        
+        public string convertPoints(int pointToConvert, int opponent, GameType gameType) {
+
+            if (gameType == GameType.TIEBREAK) return pointToConvert + "";
+
+
             if (pointToConvert < 4 && opponent < 4) {
                 switch (pointToConvert) {
                     case 0:
