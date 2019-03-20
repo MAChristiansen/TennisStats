@@ -104,17 +104,36 @@ namespace TennisStats
 
             ivFootFault.Click += delegate
             {
-                if (serve == 2)
+                // Run logic for the fault scenario
+                FaultCount currentFaultCount = matchController.Fault();
+
+                // Check the fault count - Second or First serve
+                if (currentFaultCount == FaultCount.SECONDSERVE)
                 {
-                    Navigate(FragmentScore.NewInstance(new Bundle()));
+                    //Run code for the second serve scenario
+                    Bundle bundle = new Bundle();
+                    bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+                    bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                    Navigate(FragmentScore.NewInstance(bundle));
                     return;
                 }
+
+                /*
+                 *   It was a first serve, so reset the activity,
+                 *   but set the serve count to 2. This is used
+                 *   to set the header of the activity
+                 */
                 Navigate(NewInstance(2));
             };
 
             ivServiceWinner.Click += delegate
             {
-                Navigate(FragmentScore.NewInstance(new Bundle()));
+                // Run logic for ace scenario
+                matchController.Ace();
+                Bundle bundle = new Bundle();
+                bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+                bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                Navigate(FragmentScore.NewInstance(bundle));
             };
             
             return view;
