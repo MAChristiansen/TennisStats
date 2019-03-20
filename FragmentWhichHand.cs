@@ -12,12 +12,17 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
+using static TennisStats.Enum.HandPositionEnum;
+using static TennisStats.Enum.StrokeTypeEnum;
 
 namespace TennisStats
 {
     public class FragmentWhichHand : Fragment
     {
         private ImageView ivForeHand, ivBackHand;
+
+        private MatchController matchController;
 
         public static FragmentWhichHand NewInstance()
         {
@@ -29,7 +34,7 @@ namespace TennisStats
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            matchController = MatchController.Instance;
             // Create your fragment here
         }
 
@@ -41,18 +46,22 @@ namespace TennisStats
             ivForeHand = view.FindViewById<ImageView>(Resource.Id.ivForeHand);
             ivBackHand = view.FindViewById<ImageView>(Resource.Id.ivBackHand);
 
-            ivForeHand.Click += delegate { Navigate(); };
-            ivBackHand.Click += delegate { Navigate(); };    
+            ivForeHand.Click += delegate { MatchController.inPlayPB.handPosition(HandPosition.FORHAND); Navigate(); };
+            ivBackHand.Click += delegate { MatchController.inPlayPB.handPosition(HandPosition.BACKHAND); Navigate(); };    
             
             return view;
         }
 
         private void Navigate()
         {
+            MatchController.Instance.inPlay();
+            Bundle bundle = new Bundle();
+            bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
+            bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
             NavigationService.NavigateToFragment(
                 FragmentManager,
                 Activity.FindViewById<FrameLayout>(Resource.Id.fragmentContainer),
-                FragmentScore.NewInstance(new Bundle()));
+                FragmentScore.NewInstance(bundle));
         }
     }
 }
