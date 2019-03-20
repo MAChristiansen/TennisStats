@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
+using TennisStats.src.Service;
 
 namespace TennisStats
 {
@@ -38,8 +39,9 @@ namespace TennisStats
             View view = inflater.Inflate(Resource.Layout.Score, container, false);
 
             TextView tvScore = view.FindViewById<TextView>(Resource.Id.tvScore);
-
-            tvScore.Text = Arguments.GetInt("team1", 0)*15 + " - " + Arguments.GetInt("team2", 0)*15;
+            int team1Score = Arguments.GetInt("team1", 0);
+            int team2Score = Arguments.GetInt("team2", 0);
+            tvScore.Text = PointService.Instance.convertPoints(team1Score, team2Score) + " - " + PointService.Instance.convertPoints(team2Score, team1Score);
             Task.Delay(1000).ContinueWith(t=> FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive));
 
 
