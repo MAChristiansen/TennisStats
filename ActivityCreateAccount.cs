@@ -15,6 +15,7 @@ using Firebase.Database.Query;
 using TennisStats.Enum;
 using TennisStats.Model;
 using TennisStats.src.Controller;
+using TennisStats.Service;
 
 namespace TennisStats
 {
@@ -47,17 +48,22 @@ namespace TennisStats
                     _existingUsernames.Add(user.Key);
                 }
                 
-                Account account = new Account(txtUsername.Text.Trim(), txtPassword.Text.Trim());
+                //Account account = new Account(txtUsername.Text.Trim(), txtPassword.Text.Trim());
+
+                Player player = new Player.PlayerBuilder(txtUsername.Text.Trim())
+                    .Password(txtPassword.Text.Trim())
+                    .build();
                 
                 // If username already exists
-                if (_existingUsernames.Contains(account.Username))
+                if (_existingUsernames.Contains(player.PlayerId))
                 {
                     //TODO Show alert 
                     Console.WriteLine("User already exists");
                 }
                 else
                 {
-                    await firebaseClient.Child(FBTables.FbUser).Child(account.Username).PutAsync(account);
+                    await firebaseClient.Child(FBTables.FbUser).Child(player.PlayerId).PutAsync(player);
+                    NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings));
                 }
             };
         }
