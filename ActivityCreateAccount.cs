@@ -21,7 +21,7 @@ namespace TennisStats
     [Activity(Label = "ActivityCreateAccount")]
     public class ActivityCreateAccount : Activity
     {
-        private List<string> _existingUsernames = new List<string>();
+        private readonly List<string> _existingUsernames = new List<string>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -30,10 +30,13 @@ namespace TennisStats
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
             
             Button btnCreateAccount = FindViewById<Button>(Resource.Id.btnCreateAccount);
-            
+            EditText txtUsername = FindViewById<EditText>(Resource.Id.txtCreateAccountUsername);
+            EditText txtPassword = FindViewById<EditText>(Resource.Id.txtCreateAccountPassword);
             
             btnCreateAccount.Click += async delegate
             {
+                //TODO Show alert if one of the fields is empty
+                
                 //TODO Put in a spinner
                 
                 // Get all usernames from database
@@ -42,20 +45,19 @@ namespace TennisStats
                 foreach (var user in users)
                 {
                     _existingUsernames.Add(user.Key);
-                    Console.WriteLine("User key is: " + user.Key);
                 }
                 
-                Player player = new Player.PlayerBuilder("21", "jaafar", "København", HandEnum.Hand.RIGHT, GenderEnum.Gender.MALE, 100).build();
-
+                Account account = new Account(txtUsername.Text.Trim(), txtPassword.Text.Trim());
+                
                 // If username already exists
-                if (_existingUsernames.Contains(player.Name))
+                if (_existingUsernames.Contains(account.Username))
                 {
                     //TODO Show alert 
                     Console.WriteLine("User already exists");
                 }
                 else
                 {
-                    await firebaseClient.Child(FBTables.FbUser).Child("jaafar").PutAsync(player);
+                    await firebaseClient.Child(FBTables.FbUser).Child(account.Username).PutAsync(account);
                 }
             };
         }
