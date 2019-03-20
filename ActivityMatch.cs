@@ -31,6 +31,9 @@ namespace TennisStats
         private TextView tvTeam1Points;
         private TextView tvTeam2Points;
 
+        private ImageView ivTeam1Serving;
+        private ImageView ivTeam2Serving;
+
         private MatchController matchController;
         private PointService pointService;
 
@@ -60,10 +63,13 @@ namespace TennisStats
             tvTeam1Points = FindViewById<TextView>(Resource.Id.tvTeam1Points);
             tvTeam2Points = FindViewById<TextView>(Resource.Id.tvTeam2Points);
 
+            ivTeam1Serving = FindViewById<ImageView>(Resource.Id.ivTeam1Serving);
+            ivTeam2Serving = FindViewById<ImageView>(Resource.Id.ivTeam2Serving);
+
             // set the team names
             tvTeam1Names.Text = matchController.GetTeamNames()[0];
             tvTeam2Names.Text = matchController.GetTeamNames()[1];
-
+            setServerUI();
 
 
             //Creating first serve scenario
@@ -108,9 +114,26 @@ namespace TennisStats
             tvTeam2Games.Text = matchController.GetCurrentSetScore()[1] + "";
 
             //Update the score of the game
-            tvTeam1Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[0], matchController.GetCurrentGameScore()[1]);
-            tvTeam2Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[1], matchController.GetCurrentGameScore()[0]);
+            tvTeam1Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[0], matchController.GetCurrentGameScore()[1], matchController.getCurrentGameType());
+            tvTeam2Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[1], matchController.GetCurrentGameScore()[0], matchController.getCurrentGameType());
 
+            setServerUI();
+        }
+
+
+        private void setServerUI()
+        {
+            if (matchController.getCurrentGame().ServerId.Equals(matchController.GetTeamNames()[0])){
+                //team 1 is serving
+                ivTeam1Serving.Visibility = Android.Views.ViewStates.Visible;
+                ivTeam2Serving.Visibility = Android.Views.ViewStates.Invisible;
+            }
+            else
+            {
+                //team 2 is serving
+                ivTeam1Serving.Visibility = Android.Views.ViewStates.Invisible;
+                ivTeam2Serving.Visibility = Android.Views.ViewStates.Visible;
+            }
         }
     }
 }

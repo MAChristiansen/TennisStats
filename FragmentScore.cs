@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
+using TennisStats.src.Controller;
 using TennisStats.src.Service;
 
 namespace TennisStats
@@ -37,11 +38,11 @@ namespace TennisStats
         {
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.Score, container, false);
-
+            MatchController matchController = MatchController.Instance;
             TextView tvScore = view.FindViewById<TextView>(Resource.Id.tvScore);
             int team1Score = Arguments.GetInt("team1", 0);
             int team2Score = Arguments.GetInt("team2", 0);
-            tvScore.Text = PointService.Instance.convertPoints(team1Score, team2Score) + " - " + PointService.Instance.convertPoints(team2Score, team1Score);
+            tvScore.Text = PointService.Instance.convertPoints(team1Score, team2Score, matchController.getCurrentGameType()) + " - " + PointService.Instance.convertPoints(team2Score, team1Score, matchController.getCurrentGameType());
             Task.Delay(1000).ContinueWith(t=> FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive));
 
 
