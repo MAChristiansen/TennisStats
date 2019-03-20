@@ -10,6 +10,7 @@ using Android.Widget;
 using TennisStats.Model;
 using TennisStats.Service;
 using TennisStats.src.Controller;
+using TennisStats.src.Service;
 
 namespace TennisStats
 {
@@ -31,6 +32,7 @@ namespace TennisStats
         private TextView tvTeam2Points;
 
         private MatchController matchController;
+        private PointService pointService;
 
         private Unsubscriber<Match> unsubscriber;
 
@@ -78,13 +80,14 @@ namespace TennisStats
         /*
          *   Implementation of the observerpattern!
          * 
-         *   OnNext is called when information has been updated
-         * 
+         *   - OnNext is called when information has been updated
+         *   - OnCompleted is called when the game is finished
          * 
          */
         public void OnCompleted()
         {
-            throw new NotImplementedException();
+            //TODO når der er fundet en vinder skal der vises en statestik side.
+            Console.WriteLine("The match is done!!");
         }
 
         public void OnError(Exception error)
@@ -95,6 +98,7 @@ namespace TennisStats
         public void OnNext(Match value)
         {
             matchController = MatchController.Instance;
+            pointService = PointService.Instance;
             //Update the score of the match
             tvTeam1Sets.Text =  matchController.GetCurrentMatchScore()[0] + "";
             tvTeam2Sets.Text = matchController.GetCurrentMatchScore()[1] + "";
@@ -103,10 +107,9 @@ namespace TennisStats
             tvTeam1Games.Text = matchController.GetCurrentSetScore()[0] + "";
             tvTeam2Games.Text = matchController.GetCurrentSetScore()[1] + "";
 
-            //TODO det her skal igennem en "konverter". Pt ganger jeg bare med 15
             //Update the score of the game
-            tvTeam1Points.Text = matchController.GetCurrentGameScore()[0]*15 + "";
-            tvTeam2Points.Text = matchController.GetCurrentGameScore()[1]*15 + "";
+            tvTeam1Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[0], matchController.GetCurrentGameScore()[1]);
+            tvTeam2Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[1], matchController.GetCurrentGameScore()[0]);
 
         }
     }
