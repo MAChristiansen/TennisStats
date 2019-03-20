@@ -12,15 +12,16 @@ namespace TennisStats.src.Controller
 {
     public sealed class MatchController : IObservable<Match>
     {
-        private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
+        public static Point.PointBuilder inPlayPB { get; set; }
 
+        private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
         private Match currentMatch;
         private Set currentSet;
         private Game currentGame;
         private static MatchController instance = null;
         private static readonly object padlock = new object();
 
-        MatchController(){}
+        MatchController(){ inPlayPB = new Point.PointBuilder(); }
 
         public static MatchController Instance
         {
@@ -49,7 +50,7 @@ namespace TennisStats.src.Controller
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
-            currentGame = new Game.GameBuilder(team1Id).gameType(GameType.TIEBREAK).build();
+            currentGame = new Game.GameBuilder(team1Id).build();
 
             // Update the observers
             updateObservers();
@@ -64,12 +65,12 @@ namespace TennisStats.src.Controller
         {
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
-            pb.winnderId(currentGame.ServerId);
+            pb.winnderId(currentGame.Servers[currentGame.Servers.Count-1]);
             pb.serveStatus(ServeStatus.ACE);
             Point p = pb.build();
 
             // If the server was team 1, add the point to him, else add to team 2
-            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+            if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
             {
                 GivePointToTeam(currentMatch.Team1Id);
             }
@@ -80,6 +81,8 @@ namespace TennisStats.src.Controller
 
             //Add the point to the game.
             currentGame.Points.Add(p);
+
+            changeServer();
 
             //Update the observers
             updateObservers();
@@ -114,7 +117,7 @@ namespace TennisStats.src.Controller
             pb.faultCount(FaultCount.SECONDSERVE);
 
             // Find the winner and give him point
-            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+            if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
             {
                 pb.winnderId(currentMatch.Team2Id);
                 GivePointToTeam(currentMatch.Team2Id);
@@ -131,7 +134,58 @@ namespace TennisStats.src.Controller
             //Update the observers
             updateObservers();
 
+            changeServer();
+
             return currentFaultCount;
+        }
+
+
+        public void inPlay()
+        {
+            // Build the point from the point builder
+            Point point = inPlayPB.build();
+
+            //Reset the point builder
+            inPlayPB = new Point.PointBuilder();
+
+            // Give points to the winner team
+            GivePointToTeam(point.WinnerId);
+            currentGame.Points.Add(point);
+
+            //Notify observers
+            updateObservers();
+
+            //CHanger server if tiebreak
+            changeServer();
+        }
+
+        /*
+         *   Checks if the game is tiebreak,
+         *   if so, change server accordingly.        
+         */
+        private void changeServer()
+        {
+            // Never change the server, if the gametype is normal
+            if (currentGame.GameType == GameType.NORMAL) return;
+
+            string currentServer = currentGame.Servers[currentGame.Servers.Count-1];
+
+            if (currentGame.Servers.Count % 2 == 1)
+            {
+                //Change the server
+                if (currentServer.Equals(currentMatch.Team1Id)){
+                    //team 2 should serve now
+                    currentGame.Servers.Add(currentMatch.Team2Id);
+                }
+                else
+                {
+                    currentGame.Servers.Add(currentMatch.Team1Id);
+                }
+            }
+            else
+            {
+                currentGame.Servers.Add(currentServer);
+            }
         }
 
         /*
@@ -413,14 +467,31 @@ namespace TennisStats.src.Controller
 
             // Create a new game
             string newServer;
-            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+
+            if (currentGame.GameType == GameType.NORMAL)
             {
-                newServer = currentMatch.Team2Id;
+                if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
+                {
+                    newServer = currentMatch.Team2Id;
+                }
+                else
+                {
+                    newServer = currentMatch.Team1Id;
+                }
             }
             else
             {
-                newServer = currentMatch.Team1Id;
+                if (currentGame.Servers[0].Equals(currentMatch.Team1Id))
+                {
+                    newServer = currentMatch.Team2Id;
+                }
+                else
+                {
+                    newServer = currentMatch.Team1Id;
+                }
+
             }
+
 
             // Checking whether the new game should be a normal or tiebreak
             if (currentSet.Team1Score == 6 && currentSet.Team2Score == 6)
