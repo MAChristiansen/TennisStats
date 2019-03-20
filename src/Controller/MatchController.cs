@@ -93,6 +93,7 @@ namespace TennisStats.src.Controller
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
 
+            //TODO find ud af om det er en fault eller foot fault
             //Set the serve status to fault
             pb.serveStatus(ServeStatus.FAULT);
 
@@ -264,7 +265,7 @@ namespace TennisStats.src.Controller
                 observer.OnNext(currentMatch);
             }
 
-            // If the game is finished, notify with OnCompleted
+            //TODO If the game is finished, notify with OnCompleted
             //foreach (IObserver<Match> observer in matchObservers)
             //{
             //    observer.OnComplete(currentMatch);
@@ -303,6 +304,8 @@ namespace TennisStats.src.Controller
 
             // Has somebody won the match?
         }
+
+
         /*             
          *   Following is executed when registering a winner:
          *   - Set the winner id of current game
