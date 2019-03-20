@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using TennisStats.Model;
 using static TennisStats.Enum.FaultCountEnum;
+using static TennisStats.Enum.GameTypeEnum;
 using static TennisStats.Enum.MatchParticipantsEnum;
 using static TennisStats.Enum.MatchTypeEnum;
 using static TennisStats.Enum.ServeStatusEnum;
+using static TennisStats.Enum.SetTypeEnum;
 
 namespace TennisStats.src.Controller
 {
@@ -47,7 +49,7 @@ namespace TennisStats.src.Controller
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
-            currentGame = new Game.GameBuilder(team1Id).build();
+            currentGame = new Game.GameBuilder(team1Id).gameType(GameType.TIEBREAK).build();
 
             // Update the observers
             updateObservers();
@@ -183,10 +185,20 @@ namespace TennisStats.src.Controller
             return teamNames;
         }
 
+        public GameType getCurrentGameType()
+        {
+            return currentGame.GameType;
+        }
+
+        public Game getCurrentGame()
+        {
+            return currentGame;
+        }
+
         /*
          *   Subscribe method used by the observerpattern
          * 
-         */        
+         */
         public IDisposable Subscribe(IObserver<Match> observer)
         {
             // Check whether observer is already registered. If not, add it
@@ -283,23 +295,26 @@ namespace TennisStats.src.Controller
              *   - Who has the more points wins
              *   
              */
-            if (currentGame.lastScoreTeam1 > 3 || currentGame.lastScoreTeam2 > 3)
-            {
+            int minimumScore = 3;
+            if (currentGame.GameType == Enum.GameTypeEnum.GameType.TIEBREAK) minimumScore = 6;
 
-                if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) >= 2)
+                if (currentGame.lastScoreTeam1 > minimumScore || currentGame.lastScoreTeam2 > minimumScore)
                 {
-                    if (currentGame.lastScoreTeam1 > currentGame.lastScoreTeam2)
+
+                    if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) >= 2)
                     {
-                        //Team 1 has won this game
-                        registerGameWinner(currentMatch.Team1Id);
-                    }
-                    else
-                    {
-                        //Team 2 has won this game
-                        registerGameWinner(currentMatch.Team2Id);
+                        if (currentGame.lastScoreTeam1 > currentGame.lastScoreTeam2)
+                        {
+                            //Team 1 has won this game
+                            registerGameWinner(currentMatch.Team1Id);
+                        }
+                        else
+                        {
+                            //Team 2 has won this game
+                            registerGameWinner(currentMatch.Team2Id);
+                        }
                     }
                 }
-            }
 
             /*
              *   Checking if someone has won the current set:
@@ -311,7 +326,9 @@ namespace TennisStats.src.Controller
              */
             if (currentSet.Team1Score > 5 || currentSet.Team2Score > 5)
             {
-                if (Math.Abs(currentSet.Team1Score - currentSet.Team2Score) >= 2)
+                if (Math.Abs(currentSet.Team1Score - currentSet.Team2Score) >= 2 ||
+                (currentSet.Team1Score==6 && currentSet.Team2Score==7) ||
+                (currentSet.Team1Score==7 && currentSet.Team2Score==6))
                 {
 
                     if (currentSet.Team1Score > currentSet.Team2Score)
@@ -326,7 +343,6 @@ namespace TennisStats.src.Controller
                     }
                 }
             }
-
 
             // Has somebody won the match?
 
@@ -405,7 +421,17 @@ namespace TennisStats.src.Controller
             {
                 newServer = currentMatch.Team1Id;
             }
-            currentGame = new Game.GameBuilder(newServer).build();
+
+            // Checking whether the new game should be a normal or tiebreak
+            if (currentSet.Team1Score == 6 && currentSet.Team2Score == 6)
+            {
+                currentGame = new Game.GameBuilder(newServer).gameType(GameType.TIEBREAK).build();
+            }
+            else
+            {
+                currentGame = new Game.GameBuilder(newServer).build();
+            }
+
         }
 
         /*
