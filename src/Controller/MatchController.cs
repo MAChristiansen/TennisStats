@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TennisStats.Model;
 using static TennisStats.Enum.FaultCountEnum;
 using static TennisStats.Enum.MatchParticipantsEnum;
+using static TennisStats.Enum.MatchTypeEnum;
 using static TennisStats.Enum.ServeStatusEnum;
 
 namespace TennisStats.src.Controller
@@ -39,11 +40,11 @@ namespace TennisStats.src.Controller
          *  Creates a new match.
          *  Instantializes a match, set and game.        
          */
-        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants)
+        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType)
         {
             //TODO generer bedre id
             string matchId = team1Id + team2Id;
-            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).build();
+            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
@@ -276,15 +277,16 @@ namespace TennisStats.src.Controller
             /*
              *   Checking if someone has won the current game:
              * 
-             *   If someone has more than 1 score we check:
+             *   If one of the teams has more than 3 points:
              *   - Is the absolute value from the subtraction,
              *     of the team scores more/equal than 2
              *   - Who has the more points wins
              *   
              */
-            if (currentGame.lastScoreTeam1 > 0 || currentGame.lastScoreTeam2 > 0)
+            if (currentGame.lastScoreTeam1 > 3 || currentGame.lastScoreTeam2 > 3)
             {
-                if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) > 2)
+
+                if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) >= 2)
                 {
                     if (currentGame.lastScoreTeam1 > currentGame.lastScoreTeam2)
                     {
@@ -299,9 +301,74 @@ namespace TennisStats.src.Controller
                 }
             }
 
-            // Has somebody won the current Set?
+            /*
+             *   Checking if someone has won the current set:
+             * 
+             *   If one of the teams has more than 5 points:
+             *   - Is the absolute value from the subtraction,
+             *     of the team scores more/equal than 2          
+             *   
+             */
+            if (currentSet.Team1Score > 5 || currentSet.Team2Score > 5)
+            {
+                if (Math.Abs(currentSet.Team1Score - currentSet.Team2Score) >= 2)
+                {
+
+                    if (currentSet.Team1Score > currentSet.Team2Score)
+                    {
+                        // Team1 wins
+                        registerSetWinner(currentMatch.Team1Id);
+                    }
+                    else
+                    {
+                        // team2 wins
+                        registerSetWinner(currentMatch.Team2Id);
+                    }
+                }
+            }
+
 
             // Has somebody won the match?
+
+            switch (currentMatch.Type)
+            {
+                case MatchType.ONESETTER:
+                    if (currentMatch.Team1Score > 0)
+                    {
+                        //Team 1 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    else if (currentMatch.Team2Score > 0)
+                    {
+                        //Team 2 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    break;
+                case MatchType.THREESETTER:
+                    if (currentMatch.Team1Score >= 2)
+                    {
+                        //Team 1 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    else if (currentMatch.Team2Score >= 2)
+                    {
+                        //team 2 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    break;
+                case MatchType.FIVESETTER:
+                    if (currentMatch.Team1Score >= 3)
+                    {
+                        //Team 1 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    else if (currentMatch.Team2Score >= 3)
+                    {
+                        //team 2 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    break;
+            }
         }
         /*             
          *   Following is executed when registering a winner:
@@ -313,7 +380,6 @@ namespace TennisStats.src.Controller
          */            
         private void registerGameWinner(string winnerId)
         {
-
             // Register the winner of the current game
             currentGame.WinnerId = winnerId;
             currentSet.Games.Add(currentGame);
@@ -340,6 +406,29 @@ namespace TennisStats.src.Controller
                 newServer = currentMatch.Team1Id;
             }
             currentGame = new Game.GameBuilder(newServer).build();
+        }
+
+        /*
+         *   Service method used to register the winner of a set
+         */        
+        private void registerSetWinner(string winnerId)
+        {
+            //Set the winner of the set, and add it to the match
+            currentSet.WinnerId = winnerId;
+            currentMatch.Sets.Add(currentSet);
+
+            // Give a point to the right team
+            if (winnerId.Equals(currentMatch.Team1Id))
+            {
+                currentMatch.Team1Score += 1;
+            }
+            else
+            {
+                currentMatch.Team2Score += 1;
+            }
+
+            //Create a new current set
+            currentSet = new Set.SetBuilder().build();
         }
     }
 }
