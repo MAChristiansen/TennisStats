@@ -326,9 +326,6 @@ namespace TennisStats
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f08004f
-			public const int FramelayoutProfil = 2131230799;
-			
 			// aapt resource value: 0x7f08000e
 			public const int barrier = 2131230734;
 			
@@ -487,6 +484,9 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f080009
 			public const int percent = 2131230729;
+			
+			// aapt resource value: 0x7f08004f
+			public const int plotViewModel = 2131230799;
 			
 			// aapt resource value: 0x7f080003
 			public const int right = 2131230723;

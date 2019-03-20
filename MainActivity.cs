@@ -22,7 +22,7 @@ namespace TennisStats
 
             button.Click += delegate
             {
-                NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
+                NavigationService.NavigateToPage(this, typeof(ActivityUserProfil/*ActivityMatchSetup*/));
             };
         }
     }
