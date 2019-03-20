@@ -14,12 +14,15 @@ using Android.Widget;
 using TennisStats.Service;
 using TennisStats.src.Controller;
 using static TennisStats.Enum.MatchParticipantsEnum;
+using static TennisStats.Enum.MatchTypeEnum;
 
 namespace TennisStats
 {
     public class FragmentQuickMatchSetup : Fragment
     {
         private Spinner sCategory, sType;
+
+        private MatchType matchType = MatchType.THREESETTER;
 
         private static MatchController matchController;
 
@@ -82,7 +85,7 @@ namespace TennisStats
 
             ivNext.Click += delegate
             {
-                matchController.CreateMatch(etTeam1Player1.Text, etTeam2Player1.Text, MatchParticipants.SINGLE);
+                matchController.CreateMatch(etTeam1Player1.Text, etTeam2Player1.Text, MatchParticipants.SINGLE, matchType);
                 NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
             };
 
@@ -113,7 +116,6 @@ namespace TennisStats
             Spinner spinner = (Spinner) sender;
 
             //TODO: Do something when choosing match type.
-
         }
     }
 }
