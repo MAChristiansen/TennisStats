@@ -5,13 +5,29 @@ using static TennisStats.Enum.MatchTypeEnum;
 
 namespace TennisStats.src.Service
 {
-    public class PointService
+    public sealed class PointService
     {
-        public PointService()
+        private static PointService instance = null;
+        private static readonly object padlock = new object();
+
+        public static PointService Instance
         {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new PointService();
+                    }
+                    return instance;
+                }
+            }
         }
-        
+        public PointService() { }
+
         public string convertPoints(int pointToConvert, int opponent) {
+        
             if (pointToConvert < 4 && opponent < 4) {
                 switch (pointToConvert) {
                     case 0:
