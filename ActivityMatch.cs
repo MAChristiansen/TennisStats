@@ -123,7 +123,7 @@ namespace TennisStats
 
         private void setServerUI()
         {
-            if (matchController.getCurrentGame().ServerId.Equals(matchController.GetTeamNames()[0])){
+            if (matchController.getCurrentGame().Servers[matchController.getCurrentGame().Servers.Count - 1].Equals(matchController.GetTeamNames()[0])){
                 //team 1 is serving
                 ivTeam1Serving.Visibility = Android.Views.ViewStates.Visible;
                 ivTeam2Serving.Visibility = Android.Views.ViewStates.Invisible;
