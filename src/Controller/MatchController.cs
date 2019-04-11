@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using TennisStats.Model;
 using static TennisStats.Enum.FaultCountEnum;
+using static TennisStats.Enum.GameTypeEnum;
 using static TennisStats.Enum.MatchParticipantsEnum;
+using static TennisStats.Enum.MatchTypeEnum;
 using static TennisStats.Enum.ServeStatusEnum;
+using static TennisStats.Enum.SetTypeEnum;
 
 namespace TennisStats.src.Controller
 {
     public sealed class MatchController : IObservable<Match>
     {
-        private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
+        public static Point.PointBuilder inPlayPB { get; set; }
 
+        private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
         private Match currentMatch;
         private Set currentSet;
         private Game currentGame;
         private static MatchController instance = null;
         private static readonly object padlock = new object();
 
-        MatchController(){}
+        MatchController(){ inPlayPB = new Point.PointBuilder(); }
 
         public static MatchController Instance
         {
@@ -39,11 +43,11 @@ namespace TennisStats.src.Controller
          *  Creates a new match.
          *  Instantializes a match, set and game.        
          */
-        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants)
+        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType)
         {
             //TODO generer bedre id
             string matchId = team1Id + team2Id;
-            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).build();
+            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
             currentSet = new Set.SetBuilder().build();
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
@@ -61,12 +65,12 @@ namespace TennisStats.src.Controller
         {
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
-            pb.winnderId(currentGame.ServerId);
+            pb.winnderId(currentGame.Servers[currentGame.Servers.Count-1]);
             pb.serveStatus(ServeStatus.ACE);
             Point p = pb.build();
 
             // If the server was team 1, add the point to him, else add to team 2
-            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+            if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
             {
                 GivePointToTeam(currentMatch.Team1Id);
             }
@@ -77,6 +81,8 @@ namespace TennisStats.src.Controller
 
             //Add the point to the game.
             currentGame.Points.Add(p);
+
+            changeServer();
 
             //Update the observers
             updateObservers();
@@ -112,7 +118,7 @@ namespace TennisStats.src.Controller
             pb.faultCount(FaultCount.SECONDSERVE);
 
             // Find the winner and give him point
-            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+            if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
             {
                 pb.winnderId(currentMatch.Team2Id);
                 GivePointToTeam(currentMatch.Team2Id);
@@ -129,7 +135,58 @@ namespace TennisStats.src.Controller
             //Update the observers
             updateObservers();
 
+            changeServer();
+
             return currentFaultCount;
+        }
+
+
+        public void inPlay()
+        {
+            // Build the point from the point builder
+            Point point = inPlayPB.build();
+
+            //Reset the point builder
+            inPlayPB = new Point.PointBuilder();
+
+            // Give points to the winner team
+            GivePointToTeam(point.WinnerId);
+            currentGame.Points.Add(point);
+
+            //Notify observers
+            updateObservers();
+
+            //CHanger server if tiebreak
+            changeServer();
+        }
+
+        /*
+         *   Checks if the game is tiebreak,
+         *   if so, change server accordingly.        
+         */
+        private void changeServer()
+        {
+            // Never change the server, if the gametype is normal
+            if (currentGame.GameType == GameType.NORMAL) return;
+
+            string currentServer = currentGame.Servers[currentGame.Servers.Count-1];
+
+            if (currentGame.Servers.Count % 2 == 1)
+            {
+                //Change the server
+                if (currentServer.Equals(currentMatch.Team1Id)){
+                    //team 2 should serve now
+                    currentGame.Servers.Add(currentMatch.Team2Id);
+                }
+                else
+                {
+                    currentGame.Servers.Add(currentMatch.Team1Id);
+                }
+            }
+            else
+            {
+                currentGame.Servers.Add(currentServer);
+            }
         }
 
         /*
@@ -183,10 +240,20 @@ namespace TennisStats.src.Controller
             return teamNames;
         }
 
+        public GameType getCurrentGameType()
+        {
+            return currentGame.GameType;
+        }
+
+        public Game getCurrentGame()
+        {
+            return currentGame;
+        }
+
         /*
          *   Subscribe method used by the observerpattern
          * 
-         */        
+         */
         public IDisposable Subscribe(IObserver<Match> observer)
         {
             // Check whether observer is already registered. If not, add it
@@ -277,32 +344,102 @@ namespace TennisStats.src.Controller
             /*
              *   Checking if someone has won the current game:
              * 
-             *   If someone has more than 1 score we check:
+             *   If one of the teams has more than 3 points:
              *   - Is the absolute value from the subtraction,
              *     of the team scores more/equal than 2
              *   - Who has the more points wins
              *   
              */
-            if (currentGame.lastScoreTeam1 > 0 || currentGame.lastScoreTeam2 > 0)
-            {
-                if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) > 2)
+            int minimumScore = 3;
+            if (currentGame.GameType == Enum.GameTypeEnum.GameType.TIEBREAK) minimumScore = 6;
+
+                if (currentGame.lastScoreTeam1 > minimumScore || currentGame.lastScoreTeam2 > minimumScore)
                 {
-                    if (currentGame.lastScoreTeam1 > currentGame.lastScoreTeam2)
+
+                    if (Math.Abs(currentGame.lastScoreTeam1 - currentGame.lastScoreTeam2) >= 2)
                     {
-                        //Team 1 has won this game
-                        registerGameWinner(currentMatch.Team1Id);
+                        if (currentGame.lastScoreTeam1 > currentGame.lastScoreTeam2)
+                        {
+                            //Team 1 has won this game
+                            registerGameWinner(currentMatch.Team1Id);
+                        }
+                        else
+                        {
+                            //Team 2 has won this game
+                            registerGameWinner(currentMatch.Team2Id);
+                        }
+                    }
+                }
+
+            /*
+             *   Checking if someone has won the current set:
+             * 
+             *   If one of the teams has more than 5 points:
+             *   - Is the absolute value from the subtraction,
+             *     of the team scores more/equal than 2          
+             *   
+             */
+            if (currentSet.Team1Score > 5 || currentSet.Team2Score > 5)
+            {
+                if (Math.Abs(currentSet.Team1Score - currentSet.Team2Score) >= 2 ||
+                (currentSet.Team1Score==6 && currentSet.Team2Score==7) ||
+                (currentSet.Team1Score==7 && currentSet.Team2Score==6))
+                {
+
+                    if (currentSet.Team1Score > currentSet.Team2Score)
+                    {
+                        // Team1 wins
+                        registerSetWinner(currentMatch.Team1Id);
                     }
                     else
                     {
-                        //Team 2 has won this game
-                        registerGameWinner(currentMatch.Team2Id);
+                        // team2 wins
+                        registerSetWinner(currentMatch.Team2Id);
                     }
                 }
             }
 
-            // Has somebody won the current Set?
-
             // Has somebody won the match?
+
+            switch (currentMatch.Type)
+            {
+                case MatchType.ONESETTER:
+                    if (currentMatch.Team1Score > 0)
+                    {
+                        //Team 1 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    else if (currentMatch.Team2Score > 0)
+                    {
+                        //Team 2 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    break;
+                case MatchType.THREESETTER:
+                    if (currentMatch.Team1Score >= 2)
+                    {
+                        //Team 1 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    else if (currentMatch.Team2Score >= 2)
+                    {
+                        //team 2 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    break;
+                case MatchType.FIVESETTER:
+                    if (currentMatch.Team1Score >= 3)
+                    {
+                        //Team 1 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    else if (currentMatch.Team2Score >= 3)
+                    {
+                        //team 2 wins
+                        matchObservers[0].OnCompleted();
+                    }
+                    break;
+            }
         }
 
 
@@ -316,7 +453,6 @@ namespace TennisStats.src.Controller
          */            
         private void registerGameWinner(string winnerId)
         {
-
             // Register the winner of the current game
             currentGame.WinnerId = winnerId;
             currentSet.Games.Add(currentGame);
@@ -334,15 +470,65 @@ namespace TennisStats.src.Controller
 
             // Create a new game
             string newServer;
-            if (currentGame.ServerId.Equals(currentMatch.Team1Id))
+
+            if (currentGame.GameType == GameType.NORMAL)
             {
-                newServer = currentMatch.Team2Id;
+                if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
+                {
+                    newServer = currentMatch.Team2Id;
+                }
+                else
+                {
+                    newServer = currentMatch.Team1Id;
+                }
             }
             else
             {
-                newServer = currentMatch.Team1Id;
+                if (currentGame.Servers[0].Equals(currentMatch.Team1Id))
+                {
+                    newServer = currentMatch.Team2Id;
+                }
+                else
+                {
+                    newServer = currentMatch.Team1Id;
+                }
+
             }
-            currentGame = new Game.GameBuilder(newServer).build();
+
+
+            // Checking whether the new game should be a normal or tiebreak
+            if (currentSet.Team1Score == 6 && currentSet.Team2Score == 6)
+            {
+                currentGame = new Game.GameBuilder(newServer).gameType(GameType.TIEBREAK).build();
+            }
+            else
+            {
+                currentGame = new Game.GameBuilder(newServer).build();
+            }
+
+        }
+
+        /*
+         *   Service method used to register the winner of a set
+         */        
+        private void registerSetWinner(string winnerId)
+        {
+            //Set the winner of the set, and add it to the match
+            currentSet.WinnerId = winnerId;
+            currentMatch.Sets.Add(currentSet);
+
+            // Give a point to the right team
+            if (winnerId.Equals(currentMatch.Team1Id))
+            {
+                currentMatch.Team1Score += 1;
+            }
+            else
+            {
+                currentMatch.Team2Score += 1;
+            }
+
+            //Create a new current set
+            currentSet = new Set.SetBuilder().build();
         }
     }
 }

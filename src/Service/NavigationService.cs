@@ -1,15 +1,24 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.OS;
 using Android.Views;
 
 namespace TennisStats.Service
 {
     public class NavigationService
     {
-        public static void NavigateToPage(Context context, Type activity) {
+        public static void NavigateToPage(Context context, Type activity, Bundle bundle = null) {
 
-            Intent intent = new Intent(context, activity);
+            var intent = new Intent(context, activity);
+            
+            if (bundle == null)
+            {
+                context.StartActivity(intent);
+                return;
+            }
+            
+            intent.PutExtras(bundle);
             context.StartActivity(intent);
         }
 

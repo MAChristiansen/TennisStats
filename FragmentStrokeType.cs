@@ -12,6 +12,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
+using static TennisStats.Enum.StrokeTypeEnum;
 
 namespace TennisStats
 {
@@ -47,13 +49,13 @@ namespace TennisStats
             ivReturn = view.FindViewById<ImageView>(Resource.Id.ivReturn);
             ivBaseline = view.FindViewById<ImageView>(Resource.Id.ivBaseline);
 
-            ivDropShot.Click += delegate { Navigate(); };
-            ivSmash.Click += delegate { Navigate();};
-            ivVolley.Click += delegate { Navigate(); };
-            ivLob.Click += delegate { Navigate(); };
-            ivApproach.Click += delegate { Navigate(); };
-            ivReturn.Click += delegate { Navigate();};
-            ivBaseline.Click += delegate { Navigate(); };
+            ivDropShot.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.DROPSHOT); Navigate(); };
+            ivSmash.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.SMASH); Navigate();};
+            ivVolley.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.VOLLEY); Navigate(); };
+            ivLob.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.LOB); Navigate(); };
+            ivApproach.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.APPROACH); Navigate(); };
+            ivReturn.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.RETURN); Navigate();};
+            ivBaseline.Click += delegate { MatchController.inPlayPB.strokeType(StrokeType.BASELINE); Navigate(); };
             
             
             return view;

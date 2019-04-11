@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using TennisStats.Model;
 using TennisStats.Service;
 using TennisStats.src.Controller;
 using static TennisStats.Enum.FaultCountEnum;
@@ -99,6 +100,7 @@ namespace TennisStats
 
             ivInPlay.Click += delegate
             {
+                MatchController.inPlayPB.serveStatus(Enum.ServeStatusEnum.ServeStatus.INPLAY);
                 Navigate(FragmentWhoWon.NewInstance());
             };
 

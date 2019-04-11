@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
 
 namespace TennisStats
 {
@@ -19,6 +20,8 @@ namespace TennisStats
     {
         private Button btnTeam1;
         private Button btnTeam2;
+
+        private MatchController matchController;
         
         public static FragmentWhoWon NewInstance()
         {
@@ -29,7 +32,7 @@ namespace TennisStats
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            matchController = MatchController.Instance;
             // Create your fragment here
         }
 
@@ -41,31 +44,24 @@ namespace TennisStats
             btnTeam1 = view.FindViewById<Button>(Resource.Id.btnTeam1);
             btnTeam2 = view.FindViewById<Button>(Resource.Id.btnTeam2);
 
+             //Set the text of the buttons
+            btnTeam1.Text = matchController.GetTeamNames()[0];
+            btnTeam2.Text = matchController.GetTeamNames()[1];
+
             btnTeam1.Click += delegate
             {
-                AddWinnerTeamToPoint(1);
+                MatchController.inPlayPB.winnderId(matchController.GetTeamNames()[0]);
                 Navigate();
             };
 
             btnTeam2.Click += delegate
             {
-                AddWinnerTeamToPoint(2);
+                MatchController.inPlayPB.winnderId(matchController.GetTeamNames()[1]);
+
                 Navigate();
             };
 
             return view;
-        }
-
-        private void AddWinnerTeamToPoint(int winnerTeam)
-        {
-            if (winnerTeam == 1)
-            {
-                //Add winning team to the POINT... /MAC
-            }
-            else if (winnerTeam == 2)
-            {
-                //Add winning team to the POINT... /MAC
-            }
         }
 
         private void Navigate()
