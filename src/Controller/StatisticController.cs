@@ -8,7 +8,7 @@ namespace TennisStats.src.Controller
 {
     public class StatisticController
     {
-        public List<Point> GetListOfPointToBeCalculated(string playerId, StatisticType statisticType, string matchId = null)
+        public List<Point> GetListOfPointsToBeCalculated(string playerId, StatisticType statisticType, string matchId = null)
         {
             if (matchId == null && statisticType == StatisticType.MATCH) 
             {
