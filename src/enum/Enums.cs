@@ -59,5 +59,10 @@ namespace TennisStats.Enum
     {
         public enum GameType { NORMAL, TIEBREAK }
     }
+    
+    public class StatisticTypeEnum
+    {
+        public enum StatisticType { OVERALL, MATCH, SET, LASTMOUNTH, LASTYEAR }
+    }
 
 }
