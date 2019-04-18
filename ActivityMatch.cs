@@ -10,6 +10,7 @@ using Android.Widget;
 using TennisStats.Model;
 using TennisStats.Service;
 using TennisStats.src.Controller;
+using TennisStats.src.Service;
 
 namespace TennisStats
 {
@@ -30,7 +31,11 @@ namespace TennisStats
         private TextView tvTeam1Points;
         private TextView tvTeam2Points;
 
+        private ImageView ivTeam1Serving;
+        private ImageView ivTeam2Serving;
+
         private MatchController matchController;
+        private PointService pointService;
 
         private Unsubscriber<Match> unsubscriber;
 
@@ -58,10 +63,13 @@ namespace TennisStats
             tvTeam1Points = FindViewById<TextView>(Resource.Id.tvTeam1Points);
             tvTeam2Points = FindViewById<TextView>(Resource.Id.tvTeam2Points);
 
+            ivTeam1Serving = FindViewById<ImageView>(Resource.Id.ivTeam1Serving);
+            ivTeam2Serving = FindViewById<ImageView>(Resource.Id.ivTeam2Serving);
+
             // set the team names
             tvTeam1Names.Text = matchController.GetTeamNames()[0];
             tvTeam2Names.Text = matchController.GetTeamNames()[1];
-
+            setServerUI();
 
 
             //Creating first serve scenario
@@ -78,13 +86,14 @@ namespace TennisStats
         /*
          *   Implementation of the observerpattern!
          * 
-         *   OnNext is called when information has been updated
-         * 
+         *   - OnNext is called when information has been updated
+         *   - OnCompleted is called when the game is finished
          * 
          */
         public void OnCompleted()
         {
-            throw new NotImplementedException();
+            //TODO når der er fundet en vinder skal der vises en statestik side.
+            Console.WriteLine("The match is done!!");
         }
 
         public void OnError(Exception error)
@@ -95,6 +104,7 @@ namespace TennisStats
         public void OnNext(Match value)
         {
             matchController = MatchController.Instance;
+            pointService = PointService.Instance;
             //Update the score of the match
             tvTeam1Sets.Text =  matchController.GetCurrentMatchScore()[0] + "";
             tvTeam2Sets.Text = matchController.GetCurrentMatchScore()[1] + "";
@@ -103,11 +113,27 @@ namespace TennisStats
             tvTeam1Games.Text = matchController.GetCurrentSetScore()[0] + "";
             tvTeam2Games.Text = matchController.GetCurrentSetScore()[1] + "";
 
-            //TODO det her skal igennem en "konverter". Pt ganger jeg bare med 15
             //Update the score of the game
-            tvTeam1Points.Text = matchController.GetCurrentGameScore()[0]*15 + "";
-            tvTeam2Points.Text = matchController.GetCurrentGameScore()[1]*15 + "";
+            tvTeam1Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[0], matchController.GetCurrentGameScore()[1], matchController.getCurrentGameType());
+            tvTeam2Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[1], matchController.GetCurrentGameScore()[0], matchController.getCurrentGameType());
 
+            setServerUI();
+        }
+
+
+        private void setServerUI()
+        {
+            if (matchController.getCurrentGame().Servers[matchController.getCurrentGame().Servers.Count - 1].Equals(matchController.GetTeamNames()[0])){
+                //team 1 is serving
+                ivTeam1Serving.Visibility = Android.Views.ViewStates.Visible;
+                ivTeam2Serving.Visibility = Android.Views.ViewStates.Invisible;
+            }
+            else
+            {
+                //team 2 is serving
+                ivTeam1Serving.Visibility = Android.Views.ViewStates.Invisible;
+                ivTeam2Serving.Visibility = Android.Views.ViewStates.Visible;
+            }
         }
     }
 }

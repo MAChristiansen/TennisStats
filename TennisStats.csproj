@@ -95,6 +95,8 @@
     <Compile Include="ActivityLogin.cs" />
     <Compile Include="ActivityCreateAccount.cs" />
     <Compile Include="ActivityProfileSettings.cs" />
+    <Compile Include="src\Service\SetupService.cs" />
+    <Compile Include="src\Service\PointService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -133,7 +135,7 @@
     <AndroidResource Include="Resources\anim\enter_from_right.xml" />
     <AndroidResource Include="Resources\anim\exit_to_left.xml" />
     <AndroidResource Include="Resources\anim\exit_to_right.xml" />
-    <AndroidResource Include="Resources\layout\MatchSetupTeam.axml" />
+    <AndroidResource Include="Resources\layout\QuickMatchSetup.axml" />
     <AndroidResource Include="Resources\layout\Match.axml" />
     <AndroidResource Include="Resources\layout\ServScenario.axml" />
     <AndroidResource Include="Resources\layout\Score.axml" />

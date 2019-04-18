@@ -12,6 +12,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using TennisStats.Service;
+using TennisStats.src.Controller;
+using static TennisStats.Enum.WinReasonEnum;
 
 namespace TennisStats
 {
@@ -44,16 +46,19 @@ namespace TennisStats
 
             ivWinner.Click += delegate
             {
+                MatchController.inPlayPB.winReason(WinReason.WINNER);
                 Navigate();
             };
 
             ivForcedError.Click += delegate
             {
+                MatchController.inPlayPB.winReason(WinReason.FORCEDERROR);
                 Navigate();
             };
 
             ivUnforcedError.Click += delegate
             {
+                MatchController.inPlayPB.winReason(WinReason.UNFORCEDERROR);
                 Navigate();
             };
 

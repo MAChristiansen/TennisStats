@@ -42,6 +42,7 @@ namespace TennisStats.Model
             public SetBuilder() {
                 //initialize list
                 _games = new List<Game>();
+                _setType = SetType.NORMAL;
 
             }
 
