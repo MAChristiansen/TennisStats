@@ -74,6 +74,7 @@
     <Compile Include="FragmentMatchSetupCategory.cs" />
     <Compile Include="FragmentQuickMatchSetup.cs" />
     <Compile Include="src\Controller\FBTables.cs" />
+    <Compile Include="src\Controller\Util.cs" />
     <Compile Include="src\enum\Enums.cs" />
     <Compile Include="src\model\Club.cs" />
     <Compile Include="src\model\Game.cs" />
