@@ -65,7 +65,7 @@ namespace TennisStats
             ivFault.Click += delegate
             {
                 // Run logic for the fault scenario
-                FaultCount currentFaultCount = matchController.Fault();
+                FaultCount currentFaultCount = matchController.Fault(serve);
 
                 // Check the fault count - Second or First serve
                 if (currentFaultCount == FaultCount.SECONDSERVE)
@@ -89,7 +89,7 @@ namespace TennisStats
             ivAce.Click += delegate
             {
                 // Run logic for ace scenario
-                matchController.Ace();
+                matchController.Ace(serve);
                 Bundle bundle = new Bundle();
                 bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
                 bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
@@ -101,13 +101,14 @@ namespace TennisStats
             ivInPlay.Click += delegate
             {
                 MatchController.inPlayPB.serveStatus(Enum.ServeStatusEnum.ServeStatus.INPLAY);
+                MatchController.inPlayPB.faultCount(serve == 1 ? FaultCount.FIRSTSERVE : FaultCount.SECONDSERVE);
                 Navigate(FragmentWhoWon.NewInstance());
             };
 
             ivFootFault.Click += delegate
             {
                 // Run logic for the fault scenario
-                FaultCount currentFaultCount = matchController.Fault();
+                FaultCount currentFaultCount = matchController.Fault(serve, false);
 
                 // Check the fault count - Second or First serve
                 if (currentFaultCount == FaultCount.SECONDSERVE)
@@ -131,7 +132,7 @@ namespace TennisStats
             ivServiceWinner.Click += delegate
             {
                 // Run logic for ace scenario
-                matchController.Ace();
+                matchController.Ace(serve, false);
                 Bundle bundle = new Bundle();
                 bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
                 bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
