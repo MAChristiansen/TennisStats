@@ -61,12 +61,15 @@ namespace TennisStats.src.Controller
          *  This method is handles the "ace"-action
          * 
          */
-        public void Ace()
+        public void Ace(int serve, bool ace = true)
         {
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
+            pb.serverId(currentGame.Servers[currentGame.Servers.Count - 1]);
             pb.winnderId(currentGame.Servers[currentGame.Servers.Count-1]);
-            pb.serveStatus(ServeStatus.ACE);
+            pb.serveStatus(ace ? ServeStatus.ACE : ServeStatus.SERVEWINNER);
+            pb.faultCount(serve == 1 ? FaultCount.FIRSTSERVE : FaultCount.SECONDSERVE);
+
             Point p = pb.build();
 
             // If the server was team 1, add the point to him, else add to team 2
@@ -93,29 +96,24 @@ namespace TennisStats.src.Controller
          *  This method is handles the "fault"-action
          * 
          */
-        public FaultCount Fault()
+        public FaultCount Fault(int serve, bool fault = true)
         {
-            FaultCount currentFaultCount = findFaultCount();
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
+            pb.faultCount(serve == 1 ? FaultCount.FIRSTSERVE : FaultCount.SECONDSERVE);
 
-            //TODO find ud af om det er en fault eller foot fault
             //Set the serve status to fault
-            pb.serveStatus(ServeStatus.FAULT);
+            pb.serveStatus(fault ? ServeStatus.FAULT : ServeStatus.FOOTFAULT);
 
             //Check if first serve
-            if (currentFaultCount == FaultCount.FIRSTSERVE)
+            if (pb._faultCount == FaultCount.FIRSTSERVE)
             {
                 pb.faultCount(FaultCount.FIRSTSERVE);
 
                 GiveEmptyPoints();
                 currentGame.Points.Add(pb.build());
-                return currentFaultCount;
+                return pb._faultCount;
             }
-
-
-            // If it is a second serve we run this code!
-            pb.faultCount(FaultCount.SECONDSERVE);
 
             // Find the winner and give him point
             if (currentGame.Servers[currentGame.Servers.Count - 1].Equals(currentMatch.Team1Id))
@@ -137,7 +135,7 @@ namespace TennisStats.src.Controller
 
             changeServer();
 
-            return currentFaultCount;
+            return pb._faultCount;
         }
 
 
