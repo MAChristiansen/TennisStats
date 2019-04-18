@@ -10,6 +10,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase.Database;
+using Firebase.Database.Query;
+using Java.Lang;
+using TennisStats.Model;
+using TennisStats.src.Controller;
 using TennisStats.Service;
 
 namespace TennisStats
@@ -17,16 +22,77 @@ namespace TennisStats
     [Activity(Label = "LoginActivity")]
     public class ActivityLogin : Activity
     {
+        private readonly List<string> _existingUsernames = new List<string>();
+        private readonly List<Player> _existingPlayers = new List<Player>();
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Login);
+            
+            FirebaseClient firebaseClient = FBTables.FirebaseClient;
 
+            EditText etUsername = FindViewById<EditText>(Resource.Id.txtLoginUsername);
+            EditText etPassword = FindViewById<EditText>(Resource.Id.txtLoginPassword);
+            
             Button btnCreateAccount = FindViewById<Button>(Resource.Id.btnCreateAccount);
             Button btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
 
-            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings)); };
+            btnLogin.Click += async delegate
+            {
+                //TODO show a spinner
+                
+                var users = await firebaseClient.Child(FBTables.FbUser).OnceAsync<Player>();
+  
+                foreach (var user in users)
+                {
+                    _existingUsernames.Add(user.Key);
+                    _existingPlayers.Add(user.Object);
+                }
+
+                if (_existingUsernames.Contains(etUsername.Text))
+                {
+                    Player player = FindSpecificPlayer(etUsername.Text, _existingPlayers);
+                    
+                    if (player.Password == etPassword.Text.Trim())
+                    {
+                        if (player.Birthday == 0)
+                        {
+                            NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings));
+                        }
+                    }
+                    else
+                    {
+                        ShowErrorMessage(this);
+                    }
+                }
+                else
+                {
+                    ShowErrorMessage(this);
+                }
+            };
             btnCreateAccount.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityCreateAccount)); };
+        }
+
+        private void ShowErrorMessage(Context context)
+        {
+            Dialog dialog = Util.SimpleAlert(this, "Error", "Wrong username or password").Create();
+            dialog.Show();
+        }
+
+        private Player FindSpecificPlayer(string username, List<Player> players)
+        {
+            var desiredPlayer = new Player();
+
+            foreach (var player in players)
+            {
+                if (player.PlayerId == username)
+                {
+                    desiredPlayer = player;
+                }
+            }
+            
+            return desiredPlayer;
         }
     }
 }
