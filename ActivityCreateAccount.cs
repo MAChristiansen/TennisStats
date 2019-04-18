@@ -57,8 +57,8 @@ namespace TennisStats
                 // If username already exists
                 if (_existingUsernames.Contains(player.PlayerId))
                 {
-                    //TODO Show alert 
-                    Console.WriteLine("User already exists");
+                    Dialog dialog = Util.SimpleAlert(this, "Error", "Username already in use").Create();
+                    dialog.Show();
                 }
                 else
                 {
