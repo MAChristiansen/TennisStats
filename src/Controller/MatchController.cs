@@ -142,7 +142,7 @@ namespace TennisStats.src.Controller
         public void inPlay()
         {
             // Build the point from the point builder
-            Point point = inPlayPB.build();
+            Point point = inPlayPB.serverId(currentGame.Servers[currentGame.Servers.Count - 1]).build();
 
             //Reset the point builder
             inPlayPB = new Point.PointBuilder();
