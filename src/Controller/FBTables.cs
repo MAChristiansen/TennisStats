@@ -5,10 +5,10 @@ namespace TennisStats.src.Controller
 {
     public static class FBTables
     {
-        private const string User = "user";
-
         public static FirebaseClient FirebaseClient { get; } = new FirebaseClient("https://tennisstats-7926f.firebaseio.com/");
 
-        public static string FbUser => User;
+        public static string FbUser => "user";
+        public static string FbPassword => "Password";
+        public static string FbBirthday => "Birthday";
     }
 }
