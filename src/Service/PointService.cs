@@ -54,27 +54,5 @@ namespace TennisStats.src.Service
             }
             return "";
         }
-        
-        
-        //TODO: Do this method
-        public bool isGameDone(Game game, MatchType matchType)
-        {
-            
-            return false;
-        }
-
-        //TODO: Do this method
-        public bool isSetDone(Set set, MatchType matchType)
-        {
-            
-            return false;
-        }
-
-        //TODO: Do this method
-        public bool isMatchDone(Match match)
-        {
-
-            return false;
-        }
     }
 }
