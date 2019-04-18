@@ -13,5 +13,14 @@ namespace TennisStats.src.Controller
 
             return alert;
         }
+
+        public static ProgressDialog SimpleLoading(Context context, string message, bool cancelable = false)
+        {
+            ProgressDialog progressDialog = new ProgressDialog(context);
+            progressDialog.SetMessage(message);
+            progressDialog.SetCancelable(cancelable);
+
+            return progressDialog;
+        }
     }
 }
