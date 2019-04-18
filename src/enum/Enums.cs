@@ -64,5 +64,4 @@ namespace TennisStats.Enum
     {
         public enum StatisticType { OVERALL, MATCH, SET, LASTMOUNTH, LASTYEAR }
     }
-
 }
