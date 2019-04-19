@@ -36,9 +36,15 @@ namespace TennisStats
             
             btnCreateAccount.Click += async delegate
             {
-                //TODO Show alert if one of the fields is empty
-                
-                //TODO Put in a spinner
+                if (!(txtUsername.Text.Trim().Length > 0) || !(txtPassword.Text.Trim().Length > 0))
+                {
+                    Dialog dialog = Util.SimpleAlert(this, "Missing fields", "Username or password is invalid").Create();
+                    dialog.Show();
+                    return;
+                }
+
+                ProgressDialog progressDialog = Util.SimpleLoading(this, "Creating profile...");
+                progressDialog.Show();
                 
                 // Get all usernames from database
                 var users = await firebaseClient.Child(FBTables.FbUser).OnceAsync<Player>();
@@ -48,8 +54,6 @@ namespace TennisStats
                     _existingUsernames.Add(user.Key);
                 }
                 
-                //Account account = new Account(txtUsername.Text.Trim(), txtPassword.Text.Trim());
-
                 Player player = new Player.PlayerBuilder(txtUsername.Text.Trim())
                     .Password(txtPassword.Text.Trim())
                     .build();
@@ -57,12 +61,14 @@ namespace TennisStats
                 // If username already exists
                 if (_existingUsernames.Contains(player.PlayerId))
                 {
+                    progressDialog.Dismiss();
                     Dialog dialog = Util.SimpleAlert(this, "Error", "Username already in use").Create();
                     dialog.Show();
                 }
                 else
                 {
                     await firebaseClient.Child(FBTables.FbUser).Child(player.PlayerId).PutAsync(player);
+                    progressDialog.Dismiss();
                     NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings));
                 }
             };
