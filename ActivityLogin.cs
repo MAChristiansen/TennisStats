@@ -40,7 +40,15 @@ namespace TennisStats
 
             btnLogin.Click += async delegate
             {
-                //TODO show a spinner
+                if (!(etUsername.Text.Trim().Length > 0) || !(etPassword.Text.Trim().Length > 0))
+                {
+                    Dialog dialog = Util.SimpleAlert(this, "Missing fields", "Username or password is invalid").Create();
+                    dialog.Show();
+                    return;
+                }
+                
+                ProgressDialog progressDialog = Util.SimpleLoading(this, "Loading profile...");
+                progressDialog.Show();
                 
                 var users = await firebaseClient.Child(FBTables.FbUser).OnceAsync<Player>();
   
@@ -63,11 +71,13 @@ namespace TennisStats
                     }
                     else
                     {
+                        progressDialog.Dismiss();
                         ShowErrorMessage(this);
                     }
                 }
                 else
                 {
+                    progressDialog.Dismiss();
                     ShowErrorMessage(this);
                 }
             };
