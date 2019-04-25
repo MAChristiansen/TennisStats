@@ -11,6 +11,7 @@ namespace TennisStats.Model
     {
 
         private string _winnerId;
+        private string _serverId;
         private ServeStatus _serveStatus;
         private WinReason _winReason;
         private StrokeType _strokeType;
@@ -19,6 +20,7 @@ namespace TennisStats.Model
 
         private Point(PointBuilder pb) {
             _winnerId = pb._winnerId;
+            _serverId = pb._serverId;
             _serveStatus = pb._serveStatus;
             _winReason = pb._winReason;
             _strokeType = pb._strokeType;
@@ -33,10 +35,12 @@ namespace TennisStats.Model
         public StrokeType StrokeType { get { return _strokeType; } set{_strokeType=value; } }
         public HandPosition HandPosition { get{ return _handPosition; } set { _handPosition = value; } }
         public FaultCount FaultCount { get { return _faultCount; } set { _faultCount = value; } }
+        public string ServerId { get { return _serverId; } set { _serverId = value; } }
 
 
         public class PointBuilder {
             public string _winnerId;
+            public string _serverId;
             public ServeStatus _serveStatus;
             public WinReason _winReason;
             public StrokeType _strokeType;
@@ -56,6 +60,7 @@ namespace TennisStats.Model
             public PointBuilder strokeType(StrokeType strokeType) { _strokeType = strokeType; return this; }
             public PointBuilder handPosition(HandPosition handPosition) { _handPosition = handPosition; return this; }
             public PointBuilder faultCount(FaultCount faultCount) { _faultCount = faultCount; return this; }
+            public PointBuilder serverId(string serverId) {_serverId = serverId; return this; }
 
             //Build
             public Point build() { return new Point(this); }
