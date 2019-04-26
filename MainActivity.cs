@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
@@ -19,12 +19,15 @@ namespace TennisStats
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.btnQuickMatch);
+            
+            Button btnLogin = FindViewById<Button>(Resource.Id.btnLogIn);
 
             button.Click += delegate
             {
                 NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
             };
+
+            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLogin)); };
         }
     }
 }
-
