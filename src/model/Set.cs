@@ -14,6 +14,7 @@ namespace TennisStats.Model
         private int _team2Score;
         private SetType _setType;
 
+        public Set(){}
 
         private Set(SetBuilder sb)
         {

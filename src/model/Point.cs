@@ -18,6 +18,8 @@ namespace TennisStats.Model
         private HandPosition _handPosition;
         private FaultCount _faultCount;
 
+        public Point(){}
+
         private Point(PointBuilder pb) {
             _winnerId = pb._winnerId;
             _serverId = pb._serverId;

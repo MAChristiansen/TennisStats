@@ -12,8 +12,9 @@ namespace TennisStats.Model
         private List<int> _team1Score;
         private List<int> _team2Score;
         private List<Point> _points;
-
         private List<string> _servers;
+
+        public Game(){}
 
         private Game(GameBuilder gb)
         {

@@ -24,6 +24,9 @@ namespace TennisStats.Model
 
         private List<Set> _sets;
 
+        public Match()
+        {}
+
         private Match(MatchBuilder mb)
         {
             _matchId = mb._matchId;
