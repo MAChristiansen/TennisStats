@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Firebase.Database;
+using Firebase.Database.Query;
 using TennisStats.Model;
 using static TennisStats.Enum.FaultCountEnum;
 using static TennisStats.Enum.GameTypeEnum;
@@ -49,8 +51,10 @@ namespace TennisStats.src.Controller
             string matchId = team1Id + team2Id;
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
             currentSet = new Set.SetBuilder().build();
+            currentMatch.Sets.Add(currentSet);
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
+            currentSet.Games.Add(currentGame);
 
             // Update the observers
             updateObservers();
@@ -337,7 +341,7 @@ namespace TennisStats.src.Controller
             //}
         }
 
-        private void updateGameStatus()
+        private async void updateGameStatus()
         {
             /*
              *   Checking if someone has won the current game:
@@ -349,7 +353,7 @@ namespace TennisStats.src.Controller
              *   
              */
             int minimumScore = 3;
-            if (currentGame.GameType == Enum.GameTypeEnum.GameType.TIEBREAK) minimumScore = 6;
+            if (currentGame.GameType == GameType.TIEBREAK) minimumScore = 6;
 
                 if (currentGame.lastScoreTeam1 > minimumScore || currentGame.lastScoreTeam2 > minimumScore)
                 {
@@ -438,6 +442,13 @@ namespace TennisStats.src.Controller
                     }
                     break;
             }
+            
+            //Post current match data
+
+            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+
+            await firebaseClient.Child(FBTables.FBMatch).Child(currentMatch.MatchId).PutAsync(currentMatch);
+
         }
 
 
@@ -453,7 +464,7 @@ namespace TennisStats.src.Controller
         {
             // Register the winner of the current game
             currentGame.WinnerId = winnerId;
-            currentSet.Games.Add(currentGame);
+            
 
             // Give a point to the right team
             if (winnerId.Equals(currentMatch.Team1Id))
@@ -503,6 +514,8 @@ namespace TennisStats.src.Controller
             {
                 currentGame = new Game.GameBuilder(newServer).build();
             }
+            
+            currentSet.Games.Add(currentGame);
 
         }
 
@@ -513,7 +526,6 @@ namespace TennisStats.src.Controller
         {
             //Set the winner of the set, and add it to the match
             currentSet.WinnerId = winnerId;
-            currentMatch.Sets.Add(currentSet);
 
             // Give a point to the right team
             if (winnerId.Equals(currentMatch.Team1Id))
@@ -527,6 +539,7 @@ namespace TennisStats.src.Controller
 
             //Create a new current set
             currentSet = new Set.SetBuilder().build();
+            currentMatch.Sets.Add(currentSet);
         }
     }
 }
