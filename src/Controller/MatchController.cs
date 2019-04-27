@@ -20,7 +20,7 @@ namespace TennisStats.src.Controller
         private Match currentMatch;
         private Set currentSet;
         private Game currentGame;
-        private static MatchController instance = null;
+        private static MatchController instance;
         private static readonly object padlock = new object();
 
         MatchController(){ inPlayPB = new Point.PointBuilder(); }
