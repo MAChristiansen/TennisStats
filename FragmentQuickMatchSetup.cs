@@ -24,6 +24,8 @@ namespace TennisStats
 
         private MatchType matchType = MatchType.THREESETTER;
 
+        private MatchParticipants matchCategory = MatchParticipants.SINGLE;
+
         private static MatchController matchController;
 
         private EditText etTeam1Player1, etTeam1Player2, etTeam2Player1, etTeam2Player2;
@@ -31,6 +33,8 @@ namespace TennisStats
         private ImageView ivNext;
 
         private TextView tvChoosePlayer1Team1, tvChoosePlayer2Team1, tvChoosePlayer1Team2, tvChoosePlayer2Team2;
+
+        private bool isSingle = true;
 
         public static FragmentQuickMatchSetup NewInstance()
         {
@@ -40,12 +44,6 @@ namespace TennisStats
             return new FragmentQuickMatchSetup();
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
-        }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -85,10 +83,25 @@ namespace TennisStats
 
             ivNext.Click += delegate
             {
-                matchController.CreateMatch(etTeam1Player1.Text, etTeam2Player1.Text, MatchParticipants.SINGLE, matchType);
-                NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
+                switch (matchCategory)
+                {
+                    case MatchParticipants.SINGLE:
+                        matchController.CreateMatch(etTeam1Player1.Text, 
+                            etTeam2Player1.Text, 
+                            matchCategory, 
+                            matchType);
+                        NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
+                    break;
+                    
+                    case MatchParticipants.DOUBLE:
+                        matchController.CreateMatch(etTeam1Player1.Text + etTeam1Player2.Text, 
+                            etTeam2Player1.Text + etTeam2Player2.Text, 
+                            matchCategory, 
+                            matchType);
+                        NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
+                        break;
+                }
             };
-
             return view;
         }
         
@@ -101,6 +114,8 @@ namespace TennisStats
                 tvChoosePlayer2Team1.Visibility = ViewStates.Invisible;
                 etTeam2Player2.Visibility = ViewStates.Invisible;
                 tvChoosePlayer2Team2.Visibility = ViewStates.Invisible;
+
+                matchCategory = MatchParticipants.SINGLE;
             }
             else
             {
@@ -108,6 +123,8 @@ namespace TennisStats
                 tvChoosePlayer2Team1.Visibility = ViewStates.Visible;
                 etTeam2Player2.Visibility = ViewStates.Visible;
                 tvChoosePlayer2Team2.Visibility = ViewStates.Visible;
+
+                matchCategory = MatchParticipants.DOUBLE;
             }
         }
 
@@ -115,7 +132,18 @@ namespace TennisStats
         {
             Spinner spinner = (Spinner) sender;
 
-            //TODO: Do something when choosing match type.
+            switch (spinner.GetItemAtPosition(e.Position).ToString())
+            {
+               case "Best of 1 Set":
+                   matchType = MatchType.ONESETTER;
+                   break;
+               case "Best of 3 Set":
+                   matchType = MatchType.THREESETTER;
+                   break;
+               case "Best of 5 Set":
+                   matchType = MatchType.FIVESETTER;
+                   break;    
+            }
         }
     }
 }
