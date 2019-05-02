@@ -1,4 +1,5 @@
 ﻿using System;
+using TennisStats.Enum;
 using static TennisStats.Enum.HandPositionEnum;
 using static TennisStats.Enum.ServeStatusEnum;
 using static TennisStats.Enum.StrokeTypeEnum;
@@ -53,6 +54,10 @@ namespace TennisStats.Model
             public PointBuilder() 
             {
                 _faultCount = FaultCount.DEFAULTSERVE;
+                _serveStatus = ServeStatus.NONE;
+                _winReason = WinReason.NONE;
+                _strokeType = StrokeType.NONE;
+                _handPosition = HandPosition.NONE;
             }
 
             //optional variables
