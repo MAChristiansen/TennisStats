@@ -22,17 +22,16 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE)
+                if (point.ServerId == playerId && point.FaultCount == FaultCount.FIRSTSERVE && point.WinnerId != null)
+                {
+                    servesInPlay++;
+                    posibleServesInPlay++;
+                } else if (point.ServerId == playerId && point.FaultCount == FaultCount.SECONDSERVE)
                 {
                     posibleServesInPlay++;
-                    if (point.ServeStatus == ServeStatus.ACE)
-                    {
-                        servesInPlay++;
-                    }
                 }
             }
-
-            return (int)(servesInPlay / posibleServesInPlay * 100);
+            return posibleServesInPlay == 0 ? 0 : (int)(servesInPlay / posibleServesInPlay * 100);
         }
         
         public int calculateWinPercentageOnFirstServe(string playerId, List<Point> points)
@@ -42,17 +41,18 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE)
+                if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE && point.WinnerId == playerId)
                 {
                     totalFirstServesInPlay++;
-                    if (playerId == point.WinnerId)
-                    {
-                        winOnFirstServe++;
-                    }
+                    winOnFirstServe++;
+                }
+                else if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE && point.WinnerId != playerId && point.WinnerId != null)
+                {
+                    totalFirstServesInPlay++;
                 }
             }
 
-            return (int)(winOnFirstServe / totalFirstServesInPlay * 100);
+            return totalFirstServesInPlay == 0 ? 0 : (int)(winOnFirstServe / totalFirstServesInPlay * 100);
         }
         
         public int calculateWinPercentageOnSecondServe(string playerId, List<Point> points)
@@ -62,17 +62,18 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.ServerId && point.FaultCount == FaultCount.SECONDSERVE)
+                if (playerId == point.ServerId && point.FaultCount == FaultCount.SECONDSERVE && point.WinnerId == playerId)
                 {
                     totalSecondServesInPlay++;
-                    if (playerId == point.WinnerId)
-                    {
-                        winOnSecondServe++;
-                    }
+                    winOnSecondServe++;
+                }
+                else if (playerId == point.ServerId && point.FaultCount == FaultCount.SECONDSERVE && point.WinnerId != playerId && point.WinnerId != null)
+                {
+                    totalSecondServesInPlay++;
                 }
             }
 
-            return (int)(winOnSecondServe / totalSecondServesInPlay * 100);
+            return totalSecondServesInPlay == 0 ? 0 : (int)(winOnSecondServe / totalSecondServesInPlay * 100);
         }
 
         //TODO: Vurdere om der skal returneres en liste, så vi kan få hvor mange vundet breakpoints ud fra hvor mange mulige.
@@ -138,7 +139,9 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId != point.WinnerId && point.WinReason == WinReasonEnum.WinReason.UNFORCEDERROR)
+                Console.WriteLine("Lægden af Point: " + points.Count);
+                Console.WriteLine(point.ToString());
+                if (playerId != point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.UNFORCEDERROR)
                 {
                     unforcedErrors++;
                 }
@@ -153,7 +156,7 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.WinnerId && point.WinReason == WinReasonEnum.WinReason.WINNER)
+                if (playerId == point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.WINNER)
                 {
                     winners++;
                 }
@@ -168,7 +171,7 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId != point.WinnerId && point.WinReason == WinReasonEnum.WinReason.FORCEDERROR)
+                if (playerId != point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.FORCEDERROR)
                 {
                     forcedErrors++;
                 }
@@ -226,7 +229,7 @@ namespace TennisStats.src.Controller
             return matches;
         }
 
-        public async Task<List<Point>> GetListOfPointsToBeCalculated(string playerId, StatisticType statisticType, string matchId = null, int set = 0)
+        public async Task<List<Point>> GetListOfPointsToBeCalculatedAsync(string playerId, StatisticType statisticType, string matchId = null, int set = 0)
         {
 
             List<Match> matches = await GetMatches(playerId);
@@ -298,5 +301,27 @@ namespace TennisStats.src.Controller
             return points;
         }
 
+        public List<Point> GetPointsBasedOnMatch(Match match, int set = 0)
+        {
+            List<Point> points = new List<Point>();
+            if (set == 0)
+            {
+                foreach (Set matchSet in match.Sets)
+                {
+                    foreach (Game game in matchSet.Games)
+                    {
+                        points.AddRange(game.Points);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Game game in match.Sets[set].Games)
+                {
+                    points.AddRange(game.Points);
+                }
+            }
+            return points;
+        }
     }
 }
