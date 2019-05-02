@@ -77,7 +77,7 @@ namespace TennisStats.Model
                 _matchId = matchId;
                 _team1Id = team1Id;
                 _team2Id = team2Id;
-
+                _endTime = 0;
                 _participants = participants;
 
                 //Initialize list

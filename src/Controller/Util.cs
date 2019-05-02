@@ -1,3 +1,4 @@
+using System;
 using Android.App;
 using Android.Content;
 
@@ -21,6 +22,12 @@ namespace TennisStats.src.Controller
             progressDialog.SetCancelable(cancelable);
 
             return progressDialog;
+        }
+
+        public static long GenerateTimeStamp()
+        {
+            //DateTime.MinValue is 01/01/01 00:00 so add 1969 years. to get 1/1/1970
+            return (long) DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds;           
         }
     }
 }

@@ -50,7 +50,7 @@ namespace TennisStats.src.Controller
         {
             //TODO generer bedre id
             string matchId = team1Id + team2Id;
-            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
+            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).startTime(Util.GenerateTimeStamp()).build();
             currentSet = new Set.SetBuilder().build();
             currentMatch.Sets.Add(currentSet);
             //TODO Hvem skal starte med serven?
@@ -359,11 +359,14 @@ namespace TennisStats.src.Controller
                 observer.OnNext(currentMatch);
             }
 
-            //TODO If the game is finished, notify with OnCompleted
-            //foreach (IObserver<Match> observer in matchObservers)
-            //{
-            //    observer.OnComplete(currentMatch);
-            //}
+            if (currentMatch.EndTime != 0)
+            {
+                //TODO If the game is finished, notify with OnCompleted
+                //foreach (IObserver<Match> observer in matchObservers)
+                //{
+                //    observer.OnComplete(currentMatch);
+                //}
+            }
         }
 
         private async void updateGameStatus()
@@ -435,11 +438,15 @@ namespace TennisStats.src.Controller
                     {
                         //Team 1 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team1Id;
                     }
                     else if (currentMatch.Team2Score > 0)
                     {
                         //Team 2 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team2Id;
                     }
                     break;
                 case MatchType.THREESETTER:
@@ -447,11 +454,15 @@ namespace TennisStats.src.Controller
                     {
                         //Team 1 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.WinnerId = currentMatch.Team1Id;
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
                     }
                     else if (currentMatch.Team2Score >= 2)
                     {
                         //team 2 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team2Id;
                     }
                     break;
                 case MatchType.FIVESETTER:
@@ -459,11 +470,15 @@ namespace TennisStats.src.Controller
                     {
                         //Team 1 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team1Id;
                     }
                     else if (currentMatch.Team2Score >= 3)
                     {
                         //team 2 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team2Id;
                     }
                     break;
             }
