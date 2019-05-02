@@ -9,6 +9,7 @@ using static TennisStats.Enum.MatchParticipantsEnum;
 using static TennisStats.Enum.MatchTypeEnum;
 using static TennisStats.Enum.ServeStatusEnum;
 using static TennisStats.Enum.SetTypeEnum;
+using Boolean = Java.Lang.Boolean;
 
 namespace TennisStats.src.Controller
 {
@@ -104,6 +105,7 @@ namespace TennisStats.src.Controller
         {
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
+            pb.serverId(currentGame.Servers[currentGame.Servers.Count - 1]);
             pb.faultCount(serve == 1 ? FaultCount.FIRSTSERVE : FaultCount.SECONDSERVE);
 
             //Set the serve status to fault
@@ -112,10 +114,9 @@ namespace TennisStats.src.Controller
             //Check if first serve
             if (pb._faultCount == FaultCount.FIRSTSERVE)
             {
-                pb.faultCount(FaultCount.FIRSTSERVE);
-
                 GiveEmptyPoints();
                 currentGame.Points.Add(pb.build());
+                Console.WriteLine(pb.ToString());
                 return pb._faultCount;
             }
 
@@ -250,6 +251,30 @@ namespace TennisStats.src.Controller
         public Game getCurrentGame()
         {
             return currentGame;
+        }
+
+        public Match GetCurrentMatch()
+        {
+            return currentMatch;
+        }
+
+        public string GetMatchScore(Match match)
+        {
+            string score = "";
+
+            for (int i = 0; i < match.Sets.Count; i++)
+            {
+                if (i == 0 && match.Sets.Count > 1)
+                {
+                    score += match.Sets[i].Team1Score + " / " + match.Sets[i].Team2Score + " ";
+                }
+                else
+                {
+                    score += match.Sets[i].Team1Score + " / " + match.Sets[i].Team2Score;
+                }
+            }
+
+            return score;
         }
 
         /*
@@ -541,5 +566,5 @@ namespace TennisStats.src.Controller
             currentSet = new Set.SetBuilder().build();
             currentMatch.Sets.Add(currentSet);
         }
-    }
+    } 
 }
