@@ -68,5 +68,13 @@ namespace TennisStats.Model
             public Point build() { return new Point(this); }
 
         }
+
+        public string ToString()
+        {
+            return "ServerID: " + _serverId + "\n" +
+                   "WinnerID: " + _winnerId + "\n" +
+                   "FaultCount: " + _faultCount + "\n" + 
+                   "Win Reason: " + _winReason;
+        }
     }
 }
