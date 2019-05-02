@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
+using Java.Util;
 using TennisStats.Model;
 using TennisStats.src.Controller;
 using TennisStats.Service;
@@ -37,13 +38,18 @@ namespace TennisStats
 
             btnCreateMatch.Click += async delegate
             {
-                StatisticController sc = new StatisticController();
 
-                var listOfPoints = await sc.GetListOfPointsToBeCalculatedAsync("Frederikke", StatisticType.OVERALL);
+                long date = (long) (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc) - new DateTime()).TotalMilliseconds;
 
-                double points = sc.calculateFirstServePercentage("Frederikke", listOfPoints);
-                
-                Console.WriteLine("Frederikkes først servs percent er: " + points);
+                Console.WriteLine(Util.GenerateTimeStamp());
+
+//                StatisticController sc = new StatisticController();
+//
+//                var listOfPoints = await sc.GetListOfPointsToBeCalculatedAsync("Frederikke", StatisticType.OVERALL);
+//
+//                double points = sc.calculateFirstServePercentage("Frederikke", listOfPoints);
+//                
+//                Console.WriteLine("Frederikkes først servs percent er: " + points);
             };
         }
     }
