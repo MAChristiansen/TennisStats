@@ -35,9 +35,24 @@
             android:text="My Stats"
             android:textColor="#000"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnLiveMatches"
+            app:layout_constraintBottom_toTopOf="@+id/btnCreateMatch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+    />
+    
+    <Button
+            android:id="@+id/btnCreateMatch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="20dp"
+            android:text="Create Match"
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnLiveMatches"
     />
 
     <Button
