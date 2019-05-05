@@ -53,6 +53,7 @@ namespace TennisStats
             btnLogOut.Click += delegate
             {
                 // TODO : Some Logout code here, HANDLE IT JAAFAR!!
+                Util.logUser(view.Context, false);
                 NavigationService.NavigateToPage(view.Context, typeof(MainActivity));
             };
             
