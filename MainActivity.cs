@@ -28,6 +28,7 @@ namespace TennisStats
             Button btnQuickMatch = FindViewById<Button>(Resource.Id.btnQuickMatch);
             Button btnCreateMatch = FindViewById<Button>(Resource.Id.btnCreateMatch);
             Button btnLogin = FindViewById<Button>(Resource.Id.btnLogIn);
+            Button btnLiveScore = FindViewById<Button>(Resource.Id.btnLiveScore);
 
             btnQuickMatch.Click += delegate
             {
@@ -51,6 +52,8 @@ namespace TennisStats
 //                
 //                Console.WriteLine("Frederikkes først servs percent er: " + points);
             };
+
+            btnLiveScore.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLiveScore)); };
         }
     }
 }
