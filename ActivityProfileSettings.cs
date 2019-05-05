@@ -10,6 +10,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase.Database;
+using TennisStats.src.Controller;
 
 namespace TennisStats
 {
@@ -22,9 +24,37 @@ namespace TennisStats
             SetContentView(Resource.Layout.ProfileSettings);
 
             Button btnBirthDay = FindViewById<Button>(Resource.Id.btnProfileSettingsBirthday);
+            Spinner clubSpinner = FindViewById<Spinner>(Resource.Id.spinnerClub);
+            
+            PopulateClubList(clubSpinner);
 
             btnBirthDay.Click += delegate { OnClickDatePicker(this); };
 
+        }
+
+        private async void PopulateClubList(Spinner spinner)
+        {
+            spinner.ItemSelected += onClubSelected;
+            List<string> clubList = new List<string>();
+
+            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            
+            var clubs = await firebaseClient.Child(FBTables.FbClub).OnceAsync<object>();
+
+            foreach (var club in clubs)
+            {
+                clubList.Add(club.Key);
+            }
+
+            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, clubList);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = adapter;
+        }
+
+        private void onClubSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+            Console.WriteLine(spinner.GetItemAtPosition(e.Position).ToString());
         }
         
         private void OnClickDatePicker(Context context)
