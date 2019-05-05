@@ -152,6 +152,7 @@
     <AndroidResource Include="Resources\layout\ProfileSettings.axml" />
     <AndroidResource Include="Resources\layout\MatchStats.axml" />
     <AndroidResource Include="Resources\layout\ResultPage.axml" />
+    <AndroidResource Include="Resources\layout\live_score_layout.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
