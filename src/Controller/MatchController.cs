@@ -8,8 +8,6 @@ using static TennisStats.Enum.GameTypeEnum;
 using static TennisStats.Enum.MatchParticipantsEnum;
 using static TennisStats.Enum.MatchTypeEnum;
 using static TennisStats.Enum.ServeStatusEnum;
-using static TennisStats.Enum.SetTypeEnum;
-using Boolean = Java.Lang.Boolean;
 
 namespace TennisStats.src.Controller
 {
