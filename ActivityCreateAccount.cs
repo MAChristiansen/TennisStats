@@ -69,7 +69,10 @@ namespace TennisStats
                 {
                     await firebaseClient.Child(FBTables.FbUser).Child(player.PlayerId).PutAsync(player);
                     progressDialog.Dismiss();
-                    NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings));
+                    Bundle bundle = new Bundle();
+                    bundle.PutString("Id", txtUsername.Text.Trim());
+                    bundle.PutString("password", txtPassword.Text.Trim());
+                    NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings), bundle);
                 }
             };
         }
