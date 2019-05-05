@@ -139,8 +139,6 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                Console.WriteLine("Lægden af Point: " + points.Count);
-                Console.WriteLine(point.ToString());
                 if (playerId != point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.UNFORCEDERROR)
                 {
                     unforcedErrors++;
@@ -210,7 +208,7 @@ namespace TennisStats.src.Controller
             return matchLosses;
         }
 
-        public async Task<List<Match>> GetMatches(string playerId)
+        private async Task<List<Match>> GetMatches(string playerId)
         {
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
             

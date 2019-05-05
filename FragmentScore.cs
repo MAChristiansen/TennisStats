@@ -30,11 +30,6 @@ namespace TennisStats
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.Score, container, false);
             MatchController matchController = MatchController.Instance;
-
-            if (matchController.GetCurrentMatch().EndTime != 0)
-            {
-               //TODO Gør noget når kampen er færdig.
-            }
             
             TextView tvScore = view.FindViewById<TextView>(Resource.Id.tvScore);
             int team1Score = Arguments.GetInt("team1", 0);
