@@ -94,8 +94,8 @@ namespace TennisStats
                     break;
                     
                     case MatchParticipants.DOUBLE:
-                        matchController.CreateMatch(etTeam1Player1.Text + etTeam1Player2.Text, 
-                            etTeam2Player1.Text + etTeam2Player2.Text, 
+                        matchController.CreateMatch(etTeam1Player1.Text + " | " + etTeam1Player2.Text, 
+                            etTeam2Player1.Text + " | " + etTeam2Player2.Text, 
                             matchCategory, 
                             matchType);
                         NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
@@ -137,10 +137,10 @@ namespace TennisStats
                case "Best of 1 Set":
                    matchType = MatchType.ONESETTER;
                    break;
-               case "Best of 3 Set":
+               case "Best of 3 Sets":
                    matchType = MatchType.THREESETTER;
                    break;
-               case "Best of 5 Set":
+               case "Best of 5 Sets":
                    matchType = MatchType.FIVESETTER;
                    break;    
             }
