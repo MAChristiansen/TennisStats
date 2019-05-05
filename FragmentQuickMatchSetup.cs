@@ -34,7 +34,11 @@ namespace TennisStats
 
         private TextView tvChoosePlayer1Team1, tvChoosePlayer2Team1, tvChoosePlayer1Team2, tvChoosePlayer2Team2;
 
+        private Switch switchChooseServer;
+
         private bool isSingle = true;
+
+        private bool switchChooseServerStatus;
 
         public static FragmentQuickMatchSetup NewInstance()
         {
@@ -53,6 +57,7 @@ namespace TennisStats
             
             sCategory = view.FindViewById<Spinner>(Resource.Id.sCategory);
             sType = view.FindViewById<Spinner>(Resource.Id.sType);
+            switchChooseServer = view.FindViewById<Switch>(Resource.Id.switch_choose_server);
             etTeam1Player1 = view.FindViewById<EditText>(Resource.Id.etTeam1Player1);
             etTeam1Player2 = view.FindViewById<EditText>(Resource.Id.etTeam1Player2);
             etTeam2Player1 = view.FindViewById<EditText>(Resource.Id.etTeam2Player1);
@@ -80,6 +85,12 @@ namespace TennisStats
                 Android.Resource.Layout.SimpleSpinnerItem);
             adapterCategory.SetDropDownViewResource (Android.Resource.Layout.SimpleSpinnerDropDownItem);
             sType.Adapter = adapterForm;
+            
+            switchChooseServer.CheckedChange += delegate(object sender, CompoundButton.CheckedChangeEventArgs e)
+            {
+                switchChooseServer.Text = e.IsChecked ? "Team 2 starts serving" : "Team 1 starts serving";
+                switchChooseServerStatus = e.IsChecked;
+            };
 
             ivNext.Click += delegate
             {
@@ -89,7 +100,8 @@ namespace TennisStats
                         matchController.CreateMatch(etTeam1Player1.Text, 
                             etTeam2Player1.Text, 
                             matchCategory, 
-                            matchType);
+                            matchType,
+                            switchChooseServerStatus);
                         NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
                     break;
                     
@@ -97,11 +109,13 @@ namespace TennisStats
                         matchController.CreateMatch(etTeam1Player1.Text + " | " + etTeam1Player2.Text, 
                             etTeam2Player1.Text + " | " + etTeam2Player2.Text, 
                             matchCategory, 
-                            matchType);
+                            matchType,
+                            switchChooseServerStatus);
                         NavigationService.NavigateToPage(Activity, typeof(ActivityMatch));
                         break;
                 }
             };
+            
             return view;
         }
         
