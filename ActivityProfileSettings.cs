@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -11,6 +12,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Firebase.Database;
+using Firebase.Database.Query;
+using TennisStats.Model;
 using TennisStats.src.Controller;
 
 namespace TennisStats
@@ -18,18 +21,46 @@ namespace TennisStats
     [Activity(Label = "ActivityProfileSettings")]
     public class ActivityProfileSettings : Activity, DatePickerDialog.IOnDateSetListener
     {
+        private Player.PlayerBuilder _player;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ProfileSettings);
-
-            Button btnBirthDay = FindViewById<Button>(Resource.Id.btnProfileSettingsBirthday);
-            Spinner clubSpinner = FindViewById<Spinner>(Resource.Id.spinnerClub);
             
+            _player = new Player.PlayerBuilder(Intent.Extras.GetString("Id")).Password(Intent.Extras.GetString("password"));
+
+            EditText etName = FindViewById<EditText>(Resource.Id.txtProfileSettingsName);
+            Button btnBirthDay = FindViewById<Button>(Resource.Id.btnProfileSettingsBirthday);
+            Button btnSaveSettings = FindViewById<Button>(Resource.Id.btnSaveSettings);
+            Spinner clubSpinner = FindViewById<Spinner>(Resource.Id.spinnerClub);
+            Switch handSwitch = FindViewById<Switch>(Resource.Id.switchProfileSettingsHand);
+            Switch genderSwitch = FindViewById<Switch>(Resource.Id.switchProfileSettingsGender);
+            
+            
+            handSwitch.CheckedChange += delegate(object sender, CompoundButton.CheckedChangeEventArgs e) {
+                var hand = e.IsChecked ? "Right" : "Left";
+                handSwitch.Text = "Playing hand is set to: " + hand;
+                Console.WriteLine(e.IsChecked);
+                _player.Hand(e.IsChecked);
+            };
+            
+            genderSwitch.CheckedChange += delegate(object sender, CompoundButton.CheckedChangeEventArgs e) {
+                var gender = e.IsChecked ? "Male" : "Female";
+                genderSwitch.Text = "Gender is set to: " + gender;
+                _player.Gender(e.IsChecked);
+            };
+                
             PopulateClubList(clubSpinner);
 
             btnBirthDay.Click += delegate { OnClickDatePicker(this); };
 
+            btnSaveSettings.Click += async delegate
+            {
+                FirebaseClient firebaseClient = FBTables.FirebaseClient;
+                _player.Name(etName.Text.Trim());
+                Player player = _player.build();
+                await firebaseClient.Child(FBTables.FbUser).Child(player.PlayerId).PutAsync(player);
+            };
         }
 
         private async void PopulateClubList(Spinner spinner)
@@ -45,6 +76,8 @@ namespace TennisStats
             {
                 clubList.Add(club.Key);
             }
+            
+            clubList.Insert(0, "Choose club");
 
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, clubList);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
@@ -55,6 +88,7 @@ namespace TennisStats
         {
             Spinner spinner = (Spinner)sender;
             Console.WriteLine(spinner.GetItemAtPosition(e.Position).ToString());
+            _player.ClubId(spinner.GetItemAtPosition(e.Position).ToString());
         }
         
         private void OnClickDatePicker(Context context)
@@ -66,7 +100,11 @@ namespace TennisStats
 
         public void OnDateSet(DatePicker view, int year, int month, int dayOfMonth)
         {
-            throw new NotImplementedException();
+            var baseDate = new DateTime (1970, 01, 01);
+            var toDate = new DateTime (year, (month + 1), dayOfMonth);
+            var numberOfSeconds = toDate.Subtract (baseDate).TotalSeconds;
+            var timestamp = (long)numberOfSeconds * 1000;
+            _player.Birthday(timestamp);
         }
     }
 }
