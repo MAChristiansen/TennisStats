@@ -73,6 +73,7 @@
     <Compile Include="ActivityMatchSetup.cs" />
     <Compile Include="FragmentMatchSetupCategory.cs" />
     <Compile Include="FragmentQuickMatchSetup.cs" />
+    <Compile Include="src\adapter\LiveScoreAdapter.cs" />
     <Compile Include="src\Controller\FBTables.cs" />
     <Compile Include="src\Controller\Util.cs" />
     <Compile Include="src\enum\Enums.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="src\Controller\StatisticController.cs" />
     <Compile Include="FragmentMatchStats.cs" />
     <Compile Include="ActivityResultPage.cs" />
+    <Compile Include="ActivityLiveScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -152,7 +154,8 @@
     <AndroidResource Include="Resources\layout\ProfileSettings.axml" />
     <AndroidResource Include="Resources\layout\MatchStats.axml" />
     <AndroidResource Include="Resources\layout\ResultPage.axml" />
-    <AndroidResource Include="Resources\layout\live_score_layout.axml" />
+    <AndroidResource Include="Resources\layout\LiveScoreLayout.axml" />
+    <AndroidResource Include="Resources\layout\LiveScore.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
