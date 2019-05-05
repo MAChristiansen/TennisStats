@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Firebase.Database;
+using Firebase.Database.Query;
 using TennisStats.Model;
 using static TennisStats.Enum.FaultCountEnum;
 using static TennisStats.Enum.GameTypeEnum;
 using static TennisStats.Enum.MatchParticipantsEnum;
 using static TennisStats.Enum.MatchTypeEnum;
 using static TennisStats.Enum.ServeStatusEnum;
-using static TennisStats.Enum.SetTypeEnum;
 
 namespace TennisStats.src.Controller
 {
@@ -18,7 +19,7 @@ namespace TennisStats.src.Controller
         private Match currentMatch;
         private Set currentSet;
         private Game currentGame;
-        private static MatchController instance = null;
+        private static MatchController instance;
         private static readonly object padlock = new object();
 
         MatchController(){ inPlayPB = new Point.PointBuilder(); }
@@ -47,10 +48,12 @@ namespace TennisStats.src.Controller
         {
             //TODO generer bedre id
             string matchId = team1Id + team2Id;
-            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).build();
+            currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).startTime(Util.GenerateTimeStamp()).build();
             currentSet = new Set.SetBuilder().build();
+            currentMatch.Sets.Add(currentSet);
             //TODO Hvem skal starte med serven?
             currentGame = new Game.GameBuilder(team1Id).build();
+            currentSet.Games.Add(currentGame);
 
             // Update the observers
             updateObservers();
@@ -100,6 +103,7 @@ namespace TennisStats.src.Controller
         {
             //Create point descriping the action
             Point.PointBuilder pb = new Point.PointBuilder();
+            pb.serverId(currentGame.Servers[currentGame.Servers.Count - 1]);
             pb.faultCount(serve == 1 ? FaultCount.FIRSTSERVE : FaultCount.SECONDSERVE);
 
             //Set the serve status to fault
@@ -108,10 +112,9 @@ namespace TennisStats.src.Controller
             //Check if first serve
             if (pb._faultCount == FaultCount.FIRSTSERVE)
             {
-                pb.faultCount(FaultCount.FIRSTSERVE);
-
                 GiveEmptyPoints();
                 currentGame.Points.Add(pb.build());
+                Console.WriteLine(pb.ToString());
                 return pb._faultCount;
             }
 
@@ -248,6 +251,30 @@ namespace TennisStats.src.Controller
             return currentGame;
         }
 
+        public Match GetCurrentMatch()
+        {
+            return currentMatch;
+        }
+
+        public string GetMatchScore(Match match)
+        {
+            string score = "";
+
+            for (int i = 0; i < match.Sets.Count; i++)
+            {
+                if (i == 0 && match.Sets.Count > 1)
+                {
+                    score += match.Sets[i].Team1Score + " / " + match.Sets[i].Team2Score + " ";
+                }
+                else
+                {
+                    score += match.Sets[i].Team1Score + " / " + match.Sets[i].Team2Score;
+                }
+            }
+
+            return score;
+        }
+
         /*
          *   Subscribe method used by the observerpattern
          * 
@@ -330,14 +357,17 @@ namespace TennisStats.src.Controller
                 observer.OnNext(currentMatch);
             }
 
-            //TODO If the game is finished, notify with OnCompleted
-            //foreach (IObserver<Match> observer in matchObservers)
-            //{
-            //    observer.OnComplete(currentMatch);
-            //}
+            if (currentMatch.EndTime != 0)
+            {
+                //TODO If the game is finished, notify with OnCompleted
+                //foreach (IObserver<Match> observer in matchObservers)
+                //{
+                //    observer.OnComplete(currentMatch);
+                //}
+            }
         }
 
-        private void updateGameStatus()
+        private async void updateGameStatus()
         {
             /*
              *   Checking if someone has won the current game:
@@ -349,7 +379,7 @@ namespace TennisStats.src.Controller
              *   
              */
             int minimumScore = 3;
-            if (currentGame.GameType == Enum.GameTypeEnum.GameType.TIEBREAK) minimumScore = 6;
+            if (currentGame.GameType == GameType.TIEBREAK) minimumScore = 6;
 
                 if (currentGame.lastScoreTeam1 > minimumScore || currentGame.lastScoreTeam2 > minimumScore)
                 {
@@ -406,11 +436,15 @@ namespace TennisStats.src.Controller
                     {
                         //Team 1 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team1Id;
                     }
                     else if (currentMatch.Team2Score > 0)
                     {
                         //Team 2 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team2Id;
                     }
                     break;
                 case MatchType.THREESETTER:
@@ -418,11 +452,15 @@ namespace TennisStats.src.Controller
                     {
                         //Team 1 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.WinnerId = currentMatch.Team1Id;
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
                     }
                     else if (currentMatch.Team2Score >= 2)
                     {
                         //team 2 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team2Id;
                     }
                     break;
                 case MatchType.FIVESETTER:
@@ -430,14 +468,25 @@ namespace TennisStats.src.Controller
                     {
                         //Team 1 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team1Id;
                     }
                     else if (currentMatch.Team2Score >= 3)
                     {
                         //team 2 wins
                         matchObservers[0].OnCompleted();
+                        currentMatch.EndTime = Util.GenerateTimeStamp();
+                        currentMatch.WinnerId = currentMatch.Team2Id;
                     }
                     break;
             }
+            
+            //Post current match data
+
+            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+
+            await firebaseClient.Child(FBTables.FBMatch).Child(currentMatch.MatchId).PutAsync(currentMatch);
+
         }
 
 
@@ -453,7 +502,7 @@ namespace TennisStats.src.Controller
         {
             // Register the winner of the current game
             currentGame.WinnerId = winnerId;
-            currentSet.Games.Add(currentGame);
+            
 
             // Give a point to the right team
             if (winnerId.Equals(currentMatch.Team1Id))
@@ -503,6 +552,8 @@ namespace TennisStats.src.Controller
             {
                 currentGame = new Game.GameBuilder(newServer).build();
             }
+            
+            currentSet.Games.Add(currentGame);
 
         }
 
@@ -513,7 +564,6 @@ namespace TennisStats.src.Controller
         {
             //Set the winner of the set, and add it to the match
             currentSet.WinnerId = winnerId;
-            currentMatch.Sets.Add(currentSet);
 
             // Give a point to the right team
             if (winnerId.Equals(currentMatch.Team1Id))
@@ -527,6 +577,7 @@ namespace TennisStats.src.Controller
 
             //Create a new current set
             currentSet = new Set.SetBuilder().build();
+            currentMatch.Sets.Add(currentSet);
         }
-    }
+    } 
 }

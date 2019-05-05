@@ -31,7 +31,7 @@ namespace TennisStats.Enum
 
     // These enums are used in the Point class to express how a point is won.
     public class ServeStatusEnum {
-        public enum ServeStatus { ACE, SERVEWINNER, FOOTFAULT, FAULT, INPLAY };
+        public enum ServeStatus { NONE, ACE, SERVEWINNER, FOOTFAULT, FAULT, INPLAY };
     }
 
     public class FaultCountEnum
@@ -40,15 +40,15 @@ namespace TennisStats.Enum
     }
 
     public class WinReasonEnum {
-        public enum WinReason { FORCEDERROR, UNFORCEDERROR, WINNER };
+        public enum WinReason { NONE, FORCEDERROR, UNFORCEDERROR, WINNER };
     }
 
     public class StrokeTypeEnum {
-        public enum StrokeType { DROPSHOT, SMASH, VOLLEY, LOB, APPROACH, RETURN, BASELINE };
+        public enum StrokeType { NONE, DROPSHOT, SMASH, VOLLEY, LOB, APPROACH, RETURN, BASELINE };
     }
 
     public class HandPositionEnum {
-        public enum HandPosition { FORHAND, BACKHAND };
+        public enum HandPosition { NONE, FORHAND, BACKHAND };
     }
 
     public class SetTypeEnum {

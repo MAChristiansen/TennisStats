@@ -10,5 +10,7 @@ namespace TennisStats.src.Controller
         public static string FbUser => "user";
         public static string FbPassword => "Password";
         public static string FbBirthday => "Birthday";
+
+        public static string FBMatch => "match";
     }
 }

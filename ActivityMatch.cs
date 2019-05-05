@@ -14,7 +14,7 @@ using TennisStats.src.Service;
 
 namespace TennisStats
 {
-    [Activity(Label = "Actual Match")]
+    [Activity(Label = "Match")]
 
 
     public class ActivityMatch : Activity, IObserver<Match>
@@ -33,6 +33,8 @@ namespace TennisStats
 
         private ImageView ivTeam1Serving;
         private ImageView ivTeam2Serving;
+
+        private static Button btnStats;
 
         private MatchController matchController;
         private PointService pointService;
@@ -66,6 +68,15 @@ namespace TennisStats
             ivTeam1Serving = FindViewById<ImageView>(Resource.Id.ivTeam1Serving);
             ivTeam2Serving = FindViewById<ImageView>(Resource.Id.ivTeam2Serving);
 
+            btnStats = FindViewById<Button>(Resource.Id.btnStats);
+            
+            NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentServeScenario.NewInstance(1));
+            
+            btnStats.Click += delegate
+            {
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentMatchStats.NewInstance(null));
+            };
+
             // set the team names
             tvTeam1Names.Text = matchController.GetTeamNames()[0];
             tvTeam2Names.Text = matchController.GetTeamNames()[1];
@@ -73,7 +84,7 @@ namespace TennisStats
 
 
             //Creating first serve scenario
-            NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentServeScenario.NewInstance(1));
+            
         }
 
         protected override void OnResume()

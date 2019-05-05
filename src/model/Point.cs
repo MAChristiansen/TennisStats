@@ -1,4 +1,5 @@
 ﻿using System;
+using TennisStats.Enum;
 using static TennisStats.Enum.HandPositionEnum;
 using static TennisStats.Enum.ServeStatusEnum;
 using static TennisStats.Enum.StrokeTypeEnum;
@@ -17,6 +18,8 @@ namespace TennisStats.Model
         private StrokeType _strokeType;
         private HandPosition _handPosition;
         private FaultCount _faultCount;
+
+        public Point(){}
 
         private Point(PointBuilder pb) {
             _winnerId = pb._winnerId;
@@ -51,6 +54,10 @@ namespace TennisStats.Model
             public PointBuilder() 
             {
                 _faultCount = FaultCount.DEFAULTSERVE;
+                _serveStatus = ServeStatus.NONE;
+                _winReason = WinReason.NONE;
+                _strokeType = StrokeType.NONE;
+                _handPosition = HandPosition.NONE;
             }
 
             //optional variables
@@ -65,6 +72,14 @@ namespace TennisStats.Model
             //Build
             public Point build() { return new Point(this); }
 
+        }
+
+        public string ToString()
+        {
+            return "ServerID: " + _serverId + "\n" +
+                   "WinnerID: " + _winnerId + "\n" +
+                   "FaultCount: " + _faultCount + "\n" + 
+                   "Win Reason: " + _winReason;
         }
     }
 }

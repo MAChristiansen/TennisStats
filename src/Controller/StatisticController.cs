@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Firebase.Database;
+using Firebase.Database.Query;
 using TennisStats.Enum;
 using TennisStats.Model;
 using static TennisStats.Enum.FaultCountEnum;
@@ -11,39 +15,6 @@ namespace TennisStats.src.Controller
 {
     public class StatisticController
     {
-        public List<Point> GetListOfPointsToBeCalculated(string playerId, StatisticType statisticType, string matchId = null)
-        {
-            if (matchId == null && statisticType == StatisticType.MATCH) 
-            {
-                return null;
-            }
-            
-            List<Point> points = new List<Point>();
-            
-            //TODO: Her skal der laves kode til at finde alle 
-
-            switch (statisticType)
-            {
-                case StatisticType.OVERALL:
-                    // DO something...
-                    break;
-                case StatisticType.MATCH:
-                    // DO something...
-                    break;
-                case StatisticType.SET:
-                    // DO something...
-                    break;
-                case StatisticType.LASTMOUNTH:
-                    // DO something...
-                    break;
-                case StatisticType.LASTYEAR:
-                    // DO something...
-                    break;
-            }
-            
-            return points;
-        }
-
         public int calculateFirstServePercentage(string playerId, List<Point> points)
         {
             double servesInPlay = 0;
@@ -51,17 +22,16 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE)
+                if (point.ServerId == playerId && point.FaultCount == FaultCount.FIRSTSERVE && point.WinnerId != null)
+                {
+                    servesInPlay++;
+                    posibleServesInPlay++;
+                } else if (point.ServerId == playerId && point.FaultCount == FaultCount.SECONDSERVE)
                 {
                     posibleServesInPlay++;
-                    if (point.ServeStatus == ServeStatus.ACE)
-                    {
-                        servesInPlay++;
-                    }
                 }
             }
-
-            return (int)(servesInPlay / posibleServesInPlay * 100);
+            return posibleServesInPlay == 0 ? 0 : (int)(servesInPlay / posibleServesInPlay * 100);
         }
         
         public int calculateWinPercentageOnFirstServe(string playerId, List<Point> points)
@@ -71,17 +41,18 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE)
+                if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE && point.WinnerId == playerId)
                 {
                     totalFirstServesInPlay++;
-                    if (playerId == point.WinnerId)
-                    {
-                        winOnFirstServe++;
-                    }
+                    winOnFirstServe++;
+                }
+                else if (playerId == point.ServerId && point.FaultCount == FaultCount.FIRSTSERVE && point.WinnerId != playerId && point.WinnerId != null)
+                {
+                    totalFirstServesInPlay++;
                 }
             }
 
-            return (int)(winOnFirstServe / totalFirstServesInPlay * 100);
+            return totalFirstServesInPlay == 0 ? 0 : (int)(winOnFirstServe / totalFirstServesInPlay * 100);
         }
         
         public int calculateWinPercentageOnSecondServe(string playerId, List<Point> points)
@@ -91,17 +62,18 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.ServerId && point.FaultCount == FaultCount.SECONDSERVE)
+                if (playerId == point.ServerId && point.FaultCount == FaultCount.SECONDSERVE && point.WinnerId == playerId)
                 {
                     totalSecondServesInPlay++;
-                    if (playerId == point.WinnerId)
-                    {
-                        winOnSecondServe++;
-                    }
+                    winOnSecondServe++;
+                }
+                else if (playerId == point.ServerId && point.FaultCount == FaultCount.SECONDSERVE && point.WinnerId != playerId && point.WinnerId != null)
+                {
+                    totalSecondServesInPlay++;
                 }
             }
 
-            return (int)(winOnSecondServe / totalSecondServesInPlay * 100);
+            return totalSecondServesInPlay == 0 ? 0 : (int)(winOnSecondServe / totalSecondServesInPlay * 100);
         }
 
         //TODO: Vurdere om der skal returneres en liste, så vi kan få hvor mange vundet breakpoints ud fra hvor mange mulige.
@@ -167,7 +139,7 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId != point.WinnerId && point.WinReason == WinReasonEnum.WinReason.UNFORCEDERROR)
+                if (playerId != point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.UNFORCEDERROR)
                 {
                     unforcedErrors++;
                 }
@@ -182,7 +154,7 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId == point.WinnerId && point.WinReason == WinReasonEnum.WinReason.WINNER)
+                if (playerId == point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.WINNER)
                 {
                     winners++;
                 }
@@ -197,7 +169,7 @@ namespace TennisStats.src.Controller
 
             foreach (Point point in points)
             {
-                if (playerId != point.WinnerId && point.WinReason == WinReasonEnum.WinReason.FORCEDERROR)
+                if (playerId != point.WinnerId && point.WinnerId != null && point.WinReason == WinReasonEnum.WinReason.FORCEDERROR)
                 {
                     forcedErrors++;
                 }
@@ -236,5 +208,118 @@ namespace TennisStats.src.Controller
             return matchLosses;
         }
 
+        private async Task<List<Match>> GetMatches(string playerId)
+        {
+            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            
+            List<Match> matches = new List<Match>();
+            
+            var collectedMatches = await firebaseClient.Child(FBTables.FBMatch).OnceAsync<Match>();
+
+            foreach (var match in collectedMatches)
+            {
+                if (match.Object.MatchId.Contains(playerId))
+                {
+                    matches.Add(match.Object);
+                }
+            }
+
+            return matches;
+        }
+
+        public async Task<List<Point>> GetListOfPointsToBeCalculatedAsync(string playerId, StatisticType statisticType, string matchId = null, int set = 0)
+        {
+
+            List<Match> matches = await GetMatches(playerId);
+            List<Point> points = new List<Point>();
+
+            if (matchId == null && statisticType == StatisticType.MATCH) 
+            {
+                return null;
+            }
+            
+            switch (statisticType)
+            {
+                //TODO jeg kan ikke lig vi har 3 nested for-loops, for at finde alle point
+                case StatisticType.OVERALL:
+                    foreach (Match match in matches)
+                    {
+                        foreach (Set matchSet in match.Sets)
+                        {
+                            foreach (Game game in matchSet.Games)
+                            {
+                                if (game.Points != null)
+                                {
+                                    points.AddRange(game.Points);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case StatisticType.MATCH:
+                    foreach (Match match in matches)
+                    {
+                        if (match.MatchId.Equals(matchId))
+                        {
+                            foreach (Set matchSet in match.Sets)
+                            {
+                                foreach (Game game in matchSet.Games)
+                                {
+                                    if (game.Points != null)
+                                    {
+                                        points.AddRange(game.Points);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case StatisticType.SET:
+                    foreach (Match match in matches)
+                    {
+                        if (match.MatchId.Equals(matchId))
+                        {
+                            foreach (Game game in match.Sets[set].Games)
+                            {
+                                if (game.Points != null)
+                                {
+                                    points.AddRange(game.Points);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case StatisticType.LASTMOUNTH:
+                    //TODO NOT IMPLEMENTED
+                    break;
+                case StatisticType.LASTYEAR:
+                    //TODO NOT IMPLEMENTED
+                    break;
+            }
+            return points;
+        }
+
+        public List<Point> GetPointsBasedOnMatch(Match match, int set = 0)
+        {
+            List<Point> points = new List<Point>();
+            if (set == 0)
+            {
+                foreach (Set matchSet in match.Sets)
+                {
+                    foreach (Game game in matchSet.Games)
+                    {
+                        points.AddRange(game.Points);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Game game in match.Sets[set].Games)
+                {
+                    points.AddRange(game.Points);
+                }
+            }
+            return points;
+        }
     }
 }
