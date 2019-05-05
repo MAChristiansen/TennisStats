@@ -34,11 +34,11 @@ namespace TennisStats.src.Controller
             return (long) DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds;           
         }
 
-        public static void logIn(Context context)
+        public static void logUser(Context context, Boolean log)
         {
             prefs = PreferenceManager.GetDefaultSharedPreferences(context);
             ISharedPreferencesEditor editor = prefs.Edit();
-            editor.PutBoolean("userLogin", true);
+            editor.PutBoolean("userLogin", log);
         }
 
         public static Boolean isLoggetIn(Context context)
