@@ -26,6 +26,7 @@ namespace TennisStats
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ProfileSettings);
+            // TODO FJern comment.
             
             _player = new Player.PlayerBuilder(Intent.Extras.GetString("Id")).Password(Intent.Extras.GetString("password"));
 
