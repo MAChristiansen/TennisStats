@@ -32,18 +32,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblPersonalInfo" />
 
-    <EditText
-        android:id="@+id/txtProfileSettingsClub"
+    <Spinner
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:id="@+id/spinnerClub"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Club"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtProfileSettingsName" />
 
     <Switch
@@ -53,10 +49,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Right Hand"
+        android:text="Playing hand is set to: Left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProfileSettingsClub" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerClub" />
 
     <Switch
         android:id="@+id/switchProfileSettingsGender"
@@ -65,7 +61,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Male"
+        android:text="Gender is set to: Female"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchProfileSettingsHand" />
@@ -81,4 +77,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchProfileSettingsGender" />
+
+    <Button
+            android:id="@+id/btnSaveSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Submit settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 </android.support.constraint.ConstraintLayout>

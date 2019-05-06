@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+>
+    <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:text="6 / 4 - 4 / 2"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/tvTeam1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Team1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvScore"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvScore"
+            app:layout_constraintBottom_toBottomOf="@+id/tvScore"/>
+
+    <TextView
+            android:id="@+id/tvTeam2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Team2"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvScore"
+            app:layout_constraintTop_toTopOf="@+id/tvScore"
+            app:layout_constraintBottom_toBottomOf="@+id/tvScore"/>
+
+    <TextView
+            android:id="@+id/tvLabelFirstServePercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="1. Serve %"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvScore"
+            app:layout_constraintStart_toStartOf="@+id/tvScore"
+            app:layout_constraintTop_toBottomOf="@+id/tvScore" />
+
+    <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Win % on 1. Serve"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvLabelFirstServePercent"
+            app:layout_constraintStart_toStartOf="@+id/tvLabelFirstServePercent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelFirstServePercent" />
+
+    <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Win % on 2. Serve"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView14"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Aces"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView15"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Double Faults"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Winners"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView17"
+            app:layout_constraintStart_toStartOf="@+id/textView17"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Unforced Errors"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView18"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Forced Errors"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView19"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Total Points Won"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView20"
+            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <TextView
+            android:id="@+id/tvT1FirstServePercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvTeam1"
+            app:layout_constraintStart_toStartOf="@+id/tvTeam1"
+            app:layout_constraintTop_toTopOf="@+id/tvLabelFirstServePercent" />
+
+    <TextView
+            android:id="@+id/tvT1WinOnFirstServe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1FirstServePercent"
+            app:layout_constraintStart_toStartOf="@+id/tvT1FirstServePercent"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+            android:id="@+id/tvT1WinOnSecondServe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1WinOnFirstServe"
+            app:layout_constraintStart_toStartOf="@+id/tvT1WinOnFirstServe"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+    <TextView
+            android:id="@+id/tvT1Aces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1WinOnSecondServe"
+            app:layout_constraintStart_toStartOf="@+id/tvT1WinOnSecondServe"
+            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <TextView
+            android:id="@+id/tvT1DoubleFaults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1Aces"
+            app:layout_constraintStart_toStartOf="@+id/tvT1Aces"
+            app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+    <TextView
+            android:id="@+id/tvT1Winners"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1DoubleFaults"
+            app:layout_constraintStart_toStartOf="@+id/tvT1DoubleFaults"
+            app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <TextView
+            android:id="@+id/tvT1UnforcedError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1Winners"
+            app:layout_constraintStart_toStartOf="@+id/tvT1Winners"
+            app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+    <TextView
+            android:id="@+id/tvT1ForcedError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1UnforcedError"
+            app:layout_constraintStart_toStartOf="@+id/tvT1UnforcedError"
+            app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    <TextView
+            android:id="@+id/tvT1TotalPointsWon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT1ForcedError"
+            app:layout_constraintStart_toStartOf="@+id/tvT1ForcedError"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+    <TextView
+            android:id="@+id/tvT2FirstServePercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvTeam2"
+            app:layout_constraintStart_toStartOf="@+id/tvTeam2"
+            app:layout_constraintTop_toTopOf="@+id/tvLabelFirstServePercent" />
+
+    <TextView
+            android:id="@+id/tvT2WinOnFirstServe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2FirstServePercent"
+            app:layout_constraintStart_toStartOf="@+id/tvT2FirstServePercent"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+            android:id="@+id/tvT2WinOnSecondServe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2WinOnFirstServe"
+            app:layout_constraintStart_toStartOf="@+id/tvT2WinOnFirstServe"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+    <TextView
+            android:id="@+id/tvT2Aces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2WinOnSecondServe"
+            app:layout_constraintStart_toStartOf="@+id/tvT2WinOnSecondServe"
+            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <TextView
+            android:id="@+id/tvT2DoubleFaults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2Aces"
+            app:layout_constraintStart_toStartOf="@+id/tvT2Aces"
+            app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+    <TextView
+            android:id="@+id/tvT2Winners"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2DoubleFaults"
+            app:layout_constraintStart_toStartOf="@+id/tvT2DoubleFaults"
+            app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <TextView
+            android:id="@+id/tvT2UnforcedError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2Winners"
+            app:layout_constraintStart_toStartOf="@+id/tvT2Winners"
+            app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+    <TextView
+            android:id="@+id/tvT2ForcedError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2UnforcedError"
+            app:layout_constraintStart_toStartOf="@+id/tvT2UnforcedError"
+            app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    <TextView
+            android:id="@+id/tvT2TotalPointsWon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/tvT2ForcedError"
+            app:layout_constraintStart_toStartOf="@+id/tvT2ForcedError"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+    <Button
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Done"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView21"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+</android.support.constraint.ConstraintLayout>
+
