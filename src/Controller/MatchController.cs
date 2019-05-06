@@ -46,7 +46,8 @@ namespace TennisStats.src.Controller
          */
         public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType)
         {
-            string matchId = team1Id + "||"+ team2Id;
+            //TODO generer bedre id
+            string matchId = team1Id + team2Id;
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).startTime(Util.GenerateTimeStamp()).build();
             currentSet = new Set.SetBuilder().build();
             currentMatch.Sets.Add(currentSet);
@@ -54,8 +55,6 @@ namespace TennisStats.src.Controller
             currentGame = new Game.GameBuilder(team1Id).build();
             currentSet.Games.Add(currentGame);
 
-            Console.WriteLine("MatchType: " + currentMatch.Type);
-            
             // Update the observers
             updateObservers();
         }
@@ -481,15 +480,11 @@ namespace TennisStats.src.Controller
                     }
                     break;
             }
-
-            //Remove the last empty set, if the match is done
-            if (currentMatch.EndTime != 0)
-            {
-                currentMatch.Sets.Remove(currentMatch.Sets[currentMatch.Sets.Count - 1]);
-            }
             
             //Post current match data
+
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
+
             await firebaseClient.Child(FBTables.FBMatch).Child(currentMatch.MatchId).PutAsync(currentMatch);
 
         }

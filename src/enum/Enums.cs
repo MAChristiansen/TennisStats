@@ -26,7 +26,7 @@ namespace TennisStats.Enum
 
     public class HandEnum
     {
-        public enum Hand { RIGHT, LEFT }
+        public enum Hand { LEFT, RIGHT }
     }
 
     // These enums are used in the Point class to express how a point is won.

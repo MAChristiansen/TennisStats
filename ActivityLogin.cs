@@ -66,10 +66,7 @@ namespace TennisStats
                     {
                         if (player.Birthday == 0)
                         {
-                            Bundle bundle = new Bundle();
-                            bundle.PutString("Id", etUsername.Text.Trim());
-                            bundle.PutString("password", etPassword.Text.Trim());
-                            NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings), bundle);
+                            NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings));
                         }
                     }
                     else
