@@ -103,8 +103,7 @@ namespace TennisStats
          */
         public void OnCompleted()
         {
-            //TODO når der er fundet en vinder skal der vises en statestik side.
-            Console.WriteLine("The match is done!!");
+            NavigationService.NavigateToPage(this, typeof(ActivityResultPage));
         }
 
         public void OnError(Exception error)
