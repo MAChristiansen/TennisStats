@@ -56,7 +56,8 @@ namespace TennisStats
             
             _statisticController = new StatisticController();
 
-            string playerId = "Jaafar92";
+            string playerId = Arguments.GetString("playerId");
+            StatisticTypeEnum.StatisticType type = (StatisticTypeEnum.StatisticType) Arguments.GetInt("statType");
             
             tvT1FirstServePercent = view.FindViewById<TextView>(Resource.Id.tvT1FirstServePercent);
             tvT1WinPercentOnFirstServe = view.FindViewById<TextView>(Resource.Id.tvT1WinOnFirstServe);
@@ -67,8 +68,8 @@ namespace TennisStats
             tvT1UnforcedError = view.FindViewById<TextView>(Resource.Id.tvT1UnforcedError);
             tvT1ForcedError = view.FindViewById<TextView>(Resource.Id.tvT1ForcedError);
             tvT1TotalPointsWon = view.FindViewById<TextView>(Resource.Id.tvT1TotalPointsWon);
-
-            List<Point> points = await _statisticController.GetListOfPointsToBeCalculatedAsync(playerId, StatisticTypeEnum.StatisticType.OVERALL);
+            
+            List<Point> points = await _statisticController.GetListOfPointsToBeCalculatedAsync(playerId, type);
 
             tvT1FirstServePercent.Text = _statisticController.calculateFirstServePercentage(playerId, points).ToString();
             tvT1WinPercentOnFirstServe.Text = _statisticController.calculateWinPercentageOnFirstServe(playerId, points).ToString();

@@ -6,6 +6,8 @@ namespace TennisStats.src.Controller
 {
     public class Util
     {
+        public static long OneYearInMili = 31556952000;
+        public static long OneMonthInMili = 2629746000;
         public static AlertDialog.Builder SimpleAlert(Context context, string title, string message)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder (context);

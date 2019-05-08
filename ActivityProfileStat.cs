@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using TennisStats.Enum;
 using TennisStats.Service;
 
 namespace TennisStats
@@ -39,10 +40,29 @@ namespace TennisStats
             btnLastMonth = FindViewById<Button>(Resource.Id.btLastMonth);
             btnMatch = FindViewById<Button>(Resource.Id.btMatch);
 
+            
+            Bundle bundle = new Bundle();
+            bundle.PutString("playerId", "Jaafar92");
 
             btnOverAll.Click += delegate
             {
-               NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(null));
+                bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.OVERALL);
+                FragmentManager.PopBackStack();
+                NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
+            };
+
+            btnLastMonth.Click += delegate
+            {
+                bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.LASTMOUNTH);
+                FragmentManager.PopBackStack();
+                NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
+            };
+
+            btnLastYear.Click += delegate
+            {
+                bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.LASTYEAR);
+                FragmentManager.PopBackStack();
+                NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
             };
 
         }
