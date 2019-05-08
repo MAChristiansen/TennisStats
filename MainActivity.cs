@@ -39,9 +39,9 @@ namespace TennisStats
             btnCreateMatch.Click += async delegate
             {
 
-                long date = (long) (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc) - new DateTime()).TotalMilliseconds;
+                 NavigationService.NavigateToPage(this, typeof(ActivityProfileStat));
 
-                Console.WriteLine(Util.GenerateTimeStamp());
+             
 
 //                StatisticController sc = new StatisticController();
 //
