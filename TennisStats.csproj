@@ -105,6 +105,7 @@
     <Compile Include="ActivityLiveScore.cs" />
     <Compile Include="ActivityProfileStat.cs" />
     <Compile Include="FragmentUserStats.cs" />
+    <Compile Include="FragmentUserMatchStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -160,6 +161,7 @@
     <AndroidResource Include="Resources\layout\UserStats.axml" />
     <AndroidResource Include="Resources\layout\LiveScoreLayout.axml" />
     <AndroidResource Include="Resources\layout\LiveScore.axml" />
+    <AndroidResource Include="Resources\layout\UserMatchStats.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

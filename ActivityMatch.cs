@@ -7,6 +7,7 @@ using System.Text;
 using Android.App;
 using Android.OS;
 using Android.Widget;
+using Newtonsoft.Json;
 using TennisStats.Model;
 using TennisStats.Service;
 using TennisStats.src.Controller;
@@ -74,7 +75,11 @@ namespace TennisStats
             
             btnStats.Click += delegate
             {
-                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentMatchStats.NewInstance(null));
+                string matchJSON = JsonConvert.SerializeObject(matchController.GetCurrentMatch());
+                
+                Bundle b = new Bundle();
+                b.PutString("matchJSON", matchJSON);
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentMatchStats.NewInstance(b));
             };
 
             // set the team names

@@ -43,26 +43,32 @@ namespace TennisStats
             
             Bundle bundle = new Bundle();
             bundle.PutString("playerId", "Jaafar92");
+            
+            bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.OVERALL);
+            NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
 
             btnOverAll.Click += delegate
             {
-                bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.OVERALL);
-                FragmentManager.PopBackStack();
-                NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
             };
 
             btnLastMonth.Click += delegate
             {
                 bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.LASTMOUNTH);
                 FragmentManager.PopBackStack();
-                NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
             };
 
             btnLastYear.Click += delegate
             {
                 bundle.PutInt("statType", (int) StatisticTypeEnum.StatisticType.LASTYEAR);
                 FragmentManager.PopBackStack();
-                NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(bundle));
+            };
+
+            btnMatch.Click += delegate
+            {
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserMatchStats.NewInstance(bundle));
             };
 
         }

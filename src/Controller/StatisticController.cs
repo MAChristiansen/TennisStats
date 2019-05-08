@@ -208,7 +208,7 @@ namespace TennisStats.src.Controller
             return matchLosses;
         }
 
-        private async Task<List<Match>> GetMatches(string playerId)
+        public async Task<List<Match>> GetMatches(string playerId)
         {
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
             

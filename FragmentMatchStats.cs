@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 using TennisStats.Model;
 using TennisStats.src.Controller;
 
@@ -69,6 +70,11 @@ namespace TennisStats
             btnStats.Visibility = ViewStates.Invisible;
             
             View view = inflater.Inflate(Resource.Layout.MatchStats, container, false);
+
+
+            string matchJSON = Arguments.GetString("matchJSON");
+
+            var match = (Match)JsonConvert.DeserializeObject(matchJSON);
             
             _matchController = MatchController.Instance;
             _statisticController = new StatisticController();
@@ -96,34 +102,33 @@ namespace TennisStats
             tvT1TotalPointsWon = view.FindViewById<TextView>(Resource.Id.tvT1TotalPointsWon);
             tvT2TotalPointsWon = view.FindViewById<TextView>(Resource.Id.tvT2TotalPointsWon);
 
-            Match currentMatch = _matchController.GetCurrentMatch();
             List<string> teamNames = _matchController.GetTeamNames();
-            List<Point> points = _statisticController.GetPointsBasedOnMatch(currentMatch);
+            List<Point> points = _statisticController.GetPointsBasedOnMatch(match);
 
-            tvScore.Text = _matchController.GetMatchScore(currentMatch);
+            tvScore.Text = _matchController.GetMatchScore(match);
             tvTeam1.Text = teamNames[0];
             tvTeam2.Text = teamNames[1];
-            tvT1FirstServePercent.Text = _statisticController.calculateFirstServePercentage(currentMatch.Team1Id, points).ToString();
-            tvT2FirstServePercent.Text = _statisticController.calculateFirstServePercentage(currentMatch.Team2Id, points).ToString();
-            tvT1WinPercentOnFirstServe.Text = _statisticController.calculateWinPercentageOnFirstServe(currentMatch.Team1Id, points).ToString();
-            tvT2WinPercentOnFirstServe.Text = _statisticController.calculateWinPercentageOnFirstServe(currentMatch.Team2Id, points).ToString();
-            tvT1WinPercentOnSecondServe.Text = _statisticController.calculateWinPercentageOnSecondServe(currentMatch.Team1Id, points).ToString();
-            tvT2WinPercentOnSecondServe.Text = _statisticController.calculateWinPercentageOnSecondServe(currentMatch.Team2Id, points).ToString();
-            tvT1Aces.Text = _statisticController.calculateAmountOfAces(currentMatch.Team1Id, points).ToString();
-            tvT2Aces.Text = _statisticController.calculateAmountOfAces(currentMatch.Team2Id, points).ToString();
-            tvT1DoubleFaults.Text = _statisticController.calculateAmountOfDoubleFaults(currentMatch.Team1Id, points).ToString();
-            tvT2DoubleFaults.Text = _statisticController.calculateAmountOfDoubleFaults(currentMatch.Team2Id, points).ToString();
-            tvT1Winners.Text = _statisticController.calculateAmountOfWinners(currentMatch.Team1Id, points).ToString();
-            tvT2Winners.Text = _statisticController.calculateAmountOfWinners(currentMatch.Team2Id, points).ToString();
-            tvT1UnforcedError.Text = _statisticController.calculateAmountOfUnforcedErrors(currentMatch.Team1Id, points).ToString();
-            tvT2UnforcedError.Text = _statisticController.calculateAmountOfUnforcedErrors(currentMatch.Team2Id, points).ToString();
-            tvT1ForcedError.Text = _statisticController.calculateAmountOfForcedErrors(currentMatch.Team1Id, points).ToString();
-            tvT2ForcedError.Text = _statisticController.calculateAmountOfForcedErrors(currentMatch.Team2Id, points).ToString();
+            tvT1FirstServePercent.Text = _statisticController.calculateFirstServePercentage(match.Team1Id, points).ToString();
+            tvT2FirstServePercent.Text = _statisticController.calculateFirstServePercentage(match.Team2Id, points).ToString();
+            tvT1WinPercentOnFirstServe.Text = _statisticController.calculateWinPercentageOnFirstServe(match.Team1Id, points).ToString();
+            tvT2WinPercentOnFirstServe.Text = _statisticController.calculateWinPercentageOnFirstServe(match.Team2Id, points).ToString();
+            tvT1WinPercentOnSecondServe.Text = _statisticController.calculateWinPercentageOnSecondServe(match.Team1Id, points).ToString();
+            tvT2WinPercentOnSecondServe.Text = _statisticController.calculateWinPercentageOnSecondServe(match.Team2Id, points).ToString();
+            tvT1Aces.Text = _statisticController.calculateAmountOfAces(match.Team1Id, points).ToString();
+            tvT2Aces.Text = _statisticController.calculateAmountOfAces(match.Team2Id, points).ToString();
+            tvT1DoubleFaults.Text = _statisticController.calculateAmountOfDoubleFaults(match.Team1Id, points).ToString();
+            tvT2DoubleFaults.Text = _statisticController.calculateAmountOfDoubleFaults(match.Team2Id, points).ToString();
+            tvT1Winners.Text = _statisticController.calculateAmountOfWinners(match.Team1Id, points).ToString();
+            tvT2Winners.Text = _statisticController.calculateAmountOfWinners(match.Team2Id, points).ToString();
+            tvT1UnforcedError.Text = _statisticController.calculateAmountOfUnforcedErrors(match.Team1Id, points).ToString();
+            tvT2UnforcedError.Text = _statisticController.calculateAmountOfUnforcedErrors(match.Team2Id, points).ToString();
+            tvT1ForcedError.Text = _statisticController.calculateAmountOfForcedErrors(match.Team1Id, points).ToString();
+            tvT2ForcedError.Text = _statisticController.calculateAmountOfForcedErrors(match.Team2Id, points).ToString();
             
             
 
-            tvT1TotalPointsWon.Text = _statisticController.calculateTotalPointsWon(currentMatch.Team1Id, points).ToString();
-            tvT2TotalPointsWon.Text = _statisticController.calculateTotalPointsWon(currentMatch.Team2Id, points).ToString();
+            tvT1TotalPointsWon.Text = _statisticController.calculateTotalPointsWon(match.Team1Id, points).ToString();
+            tvT2TotalPointsWon.Text = _statisticController.calculateTotalPointsWon(match.Team2Id, points).ToString();
             
             return view;
         }
