@@ -34,7 +34,6 @@ namespace TennisStats
 
             // Define widgets
             tvProfileName = FindViewById<TextView>(Resource.Id.tvProfilName);
-            tvClub = FindViewById<TextView>(Resource.Id.tvclub);
             btnOverAll = FindViewById<Button>(Resource.Id.btOverall);
             btnLastYear = FindViewById<Button>(Resource.Id.btLastYear);
             btnLastMonth = FindViewById<Button>(Resource.Id.btLastMonth);
@@ -43,7 +42,7 @@ namespace TennisStats
 
             btnOverAll.Click += delegate
             {
-               NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentMatchStats.NewInstance(null));
+               NavigationService.AddFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat), FragmentUserStats.NewInstance(null));
             };
 
         }

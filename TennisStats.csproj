@@ -101,6 +101,7 @@
     <Compile Include="src\Controller\StatisticController.cs" />
     <Compile Include="FragmentMatchStats.cs" />
     <Compile Include="ActivityProfileStat.cs" />
+    <Compile Include="FragmentUserStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -152,6 +153,7 @@
     <AndroidResource Include="Resources\layout\ProfileSettings.axml" />
     <AndroidResource Include="Resources\layout\MatchStats.axml" />
     <AndroidResource Include="Resources\layout\ProfileStat.axml" />
+    <AndroidResource Include="Resources\layout\UserStats.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
