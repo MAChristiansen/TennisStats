@@ -151,7 +151,6 @@
     <AndroidResource Include="Resources\layout\CreateAccount.axml" />
     <AndroidResource Include="Resources\layout\ProfileSettings.axml" />
     <AndroidResource Include="Resources\layout\MatchStats.axml" />
-    <AndroidResource Include="Resources\layout\ProfilStat.axml" />
     <AndroidResource Include="Resources\layout\ProfileStat.axml" />
   </ItemGroup>
   <ItemGroup>
