@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -27,28 +27,35 @@ namespace TennisStats
             List<Match> matchList = new List<Match>();
             
             ListView listView = FindViewById<ListView>(Resource.Id.livescore);
+            Button btnUpdate = FindViewById<Button>(Resource.Id.btnUpdateLiveScore);
 
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
             
             var matches = await firebaseClient.Child(FBTables.FbMatch).OnceAsync<Match>();
-
+            
             foreach (var match in matches)
             {
                 matchList.Add(match.Object);
-                Console.WriteLine("ADDED MATCH TO LIVESCORE");
             }
-            
+
             LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(this, Resource.Layout.LiveScoreLayout, matchList);
             listView.Adapter = liveScoreAdapter;
+            
+            btnUpdate.Click += async delegate { await UpdateMatchList(firebaseClient, matchList, liveScoreAdapter); };
+        }
 
-//            List<string> list = new List<string>();
-//            list.Add("lol");
-//            list.Add("fuck");
-//            list.Add("haha");
-//            
-//            ArrayAdapter<string> arrayAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, list);
-//            listView.Adapter = arrayAdapter;
-
+        private static async Task UpdateMatchList(FirebaseClient firebaseClient, List<Match> matchList, LiveScoreAdapter liveScoreAdapter)
+        {
+            var matches = await firebaseClient.Child(FBTables.FbMatch).OnceAsync<Match>();
+            
+            liveScoreAdapter.Clear();
+            
+            foreach (var match in matches)
+            {
+                liveScoreAdapter.Add(match.Object);
+            }
+            
+            liveScoreAdapter.NotifyDataSetChanged();
         }
     }
 }
