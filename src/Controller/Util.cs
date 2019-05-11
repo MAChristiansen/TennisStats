@@ -1,6 +1,7 @@
 using System;
 using Android.App;
 using Android.Content;
+using Android.Preferences;
 
 namespace TennisStats.src.Controller
 {
@@ -8,6 +9,9 @@ namespace TennisStats.src.Controller
     {
         public static long OneYearInMili = 31556952000;
         public static long OneMonthInMili = 2629746000;
+
+        private static ISharedPreferences prefs;
+        
         public static AlertDialog.Builder SimpleAlert(Context context, string title, string message)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder (context);
@@ -29,7 +33,21 @@ namespace TennisStats.src.Controller
         public static long GenerateTimeStamp()
         {
             //DateTime.MinValue is 01/01/01 00:00 so add 1969 years. to get 1/1/1970
-            return (long) DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds;           
+            return (long) DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds;
         }
+
+        public static void logUser(Context context, Boolean log)
+        {
+            prefs = PreferenceManager.GetDefaultSharedPreferences(context);
+            ISharedPreferencesEditor editor = prefs.Edit();
+            editor.PutBoolean("userLogin", log);
+        }
+
+        public static Boolean isLoggetIn(Context context)
+        {
+            prefs = PreferenceManager.GetDefaultSharedPreferences(context);
+            return prefs.GetBoolean("userLogin", false);
+        }
+
     }
 }
