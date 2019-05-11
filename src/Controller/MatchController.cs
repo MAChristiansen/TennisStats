@@ -45,14 +45,14 @@ namespace TennisStats.src.Controller
          *  Creates a new match.
          *  Instantializes a match, set and game.        
          */
-        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType)
+        public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType, bool server)
         {
             string matchId = team1Id + "||"+ team2Id;
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).startTime(Util.GenerateTimeStamp()).build();
             currentSet = new Set.SetBuilder().build();
             currentMatch.Sets.Add(currentSet);
             //TODO Hvem skal starte med serven?
-            currentGame = new Game.GameBuilder(team1Id).build();
+            currentGame = new Game.GameBuilder(server ? team2Id : team1Id).build();
             currentSet.Games.Add(currentGame);
 
             Console.WriteLine("MatchType: " + currentMatch.Type);
