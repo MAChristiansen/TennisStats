@@ -106,7 +106,6 @@
     <Compile Include="ActivityProfileStat.cs" />
     <Compile Include="FragmentUserStats.cs" />
     <Compile Include="FragmentUserMatchStats.cs" />
-    <Compile Include="ActivitySpecificUserMatchStats.cs" />
     <Compile Include="FragmentProfilePage.cs" />
   </ItemGroup>
   <ItemGroup>
