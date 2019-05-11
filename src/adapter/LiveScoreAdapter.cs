@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Android.App;
 using Android.Content;
+using Android.OS;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 using TennisStats.Model;
 using TennisStats.src.Controller;
 using TennisStats.Service;
@@ -15,14 +18,23 @@ namespace TennisStats.adapter
         private int _resource;
         private List<Match> _matches;
         private ListView _listView;
+        private FragmentManager _fragmentManager;
+        private FrameLayout _fragmentContainer;
 
-
-        public LiveScoreAdapter(Context context, int resource, List<Match> matches, ListView listView) : base(context, resource, matches)
+        public LiveScoreAdapter(Context context,
+            int resource,
+            List<Match> matches,
+            ListView listView,
+            FragmentManager fragmentManager,
+            FrameLayout fragmentContainer) 
+            : base(context, resource, matches)
         {
             _context = context;
             _resource = resource;
             _matches = matches;
             _listView = listView;
+            _fragmentManager = fragmentManager;
+            _fragmentContainer = fragmentContainer;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -50,8 +62,9 @@ namespace TennisStats.adapter
 
         public void OnItemClick(AdapterView parent, View view, int position, long id)
         {
-            Console.WriteLine("Clicked: " + position);
-            
+            Console.WriteLine(_matches[position].ToString());
+            MatchController.Match = _matches[position];
+            NavigationService.NavigateToFragment(_fragmentManager, _fragmentContainer, FragmentMatchStats.NewInstance(null));
         }
     }
 }
