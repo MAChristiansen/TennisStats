@@ -52,10 +52,11 @@ namespace TennisStats.Model
 
             //Mandatory values
             public GameBuilder(string serverId) {
-                _servers = new List<string>();
-                _servers.Add(serverId);
+                _servers = new List<string> {serverId};
                 _team1Score = new List<int>();
                 _team2Score = new List<int>();
+                _team1Score.Add(0);
+                _team2Score.Add(0);
                 _points = new List<Point>();
                 _gameType = GameType.NORMAL;
             }
@@ -65,9 +66,9 @@ namespace TennisStats.Model
                 return this;
             }
 
-            public GameBuilder gameType(GameType gametype)
+            public GameBuilder gameType(GameType gameType)
             {
-                _gameType = gametype; return this;
+                _gameType = gameType; return this;
             }
 
             public GameBuilder addScore(int team1Score, int team2Score, Point point) {

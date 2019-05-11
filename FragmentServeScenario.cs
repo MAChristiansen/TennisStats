@@ -65,15 +65,15 @@ namespace TennisStats
             ivFault.Click += delegate
             {
                 // Run logic for the fault scenario
-                FaultCount currentFaultCount = matchController.Fault(serve);
+                FaultCount currentFaultCount = matchController.Fault(matchController.GetCurrentMatch(), matchController.GetCurrentGame(), serve);
 
                 // Check the fault count - Second or First serve
                 if (currentFaultCount == FaultCount.SECONDSERVE)
                 {
                     //Run code for the second serve scenario
                     Bundle bundle = new Bundle();
-                    bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
-                    bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                    bundle.PutInt("team1", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0]);
+                    bundle.PutInt("team2", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1]);
                     Navigate(FragmentScore.NewInstance(bundle));
                     return;
                 }
@@ -89,10 +89,10 @@ namespace TennisStats
             ivAce.Click += delegate
             {
                 // Run logic for ace scenario
-                matchController.Ace(serve);
+                matchController.Ace(matchController.GetCurrentMatch(), matchController.GetCurrentGame(), serve);
                 Bundle bundle = new Bundle();
-                bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
-                bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                bundle.PutInt("team1", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0]);
+                bundle.PutInt("team2", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1]);
                 Navigate(FragmentScore.NewInstance(bundle));
 
 
@@ -108,23 +108,23 @@ namespace TennisStats
             ivFootFault.Click += delegate
             {
                 // Run logic for the fault scenario
-                FaultCount currentFaultCount = matchController.Fault(serve, false);
+                FaultCount currentFaultCount = matchController.Fault(matchController.GetCurrentMatch(), matchController.GetCurrentGame(), serve, false);
 
                 // Check the fault count - Second or First serve
                 if (currentFaultCount == FaultCount.SECONDSERVE)
                 {
                     //Run code for the second serve scenario
                     Bundle bundle = new Bundle();
-                    bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
-                    bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                    bundle.PutInt("team1", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0]);
+                    bundle.PutInt("team2", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1]);
                     Navigate(FragmentScore.NewInstance(bundle));
                     return;
                 }
 
                 /*
-                 *   It was a first serve, so reset the activity,
+                 *   It was a first serve, so reset the fragment,
                  *   but set the serve count to 2. This is used
-                 *   to set the header of the activity
+                 *   to set the header of the frament
                  */
                 Navigate(NewInstance(2));
             };
@@ -132,10 +132,10 @@ namespace TennisStats
             ivServiceWinner.Click += delegate
             {
                 // Run logic for ace scenario
-                matchController.Ace(serve, false);
+                matchController.Ace(matchController.GetCurrentMatch(), matchController.GetCurrentGame(), serve, false);
                 Bundle bundle = new Bundle();
-                bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
-                bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+                bundle.PutInt("team1", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0]);
+                bundle.PutInt("team2", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1]);
                 Navigate(FragmentScore.NewInstance(bundle));
             };
             
