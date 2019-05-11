@@ -56,6 +56,8 @@ namespace TennisStats.Model
                 _servers.Add(serverId);
                 _team1Score = new List<int>();
                 _team2Score = new List<int>();
+                _team1Score.Add(0);
+                _team2Score.Add(0);
                 _points = new List<Point>();
                 _gameType = GameType.NORMAL;
             }
