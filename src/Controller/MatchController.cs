@@ -415,7 +415,8 @@ namespace TennisStats.src.Controller
                 (currentSet.Team1Score==6 && currentSet.Team2Score==7) ||
                 (currentSet.Team1Score==7 && currentSet.Team2Score==6))
                 {
-
+                    currentSet.Games.Remove(currentSet.Games[currentSet.Games.Count - 1]);
+                    
                     if (currentSet.Team1Score > currentSet.Team2Score)
                     {
                         // Team1 wins
