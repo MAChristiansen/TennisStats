@@ -345,7 +345,10 @@ namespace TennisStats.src.Controller
                 {
                     foreach (Game game in matchSet.Games)
                     {
-                        points.AddRange(game.Points);
+                        if (game.Points != null)
+                        {
+                            points.AddRange(game.Points);
+                        }
                     }
                 }
             }
