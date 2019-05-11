@@ -160,7 +160,7 @@
     <AndroidResource Include="Resources\layout\ResultPage.axml" />
     <AndroidResource Include="Resources\layout\ProfileStat.axml" />
     <AndroidResource Include="Resources\layout\UserStats.axml" />
-    <AndroidResource Include="Resources\layout\LiveScoreLayout.axml" />
+    <AndroidResource Include="Resources\layout\UserMatchStatsLayout.axml" />
     <AndroidResource Include="Resources\layout\MatchStatScore.axml" />
     <AndroidResource Include="Resources\layout\UserMatchStats.axml" />
     <AndroidResource Include="Resources\layout\ProfilePage.axml" />

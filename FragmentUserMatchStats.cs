@@ -56,7 +56,7 @@ namespace TennisStats
             
             MatchStatisticsAdapter matchStatisticsAdapter = new MatchStatisticsAdapter(
                 Activity, 
-                Resource.Layout.LiveScoreLayout, 
+                Resource.Layout.UserMatchStatsLayout, 
                 matchList, 
                 listView,
                 FragmentManager,
