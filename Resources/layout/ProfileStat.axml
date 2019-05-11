@@ -11,67 +11,75 @@
             android:id="@+id/tvProfilName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="ProfilName"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     <Button
             android:id="@+id/btOverall"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Overall"
             android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/divider14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txClub" />
 
     <Button
             android:id="@+id/btLastYear"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Last Year"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btOverall"
-            app:layout_constraintStart_toEndOf="@+id/btOverall"
-            app:layout_constraintTop_toTopOf="@+id/btOverall"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toStartOf="@+id/divider5"
+            app:layout_constraintStart_toEndOf="@+id/divider14"
+            app:layout_constraintTop_toBottomOf="@+id/txClub" />
+
 
     <Button
             android:id="@+id/btLastMonth"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Last Month"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btLastYear"
-            app:layout_constraintEnd_toStartOf="@+id/btMatch"
-            app:layout_constraintTop_toTopOf="@+id/btLastYear"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toStartOf="@+id/divider13"
+            app:layout_constraintStart_toEndOf="@+id/divider5"
+            app:layout_constraintTop_toBottomOf="@+id/txClub" />
 
     <Button
             android:id="@+id/btMatch"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Match"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btLastMonth"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btLastMonth"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintStart_toEndOf="@+id/divider13"
+            app:layout_constraintTop_toBottomOf="@+id/txClub" />
 
     <TextView
             android:id="@+id/txClub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Tennisklub"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,18 +88,55 @@
 
     <FrameLayout
             android:id="@+id/FrameLayoutStat"
-            android:layout_width="368dp"
-            android:layout_height="359dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btLastYear">
+            app:layout_constraintTop_toBottomOf="@+id/btOverall">
 
     </FrameLayout>
 
+    <View
+            android:id="@+id/divider5"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+            android:id="@+id/divider13"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider5"
+            tools:layout_editor_absoluteY="8dp" />
+
+    <View
+            android:id="@+id/divider14"
+            android:layout_width="1dp"
+            android:layout_height="495dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="invisible"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toStartOf="@+id/divider5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="8dp" />
+    
 </android.support.constraint.ConstraintLayout>
