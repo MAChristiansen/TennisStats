@@ -34,7 +34,7 @@ namespace TennisStats
             TextView tvScore = view.FindViewById<TextView>(Resource.Id.tvScore);
             int team1Score = Arguments.GetInt("team1", 0);
             int team2Score = Arguments.GetInt("team2", 0);
-            tvScore.Text = PointService.Instance.convertPoints(team1Score, team2Score, matchController.getCurrentGameType()) + " - " + PointService.Instance.convertPoints(team2Score, team1Score, matchController.getCurrentGameType());
+            tvScore.Text = PointService.Instance.convertPoints(team1Score, team2Score, matchController.GetCurrentGameType()) + " - " + PointService.Instance.convertPoints(team2Score, team1Score, matchController.GetCurrentGameType());
             Task.Delay(1000).ContinueWith(t=> FragmentManager.PopBackStack(null, PopBackStackFlags.Inclusive));
 
 

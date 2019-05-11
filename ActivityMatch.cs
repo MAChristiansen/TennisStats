@@ -118,16 +118,20 @@ namespace TennisStats
             matchController = MatchController.Instance;
             pointService = PointService.Instance;
             //Update the score of the match
-            tvTeam1Sets.Text =  matchController.GetCurrentMatchScore()[0] + "";
-            tvTeam2Sets.Text = matchController.GetCurrentMatchScore()[1] + "";
+            tvTeam1Sets.Text =  matchController.GetCurrentMatchScore(matchController.GetCurrentMatch())[0] + "";
+            tvTeam2Sets.Text = matchController.GetCurrentMatchScore(matchController.GetCurrentMatch())[1] + "";
 
             //Update the score of the set
-            tvTeam1Games.Text = matchController.GetCurrentSetScore()[0] + "";
-            tvTeam2Games.Text = matchController.GetCurrentSetScore()[1] + "";
+            tvTeam1Games.Text = matchController.GetCurrentSetScore(matchController.GetCurrentSet())[0] + "";
+            tvTeam2Games.Text = matchController.GetCurrentSetScore(matchController.GetCurrentSet())[1] + "";
 
             //Update the score of the game
-            tvTeam1Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[0], matchController.GetCurrentGameScore()[1], matchController.getCurrentGameType());
-            tvTeam2Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore()[1], matchController.GetCurrentGameScore()[0], matchController.getCurrentGameType());
+            tvTeam1Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0], 
+                matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1], 
+                matchController.GetCurrentGameType());
+            tvTeam2Points.Text = pointService.convertPoints(matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1], 
+                matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0], 
+                matchController.GetCurrentGameType());
 
             setServerUI();
         }
@@ -135,7 +139,7 @@ namespace TennisStats
 
         private void setServerUI()
         {
-            if (matchController.getCurrentGame().Servers[matchController.getCurrentGame().Servers.Count - 1].Equals(matchController.GetTeamNames(matchController.GetCurrentMatch())[0])){
+            if (matchController.GetCurrentGame().Servers[matchController.GetCurrentGame().Servers.Count - 1].Equals(matchController.GetTeamNames(matchController.GetCurrentMatch())[0])){
                 //team 1 is serving
                 ivTeam1Serving.Visibility = Android.Views.ViewStates.Visible;
                 ivTeam2Serving.Visibility = Android.Views.ViewStates.Invisible;
