@@ -67,7 +67,10 @@ namespace TennisStats
             // Use this to return your custom view for this Fragment
 
             btnStats = Activity.FindViewById<Button>(Resource.Id.btnStats);
-            btnStats.Visibility = ViewStates.Invisible;
+            if (btnStats != null)
+            {
+                btnStats.Visibility = ViewStates.Invisible;
+            }
             
             View view = inflater.Inflate(Resource.Layout.MatchStats, container, false);
 
@@ -99,7 +102,7 @@ namespace TennisStats
             tvT1TotalPointsWon = view.FindViewById<TextView>(Resource.Id.tvT1TotalPointsWon);
             tvT2TotalPointsWon = view.FindViewById<TextView>(Resource.Id.tvT2TotalPointsWon);
 
-            List<string> teamNames = _matchController.GetTeamNames();
+            List<string> teamNames = _matchController.GetTeamNames(match);
             List<Point> points = _statisticController.GetPointsBasedOnMatch(match);
 
             tvScore.Text = _matchController.GetMatchScore(match);
@@ -132,7 +135,10 @@ namespace TennisStats
 
         public override void OnDestroy()
         {
-            btnStats.Visibility = ViewStates.Visible;
+            if (btnStats != null)
+            {
+                btnStats.Visibility = ViewStates.Visible;
+            }
             base.OnDestroy();
             
         }
