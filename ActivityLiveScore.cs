@@ -35,7 +35,10 @@ namespace TennisStats
             
             foreach (var match in matches)
             {
-                matchList.Add(match.Object);
+                if (match.Object.EndTime == 0)
+                {
+                    matchList.Add(match.Object);       
+                }
             }
 
             LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(this, Resource.Layout.LiveScoreLayout, matchList);
@@ -52,7 +55,10 @@ namespace TennisStats
             
             foreach (var match in matches)
             {
-                liveScoreAdapter.Add(match.Object);
+                if (match.Object.EndTime == 0)
+                {
+                    liveScoreAdapter.Add(match.Object);
+                }
             }
             
             liveScoreAdapter.NotifyDataSetChanged();
