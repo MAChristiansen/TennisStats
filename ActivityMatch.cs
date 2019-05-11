@@ -75,11 +75,8 @@ namespace TennisStats
             
             btnStats.Click += delegate
             {
-                string matchJSON = JsonConvert.SerializeObject(matchController.GetCurrentMatch());
-                
-                Bundle b = new Bundle();
-                b.PutString("matchJSON", matchJSON);
-                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentMatchStats.NewInstance(b));
+                MatchController.Match = matchController.GetCurrentMatch();
+                NavigationService.NavigateToFragment(FragmentManager, FindViewById<FrameLayout>(Resource.Id.fragmentContainer), FragmentMatchStats.NewInstance(null));
             };
 
             // set the team names
