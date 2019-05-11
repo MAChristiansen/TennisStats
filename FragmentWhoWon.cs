@@ -45,18 +45,18 @@ namespace TennisStats
             btnTeam2 = view.FindViewById<Button>(Resource.Id.btnTeam2);
 
              //Set the text of the buttons
-            btnTeam1.Text = matchController.GetTeamNames()[0];
-            btnTeam2.Text = matchController.GetTeamNames()[1];
+            btnTeam1.Text = matchController.GetTeamNames(matchController.GetCurrentMatch())[0];
+            btnTeam2.Text = matchController.GetTeamNames(matchController.GetCurrentMatch())[1];
 
             btnTeam1.Click += delegate
             {
-                MatchController.inPlayPB.winnderId(matchController.GetTeamNames()[0]);
+                MatchController.inPlayPB.winnderId(matchController.GetTeamNames(matchController.GetCurrentMatch())[0]);
                 Navigate();
             };
 
             btnTeam2.Click += delegate
             {
-                MatchController.inPlayPB.winnderId(matchController.GetTeamNames()[1]);
+                MatchController.inPlayPB.winnderId(matchController.GetTeamNames(matchController.GetCurrentMatch())[1]);
 
                 Navigate();
             };

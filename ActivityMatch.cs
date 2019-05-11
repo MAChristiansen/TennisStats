@@ -80,8 +80,8 @@ namespace TennisStats
             };
 
             // set the team names
-            tvTeam1Names.Text = matchController.GetTeamNames()[0];
-            tvTeam2Names.Text = matchController.GetTeamNames()[1];
+            tvTeam1Names.Text = matchController.GetTeamNames(matchController.GetCurrentMatch())[0];
+            tvTeam2Names.Text = matchController.GetTeamNames(matchController.GetCurrentMatch())[1];
             setServerUI();
 
 
@@ -135,7 +135,7 @@ namespace TennisStats
 
         private void setServerUI()
         {
-            if (matchController.getCurrentGame().Servers[matchController.getCurrentGame().Servers.Count - 1].Equals(matchController.GetTeamNames()[0])){
+            if (matchController.getCurrentGame().Servers[matchController.getCurrentGame().Servers.Count - 1].Equals(matchController.GetTeamNames(matchController.GetCurrentMatch())[0])){
                 //team 1 is serving
                 ivTeam1Serving.Visibility = Android.Views.ViewStates.Visible;
                 ivTeam2Serving.Visibility = Android.Views.ViewStates.Invisible;
