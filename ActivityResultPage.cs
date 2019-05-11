@@ -81,7 +81,7 @@ namespace TennisStats
             tvT2TotalPointsWon = FindViewById<TextView>(Resource.Id.tvT2TotalPointsWon);
 
             Match currentMatch = _matchController.GetCurrentMatch();
-            List<string> teamNames = _matchController.GetTeamNames();
+            List<string> teamNames = _matchController.GetTeamNames(currentMatch);
             List<Point> points = _statisticController.GetPointsBasedOnMatch(currentMatch);
 
             tvScore.Text = _matchController.GetMatchScore(currentMatch);

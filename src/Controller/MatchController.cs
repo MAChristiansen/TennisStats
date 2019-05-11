@@ -13,10 +13,11 @@ namespace TennisStats.src.Controller
 {
     public sealed class MatchController : IObservable<Match>
     {
+        public static Match Match { get; set; }
         public static Point.PointBuilder inPlayPB { get; set; }
 
         private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
-        private Match currentMatch;
+        private Match currentMatch { get; set; }
         private Set currentSet;
         private Game currentGame;
         private static MatchController instance;
@@ -234,11 +235,11 @@ namespace TennisStats.src.Controller
          *   Second entry in the list is team2        
          * 
          */        
-         public List<string> GetTeamNames()
+         public List<string> GetTeamNames(Match match)
         {
             List<string> teamNames = new List<string>();
-            teamNames.Add(currentMatch.Team1Id);
-            teamNames.Add(currentMatch.Team2Id);
+            teamNames.Add(match.Team1Id);
+            teamNames.Add(match.Team2Id);
             return teamNames;
         }
 

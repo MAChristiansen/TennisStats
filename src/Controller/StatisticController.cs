@@ -208,7 +208,7 @@ namespace TennisStats.src.Controller
             return matchLosses;
         }
 
-        private async Task<List<Match>> GetMatches(string playerId)
+        public async Task<List<Match>> GetMatches(string playerId)
         {
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
             
@@ -232,6 +232,9 @@ namespace TennisStats.src.Controller
 
             List<Match> matches = await GetMatches(playerId);
             List<Point> points = new List<Point>();
+            
+            Console.WriteLine("Size of Matches: " + matches.Count);
+            
 
             if (matchId == null && statisticType == StatisticType.MATCH) 
             {
@@ -255,8 +258,10 @@ namespace TennisStats.src.Controller
                             }
                         }
                     }
+                    Console.WriteLine("Just before breaking");
                     break;
                 case StatisticType.MATCH:
+                    Console.WriteLine("Went in to match");
                     foreach (Match match in matches)
                     {
                         if (match.MatchId.Equals(matchId))
@@ -290,12 +295,44 @@ namespace TennisStats.src.Controller
                     }
                     break;
                 case StatisticType.LASTMOUNTH:
-                    //TODO NOT IMPLEMENTED
+                    foreach (Match match in matches)
+                    {
+                        if (Util.GenerateTimeStamp() - match.EndTime < Util.OneYearInMili)
+                        {
+                            foreach (Set matchSet in match.Sets)
+                            {
+                                foreach (Game game in matchSet.Games)
+                                {
+                                    if (game.Points != null)
+                                    {
+                                        points.AddRange(game.Points);
+                                    }
+                                }
+                            }
+                        }
+                    }
                     break;
                 case StatisticType.LASTYEAR:
-                    //TODO NOT IMPLEMENTED
+                    foreach (Match match in matches)
+                    {
+                        if (Util.GenerateTimeStamp() - match.EndTime < Util.OneMonthInMili)
+                        {
+                            foreach (Set matchSet in match.Sets)
+                            {
+                                foreach (Game game in matchSet.Games)
+                                {
+                                    if (game.Points != null)
+                                    {
+                                        points.AddRange(game.Points);
+                                    }
+                                }
+                            }
+                        }
+                    }
                     break;
             }
+            
+            Console.WriteLine("Size of Points: " + points.Count);
             return points;
         }
 
@@ -308,7 +345,10 @@ namespace TennisStats.src.Controller
                 {
                     foreach (Game game in matchSet.Games)
                     {
-                        points.AddRange(game.Points);
+                        if (game.Points != null)
+                        {
+                            points.AddRange(game.Points);
+                        }
                     }
                 }
             }

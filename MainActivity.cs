@@ -28,6 +28,7 @@ namespace TennisStats
             Button btnQuickMatch = FindViewById<Button>(Resource.Id.btnQuickMatch);
             Button btnCreateMatch = FindViewById<Button>(Resource.Id.btnCreateMatch);
             Button btnLogin = FindViewById<Button>(Resource.Id.btnLogIn);
+            Button btnLiveScore = FindViewById<Button>(Resource.Id.btnLiveScore);
 
             btnQuickMatch.Click += delegate
             {
@@ -39,9 +40,9 @@ namespace TennisStats
             btnCreateMatch.Click += async delegate
             {
 
-                long date = (long) (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc) - new DateTime()).TotalMilliseconds;
+                 NavigationService.NavigateToPage(this, typeof(ActivityProfileStat));
 
-                Console.WriteLine(Util.GenerateTimeStamp());
+             
 
 //                StatisticController sc = new StatisticController();
 //
@@ -51,6 +52,8 @@ namespace TennisStats
 //                
 //                Console.WriteLine("Frederikkes først servs percent er: " + points);
             };
+
+            btnLiveScore.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityUserMatchStats)); };
         }
     }
 }
