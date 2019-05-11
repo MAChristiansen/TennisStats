@@ -53,7 +53,7 @@ namespace TennisStats
 //                Console.WriteLine("Frederikkes først servs percent er: " + points);
             };
 
-            btnLiveScore.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityUserMatchStats)); };
+            btnLiveScore.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLiveScore)); };
         }
     }
 }

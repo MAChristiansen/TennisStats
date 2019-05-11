@@ -39,7 +39,7 @@ namespace TennisStats.src.Controller
 
         /*
          *  Creates a new match.
-         *  Instantializes a match, set and game.        
+         *  Instantializes a match, set and game.
          */
         public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType, bool server)
         {
@@ -49,15 +49,15 @@ namespace TennisStats.src.Controller
             currentMatch.Sets.Add(currentSet);
             currentGame = new Game.GameBuilder(server ? team2Id : team1Id).build();
             currentSet.Games.Add(currentGame);
-            
+
             // Update the observers
             updateObservers(currentMatch, currentSet, currentGame);
         }
 
         /*
-         * 
+         *
          *  This method is handles the "ace"-action
-         * 
+         *
          */
         public void Ace(Match match, Game game, int serve, bool ace = true)
         {
@@ -84,9 +84,9 @@ namespace TennisStats.src.Controller
         }
 
         /*
-         * 
+         *
          *  This method is handles the "fault"-action
-         * 
+         *
          */
         public FaultCount Fault(Match match, Game game, int serve, bool fault = true)
         {
@@ -151,7 +151,7 @@ namespace TennisStats.src.Controller
 
         /*
          *   Get the current score of the current set.
-         * 
+         *
          */
         public List<int> GetCurrentMatchScore(Match match)
         {
@@ -161,7 +161,7 @@ namespace TennisStats.src.Controller
 
         /*
          *   Get the current score of the current set.
-         * 
+         *
          */
         public List<int> GetCurrentSetScore(Set set)
         {
@@ -171,8 +171,8 @@ namespace TennisStats.src.Controller
 
         /*
          *   Get the current score of the current game.
-         * 
-         */        
+         *
+         */
         public List<int> GetCurrentGameScore(Game game)
         {
             List<int> currentScore = new List<int> {game.lastScoreTeam1, game.lastScoreTeam2};
@@ -181,11 +181,11 @@ namespace TennisStats.src.Controller
 
         /*
          *   Get the current team names.
-         * 
+         *
          *   First entry in the list is team1
-         *   Second entry in the list is team2        
-         * 
-         */        
+         *   Second entry in the list is team2
+         *
+         */
          public List<string> GetTeamNames(Match match)
         {
             List<string> teamNames = new List<string> {match.Team1Id, match.Team2Id};
@@ -232,7 +232,7 @@ namespace TennisStats.src.Controller
 
         /*
          *   Subscribe method used by the observerpattern
-         * 
+         *
          */
         public IDisposable Subscribe(IObserver<Match> observer)
         {
@@ -248,7 +248,7 @@ namespace TennisStats.src.Controller
 
         /*
          *  Helping method to provide points to teams.
-         * 
+         *
          */
         private void GivePointToTeam(Match match, Game game, string winnerId)
         {
@@ -276,8 +276,8 @@ namespace TennisStats.src.Controller
 
         /*
          *   Helping method used to notify all observers
-         * 
-         */        
+         *
+         */
         private void updateObservers(Match match, Set set, Game game)
         {
             //Update game status before notifying observers
@@ -310,7 +310,7 @@ namespace TennisStats.src.Controller
             {
                 match.Sets.Remove(match.Sets[match.Sets.Count - 1]);
             }
-            
+
             //Post current match data
             FirebaseClient firebaseClient = FBTables.FirebaseClient;
             await firebaseClient.Child(FBTables.FBMatch).Child(match.MatchId).PutAsync(match);
@@ -373,30 +373,32 @@ namespace TennisStats.src.Controller
 
         /*
          *   Checking if someone has won the current set:
-         * 
+         *
          *   If one of the teams has more than 5 points:
          *   - Is the absolute value from the subtraction,
-         *     of the team scores more/equal than 2          
-         *   
+         *     of the team scores more/equal than 2
+         *
          */
         private void UpdateSetStatus(Match match, Set set)
         {
             if (set.Team1Score <= 5 && set.Team2Score <= 5) return;
-            if (Math.Abs(set.Team1Score - set.Team2Score) < 2 && 
+            if (Math.Abs(set.Team1Score - set.Team2Score) < 2 &&
                 (set.Team1Score != 6 || set.Team2Score != 7) &&
                 (set.Team1Score != 7 || set.Team2Score != 6)) return;
-            
+
+            set.Games.Remove(set.Games[set.Games.Count - 1]);
+
             RegisterSetWinner(match, set, set.Team1Score > set.Team2Score ? match.Team1Id : match.Team2Id);
         }
 
         /*
          *   Checking if someone has won the current game:
-         * 
+         *
          *   If one of the teams has more than 3 points:
          *   - Is the absolute value from the subtraction,
          *     of the team scores more/equal than 2
          *   - Who has the more points wins
-         *   
+         *
          */
         private void UpdateGameStatus(Match match, Set set, Game game)
         {
@@ -405,25 +407,25 @@ namespace TennisStats.src.Controller
 
             if (game.lastScoreTeam1 <= minimumScore && game.lastScoreTeam2 <= minimumScore) return;
             if (Math.Abs(game.lastScoreTeam1 - game.lastScoreTeam2) < 2) return;
-            
+
             RegisterGameWinner(match, set, game,
                 game.lastScoreTeam1 > game.lastScoreTeam2 ? match.Team1Id : match.Team2Id);
         }
 
 
-        /*             
+        /*
          *   Following is executed when registering a winner:
          *   - Set the winner id of current game
          *   - Add the finished game to the current set
          *   - Add a point to the winner in the set
          *   - Create a new game
-         *   - find the new server of that game 
-         */            
+         *   - find the new server of that game
+         */
         private void RegisterGameWinner(Match match, Set set, Game game, string winnerId)
         {
             // Register the winner of the current game
             game.WinnerId = winnerId;
-            
+
             // Give a point to the right team
             if (winnerId.Equals(match.Team1Id))
             {
@@ -454,14 +456,14 @@ namespace TennisStats.src.Controller
             else
             {
                 currentGame = new Game.GameBuilder(newServer).build();
-            }   
-            
+            }
+
             set.Games.Add(currentGame);
         }
 
         /*
          *   Service method used to register the winner of a set
-         */        
+         */
         private void RegisterSetWinner(Match match, Set set, string winnerId)
         {
             //Set the winner of the set, and add it to the match
@@ -481,10 +483,10 @@ namespace TennisStats.src.Controller
             currentSet = new Set.SetBuilder().build();
             match.Sets.Add(currentSet);
         }
-        
+
         /*
          *   Checks if the game is tiebreak,
-         *   if so, change server accordingly.        
+         *   if so, change server accordingly.
          */
         private void ChangeServer(Match match, Game game)
         {
@@ -503,5 +505,5 @@ namespace TennisStats.src.Controller
                 game.Servers.Add(currentServer);
             }
         }
-    } 
+    }
 }
