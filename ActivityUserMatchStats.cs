@@ -18,12 +18,12 @@ using TennisStats.src.Controller;
 namespace TennisStats
 {
     [Activity(Label = "ActivityLiveScore")]
-    public class ActivityLiveScore : Activity
+    public class ActivityUserMatchStats : Activity
     {
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.LiveScore);
+            SetContentView(Resource.Layout.UserMatchStats);
 
             List<Match> matchList = new List<Match>();
             

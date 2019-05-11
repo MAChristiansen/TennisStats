@@ -102,7 +102,7 @@
     <Compile Include="src\Controller\StatisticController.cs" />
     <Compile Include="FragmentMatchStats.cs" />
     <Compile Include="ActivityResultPage.cs" />
-    <Compile Include="ActivityLiveScore.cs" />
+    <Compile Include="ActivityUserMatchStats.cs" />
     <Compile Include="ActivityProfileStat.cs" />
     <Compile Include="FragmentUserStats.cs" />
     <Compile Include="FragmentUserMatchStats.cs" />
@@ -161,9 +161,8 @@
     <AndroidResource Include="Resources\layout\ProfileStat.axml" />
     <AndroidResource Include="Resources\layout\UserStats.axml" />
     <AndroidResource Include="Resources\layout\LiveScoreLayout.axml" />
-    <AndroidResource Include="Resources\layout\LiveScore.axml" />
+    <AndroidResource Include="Resources\layout\MatchStatScore.axml" />
     <AndroidResource Include="Resources\layout\UserMatchStats.axml" />
-    <AndroidResource Include="Resources\layout\SpecificUserMatchStats.axml" />
     <AndroidResource Include="Resources\layout\ProfilePage.axml" />
   </ItemGroup>
   <ItemGroup>
