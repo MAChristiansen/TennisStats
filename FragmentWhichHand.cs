@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using TennisStats.Enum;
 using TennisStats.Service;
 using TennisStats.src.Controller;
 using static TennisStats.Enum.HandPositionEnum;
@@ -54,10 +55,10 @@ namespace TennisStats
 
         private void Navigate()
         {
-            MatchController.Instance.inPlay();
+            MatchController.Instance.InPlay(matchController.GetCurrentGame());
             Bundle bundle = new Bundle();
-            bundle.PutInt("team1", matchController.GetCurrentGameScore()[0]);
-            bundle.PutInt("team2", matchController.GetCurrentGameScore()[1]);
+            bundle.PutInt("team1", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[0]);
+            bundle.PutInt("team2", matchController.GetCurrentGameScore(matchController.GetCurrentGame())[1]);
             NavigationService.NavigateToFragment(
                 FragmentManager,
                 Activity.FindViewById<FrameLayout>(Resource.Id.fragmentContainer),
