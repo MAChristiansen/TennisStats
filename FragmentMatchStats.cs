@@ -71,10 +71,7 @@ namespace TennisStats
             
             View view = inflater.Inflate(Resource.Layout.MatchStats, container, false);
 
-
-            string matchJSON = Arguments.GetString("matchJSON");
-
-            var match = (Match)JsonConvert.DeserializeObject(matchJSON);
+            Match match = MatchController.Match;
             
             _matchController = MatchController.Instance;
             _statisticController = new StatisticController();
