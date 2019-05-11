@@ -38,8 +38,8 @@ namespace TennisStats
                 matchList.Add(match.Object);
             }
             
-            LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(this, Resource.Layout.LiveScoreLayout, matchList, listView);
-            listView.Adapter = liveScoreAdapter;
+//            LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(this, Resource.Layout.LiveScoreLayout, matchList, listView);
+//            listView.Adapter = liveScoreAdapter;
 
 //            List<string> list = new List<string>();
 //            list.Add("lol");
