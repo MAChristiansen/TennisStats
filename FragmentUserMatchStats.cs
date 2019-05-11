@@ -45,14 +45,23 @@ namespace TennisStats
         public override async void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
-            
+
+            FrameLayout fragmentContainer = Activity.FindViewById<FrameLayout>(Resource.Id.FrameLayoutStat);
+
             StatisticController statisticController = new StatisticController();
 
             List<Match> matchList = await statisticController.GetMatches("Jaafar92");
             
             ListView listView = view.FindViewById<ListView>(Resource.Id.lvMatchStats);
             
-            LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(Activity, Resource.Layout.LiveScoreLayout, matchList, listView);
+            LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(
+                Activity, 
+                Resource.Layout.LiveScoreLayout, 
+                matchList, 
+                listView,
+                FragmentManager,
+                fragmentContainer);
+            
             listView.Adapter = liveScoreAdapter;
         }
     }
