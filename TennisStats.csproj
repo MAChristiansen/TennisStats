@@ -67,12 +67,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityLiveScore.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActivityMatchSetup.cs" />
     <Compile Include="FragmentMatchSetupCategory.cs" />
     <Compile Include="FragmentQuickMatchSetup.cs" />
+    <Compile Include="src\adapter\LiveScoreAdapter.cs" />
     <Compile Include="src\adapter\MatchStatisticsAdapter.cs" />
     <Compile Include="src\Controller\FBTables.cs" />
     <Compile Include="src\Controller\Util.cs" />
@@ -164,6 +166,8 @@
     <AndroidResource Include="Resources\layout\MatchStatScore.axml" />
     <AndroidResource Include="Resources\layout\UserMatchStats.axml" />
     <AndroidResource Include="Resources\layout\ProfilePage.axml" />
+    <AndroidResource Include="Resources\layout\LiveScoreLayout.axml" />
+    <AndroidResource Include="Resources\layout\LiveScore.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
