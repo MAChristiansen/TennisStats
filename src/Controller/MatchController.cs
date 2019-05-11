@@ -13,6 +13,7 @@ namespace TennisStats.src.Controller
 {
     public sealed class MatchController : IObservable<Match>
     {
+        public static Match Match { get; set; }
         public static Point.PointBuilder inPlayPB { get; set; }
 
         private List<IObserver<Match>> matchObservers = new List<IObserver<Match>>();
