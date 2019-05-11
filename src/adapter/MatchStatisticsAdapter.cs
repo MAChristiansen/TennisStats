@@ -12,7 +12,7 @@ using TennisStats.Service;
 
 namespace TennisStats.adapter
 {
-    public class LiveScoreAdapter : ArrayAdapter<Match>, AdapterView.IOnItemClickListener
+    public class MatchStatisticsAdapter : ArrayAdapter<Match>, AdapterView.IOnItemClickListener
     {
         private Context _context;
         private int _resource;
@@ -21,7 +21,7 @@ namespace TennisStats.adapter
         private FragmentManager _fragmentManager;
         private FrameLayout _fragmentContainer;
 
-        public LiveScoreAdapter(Context context,
+        public MatchStatisticsAdapter(Context context,
             int resource,
             List<Match> matches,
             ListView listView,

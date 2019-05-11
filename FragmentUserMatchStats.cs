@@ -54,7 +54,7 @@ namespace TennisStats
             
             ListView listView = view.FindViewById<ListView>(Resource.Id.lvMatchStats);
             
-            LiveScoreAdapter liveScoreAdapter = new LiveScoreAdapter(
+            MatchStatisticsAdapter matchStatisticsAdapter = new MatchStatisticsAdapter(
                 Activity, 
                 Resource.Layout.LiveScoreLayout, 
                 matchList, 
@@ -62,7 +62,7 @@ namespace TennisStats
                 FragmentManager,
                 fragmentContainer);
             
-            listView.Adapter = liveScoreAdapter;
+            listView.Adapter = matchStatisticsAdapter;
         }
     }
 }
