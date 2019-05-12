@@ -43,7 +43,7 @@ namespace TennisStats.src.Controller
          */
         public void CreateMatch(string team1Id, string team2Id, MatchParticipants participants, MatchType matchType, bool server)
         {
-            string matchId = team1Id + "||"+ team2Id;
+            string matchId = team1Id + "||"+ team2Id + "||" + Util.GenerateRamdom6DNumber();
             currentMatch = new Match.MatchBuilder(matchId, team1Id, team2Id, participants).matchType(matchType).startTime(Util.GenerateTimeStamp()).build();
             currentSet = new Set.SetBuilder().build();
             currentMatch.Sets.Add(currentSet);
