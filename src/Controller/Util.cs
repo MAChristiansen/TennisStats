@@ -49,5 +49,20 @@ namespace TennisStats.src.Controller
             return prefs.GetBoolean("userLogin", false);
         }
 
+        public static void PutStringToPreference(Context context, string key, string text)
+        {
+            PreferenceManager.GetDefaultSharedPreferences(context).Edit().PutString(key, text).Commit();
+        }
+
+        public static string GetStringFromPreference(Context context, string key)
+        {
+            return PreferenceManager.GetDefaultSharedPreferences(context).GetString(key, Constants.Default);
+        }
+
+        public static void RemoveStringFromPreference(Context context, string key)
+        {
+            PreferenceManager.GetDefaultSharedPreferences(context).Edit().Remove(key).Commit();
+        }
+
     }
 }
