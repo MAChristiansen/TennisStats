@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityResultPage.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="src\model\Set.cs" />
     <Compile Include="src\model\Team.cs" />
     <Compile Include="src\Service\ListAdapter.cs" />
+    <Compile Include="src\Service\LiveMatchService.cs" />
     <Compile Include="src\Service\NavigationService.cs" />
     <Compile Include="ActivityMatch.cs" />
     <Compile Include="FragmentServeScenario.cs" />
@@ -157,6 +159,7 @@
     <AndroidResource Include="Resources\layout\ProfilePage.axml" />
     <AndroidResource Include="Resources\layout\LiveMatches.axml" />
     <AndroidResource Include="Resources\layout\LiveMatchListItem.axml" />
+    <AndroidResource Include="Resources\layout\ResultPage.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

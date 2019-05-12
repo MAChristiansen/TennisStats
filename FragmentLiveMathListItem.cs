@@ -23,16 +23,18 @@ namespace TennisStats
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.LiveMatchListItem, null);
+            Console.WriteLine("Match " + "created");
             return view;
         }
 
-        public List<String> getMatchNames()
+        public void setMatch(Match match)
         {
-            var strings = new List<String>();
-            strings.Add("Hans");
-            strings.Add("Erik");
+            thisMatch = match;
+        }
 
-            return strings;
+        public Match getMatch()
+        {
+            return thisMatch;
         }
         
     }

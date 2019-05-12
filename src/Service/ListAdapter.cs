@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Android.App;
 using Android.Content;
 using Android.Views;
@@ -9,10 +10,10 @@ namespace TennisStats.Service
 {
     public class ListAdapter : BaseAdapter
     {
-        private List<FragmentLiveMathListItem> items;
+        private ObservableCollection<FragmentLiveMathListItem> items;
         private Activity context;
 
-        public ListAdapter(Activity context, List<FragmentLiveMathListItem> items)
+        public ListAdapter(Activity context, ObservableCollection<FragmentLiveMathListItem> items)
         {
             this.context = context;
             this.items = items;
@@ -28,9 +29,13 @@ namespace TennisStats.Service
                 view = context.LayoutInflater.Inflate(Resource.Layout.LiveMatchListItem, null);
             }
 
-            view.FindViewById<TextView>(Resource.Id.tvPlayer1).Text = item.getMatchNames()[0];
-            view.FindViewById<TextView>(Resource.Id.tvPlayer2).Text = item.getMatchNames()[1];
-
+            
+            view.FindViewById<TextView>(Resource.Id.tvPlayer1).Text = item.getMatch().Team1Id;
+            view.FindViewById<TextView>(Resource.Id.tvPlayer2).Text = item.getMatch().Team2Id;
+            /*
+            view.FindViewById<TextView>(Resource.Id.tvPlayer1).Text = "Hans";
+            view.FindViewById<TextView>(Resource.Id.tvPlayer2).Text = "Erik";
+*/
             return view;
         }
         
@@ -44,6 +49,11 @@ namespace TennisStats.Service
         public override Object GetItem(int position)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void setItems(ObservableCollection<FragmentLiveMathListItem> items)
+        {
+            this.items = items;
         }
         
     }

@@ -124,6 +124,11 @@ namespace TennisStats.Model
             public Match build() {
                 return new Match(this);
             }
+
+            public override string ToString()
+            {
+                return "Team1ID | " + _team1Id + "\nTeam2ID | " + _team2Id;
+            }
         }
     }
 }

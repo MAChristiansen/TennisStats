@@ -34,7 +34,8 @@ namespace TennisStats
                 NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
             };
 
-            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLogin)); };
+            // TODO : Indsæte ActivityLogin i ActivityLiveMatches
+            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLiveMatches)); };
 
             btnCreateMatch.Click += async delegate
             {
