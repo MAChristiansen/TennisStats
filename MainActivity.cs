@@ -30,28 +30,22 @@ namespace TennisStats
             Button btnLogin = FindViewById<Button>(Resource.Id.btnLogIn);
             Button btnLiveScore = FindViewById<Button>(Resource.Id.btnLiveScore);
 
-            btnQuickMatch.Click += delegate
+            Console.WriteLine(Util.GetStringFromPreference(this, Constants.UserId));
+            
+            if (Util.GetStringFromPreference(this, Constants.UserId) != Constants.Default) { btnLogin.Text = "Go To Profile"; }
+
+            btnQuickMatch.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup)); };
+
+            btnLogin.Click += delegate
             {
-                NavigationService.NavigateToPage(this, typeof(ActivityMatchSetup));
+                //Determine the navigation based on logged in or not
+                NavigationService.NavigateToPage(this,
+                    Util.GetStringFromPreference(this, Constants.UserId) != Constants.Default
+                        ? typeof(ActivityProfilePage)
+                        : typeof(ActivityLogin));
             };
 
-            btnLogin.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLogin)); };
-
-            btnCreateMatch.Click += async delegate
-            {
-
-                 NavigationService.NavigateToPage(this, typeof(ActivityProfileStat));
-
-             
-
-//                StatisticController sc = new StatisticController();
-//
-//                var listOfPoints = await sc.GetListOfPointsToBeCalculatedAsync("Frederikke", StatisticType.OVERALL);
-//
-//                double points = sc.calculateFirstServePercentage("Frederikke", listOfPoints);
-//                
-//                Console.WriteLine("Frederikkes først servs percent er: " + points);
-            };
+            btnCreateMatch.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityProfileStat)); };
 
             btnLiveScore.Click += delegate { NavigationService.NavigateToPage(this, typeof(ActivityLiveScore)); };
         }
