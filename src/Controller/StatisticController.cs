@@ -210,11 +210,11 @@ namespace TennisStats.src.Controller
 
         public async Task<List<Match>> GetMatches(string playerId)
         {
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
             
             List<Match> matches = new List<Match>();
             
-            var collectedMatches = await firebaseClient.Child(FBTables.FBMatch).OnceAsync<Match>();
+            var collectedMatches = await firebaseClient.Child(Constants.FBMatch).OnceAsync<Match>();
 
             foreach (var match in collectedMatches)
             {

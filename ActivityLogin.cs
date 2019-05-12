@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -30,7 +31,7 @@ namespace TennisStats
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Login);
             
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
 
             EditText etUsername = FindViewById<EditText>(Resource.Id.txtLoginUsername);
             EditText etPassword = FindViewById<EditText>(Resource.Id.txtLoginPassword);
@@ -50,7 +51,7 @@ namespace TennisStats
                 ProgressDialog progressDialog = Util.SimpleLoading(this, "Loading profile...");
                 progressDialog.Show();
                 
-                var users = await firebaseClient.Child(FBTables.FbUser).OnceAsync<Player>();
+                var users = await firebaseClient.Child(Constants.FbUser).OnceAsync<Player>();
   
                 foreach (var user in users)
                 {
@@ -69,8 +70,17 @@ namespace TennisStats
                             Bundle bundle = new Bundle();
                             bundle.PutString("Id", etUsername.Text.Trim());
                             bundle.PutString("password", etPassword.Text.Trim());
+                            Util.PutStringToPreference(this, Constants.UserId, etUsername.Text.Trim());
                             NavigationService.NavigateToPage(this, typeof(ActivityProfileSettings), bundle);
+                            Finish();
                         }
+                        else
+                        {
+                            Util.PutStringToPreference(this, Constants.UserId, etUsername.Text.Trim());
+                            NavigationService.NavigateToPage(this, typeof(ActivityProfilePage));
+                            Finish();
+                        }
+                        progressDialog.Dismiss();
                     }
                     else
                     {
@@ -89,7 +99,7 @@ namespace TennisStats
 
         private void ShowErrorMessage(Context context)
         {
-            Dialog dialog = Util.SimpleAlert(this, "Error", "Wrong username or password").Create();
+            Dialog dialog = Util.SimpleAlert(context, "Error", "Wrong username or password").Create();
             dialog.Show();
         }
 

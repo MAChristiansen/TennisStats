@@ -53,8 +53,8 @@ namespace TennisStats
         public override async void OnResume()
         {
             base.OnResume();
-            string playerId = Arguments.GetString("playerId");
-            StatisticTypeEnum.StatisticType type = (StatisticTypeEnum.StatisticType) Arguments.GetInt("statType");
+            string playerId = Arguments.GetString(Constants.UserId);
+            StatisticTypeEnum.StatisticType type = (StatisticTypeEnum.StatisticType) Arguments.GetInt(Constants.StatType);
             
             List<Point> points = await _statisticController.GetListOfPointsToBeCalculatedAsync(playerId, type);
 
@@ -70,7 +70,7 @@ namespace TennisStats
             tvT1TotalPointsWon.Text = _statisticController.calculateTotalPointsWon(playerId, points).ToString();
         }
 
-        public override async void OnViewCreated(View view, Bundle savedInstanceState)
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
             

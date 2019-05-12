@@ -28,7 +28,7 @@ namespace TennisStats
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateAccount);
 
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
             
             Button btnCreateAccount = FindViewById<Button>(Resource.Id.btnCreateAccount);
             EditText txtUsername = FindViewById<EditText>(Resource.Id.txtCreateAccountUsername);
@@ -47,7 +47,7 @@ namespace TennisStats
                 progressDialog.Show();
                 
                 // Get all usernames from database
-                var users = await firebaseClient.Child(FBTables.FbUser).OnceAsync<Player>();
+                var users = await firebaseClient.Child(Constants.FbUser).OnceAsync<Player>();
   
                 foreach (var user in users)
                 {
@@ -67,7 +67,7 @@ namespace TennisStats
                 }
                 else
                 {
-                    await firebaseClient.Child(FBTables.FbUser).Child(player.PlayerId).PutAsync(player);
+                    await firebaseClient.Child(Constants.FbUser).Child(player.PlayerId).PutAsync(player);
                     progressDialog.Dismiss();
                     Bundle bundle = new Bundle();
                     bundle.PutString("Id", txtUsername.Text.Trim());

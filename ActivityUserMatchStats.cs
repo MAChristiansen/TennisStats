@@ -29,9 +29,9 @@ namespace TennisStats
             
             ListView listView = FindViewById<ListView>(Resource.Id.livescore);
 
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
             
-            var matches = await firebaseClient.Child(FBTables.FbMatch).OnceAsync<Match>();
+            var matches = await firebaseClient.Child(Constants.FbMatch).OnceAsync<Match>();
 
             foreach (var match in matches)
             {
