@@ -49,5 +49,10 @@ namespace TennisStats.src.Controller
             return prefs.GetBoolean("userLogin", false);
         }
 
+        public static string GenerateRamdom6DNumber()
+        {
+            return new Random().Next(0, 999999).ToString("D6");
+        }
+
     }
 }
