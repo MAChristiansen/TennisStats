@@ -37,6 +37,8 @@ namespace TennisStats
 
         private Switch switchChooseServer;
 
+        private Spinner spinnerTeam1Player1, spinnerTeam1Player2, spinnerTeam2Player1, spinnerTeam2Player2;
+
         private bool isSingle = true;
 
         private bool switchChooseServerStatus;
@@ -69,10 +71,20 @@ namespace TennisStats
             tvChoosePlayer2Team2 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer2Team2);
             ivNext = view.FindViewById<ImageView>(Resource.Id.ivNext);
 
-            Spinner spinnerTeam1Player1 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam1Player1);
-            PopulatePlayerList(spinnerTeam1Player1);
+            spinnerTeam1Player1 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam1Player1);
+            spinnerTeam1Player2 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam1Player2);
+            spinnerTeam2Player1 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam2Player1);
+            spinnerTeam2Player2 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam2Player2);
+            
+            PopulatePlayerList(spinnerTeam1Player1, etTeam1Player1);
+            PopulatePlayerList(spinnerTeam1Player2, etTeam1Player2);
+            PopulatePlayerList(spinnerTeam2Player1, etTeam2Player1);
+            PopulatePlayerList(spinnerTeam2Player2, etTeam2Player2);
             
             tvChoosePlayer1Team1.Click += delegate { UpdateUiForSpinner(spinnerTeam1Player1, etTeam1Player1, tvChoosePlayer1Team1); };
+            tvChoosePlayer1Team2.Click += delegate { UpdateUiForSpinner(spinnerTeam2Player1, etTeam2Player1, tvChoosePlayer1Team2); };
+            tvChoosePlayer2Team1.Click += delegate { UpdateUiForSpinner(spinnerTeam1Player2, etTeam1Player2, tvChoosePlayer2Team1); };
+            tvChoosePlayer2Team2.Click += delegate { UpdateUiForSpinner(spinnerTeam2Player2, etTeam2Player2, tvChoosePlayer2Team2); };
 
 
             //Match Category spinner
@@ -142,7 +154,7 @@ namespace TennisStats
             }
         }
 
-        private async void PopulatePlayerList(Spinner spinner)
+        private async void PopulatePlayerList(Spinner spinner, EditText editText)
         {
             spinner.ItemSelected += onClubSelected;
             List<string> playerList = new List<string>();
@@ -166,8 +178,26 @@ namespace TennisStats
         private void onClubSelected (object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
-            Console.WriteLine(spinner.GetItemAtPosition(e.Position).ToString());
-            etTeam1Player1.Text = spinner.GetItemAtPosition(e.Position).ToString();
+
+            if (spinner == spinnerTeam1Player1)
+            {
+                etTeam1Player1.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
+
+            if (spinner == spinnerTeam1Player2)
+            {
+                etTeam1Player2.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
+
+            if (spinner == spinnerTeam2Player1)
+            {
+                etTeam2Player1.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
+
+            if (spinner == spinnerTeam2Player2)
+            {
+                etTeam2Player2.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
         }
         
         private void spinner_ItemSelected_Match_Category (object sender, AdapterView.ItemSelectedEventArgs e)
