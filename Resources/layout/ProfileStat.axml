@@ -31,7 +31,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/divider14"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txClub" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfilName" />
 
     <Button
             android:id="@+id/btLastYear"
@@ -44,7 +44,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/divider5"
             app:layout_constraintStart_toEndOf="@+id/divider14"
-            app:layout_constraintTop_toBottomOf="@+id/txClub" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfilName" />
 
 
     <Button
@@ -58,7 +58,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/divider13"
             app:layout_constraintStart_toEndOf="@+id/divider5"
-            app:layout_constraintTop_toBottomOf="@+id/txClub" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfilName" />
 
     <Button
             android:id="@+id/btMatch"
@@ -71,19 +71,6 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/divider13"
-            app:layout_constraintTop_toBottomOf="@+id/txClub" />
-
-    <TextView
-            android:id="@+id/txClub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Tennisklub"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvProfilName" />
 
     <FrameLayout

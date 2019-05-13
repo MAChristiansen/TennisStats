@@ -21,7 +21,6 @@ namespace TennisStats
     public class ActivityProfileStat : Activity
     {
         private TextView tvProfileName;
-        private TextView tvClub;
         private Button btnOverAll;
         private Button btnLastYear;
         private Button btnLastMonth;
@@ -37,19 +36,12 @@ namespace TennisStats
 
             // Define widgets
             tvProfileName = FindViewById<TextView>(Resource.Id.tvProfilName);
-            tvClub = FindViewById<TextView>(Resource.Id.txClub);
             btnOverAll = FindViewById<Button>(Resource.Id.btOverall);
             btnLastYear = FindViewById<Button>(Resource.Id.btLastYear);
             btnLastMonth = FindViewById<Button>(Resource.Id.btLastMonth);
             btnMatch = FindViewById<Button>(Resource.Id.btMatch);
 
             tvProfileName.Text = Util.GetStringFromPreference(this, Constants.UserId);
-//            var clubId = await Constants.FirebaseClient
-//                .Child(Constants.FbUser)
-//                .Child(Util.GetStringFromPreference(this, Constants.UserId))
-//                .Child(Constants.FbClubId).OnceAsync<string>();
-            
-            //TODO: HVORDAN FÅR JEG CLUBID FRA FIREBASE?
             
             Bundle bundle = new Bundle();
             bundle.PutString(Constants.UserId, Util.GetStringFromPreference(this, Constants.UserId));
