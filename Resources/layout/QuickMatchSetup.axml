@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.Fragments.Match_Setup_Teams_Frag">
-    
+
     <TextView
             android:text="Match Type"
             android:layout_width="wrap_content"
@@ -26,17 +26,17 @@
             app:layout_constraintStart_toStartOf="@+id/sCategory"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tvLabelCategory"/>
-    
+
     <TextView
             android:text="Match Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLabelCategory" 
+            android:id="@+id/tvLabelCategory"
             android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/sCategory" 
+            app:layout_constraintBottom_toTopOf="@+id/sCategory"
             app:layout_constraintStart_toStartOf="@+id/tvLabelTeam1"/>
-    
+
     <Spinner
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="@+id/tvLabelCategory"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/switch_choose_server"/>
-    
+
     <Switch
             android:id="@+id/switch_choose_server"
             android:layout_width="0dp"
@@ -100,10 +100,11 @@
             app:layout_constraintBottom_toTopOf="@+id/tvChoosePlayer1Team1"
             app:layout_constraintEnd_toEndOf="@+id/etTeam1Player2"
             app:layout_constraintStart_toStartOf="@+id/etTeam1Player2" />
-    
-    <TextView 
+
+
+    <TextView
             android:id="@+id/tvChoosePlayer1Team1"
-            android:layout_width="wrap_content" 
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choose player"
             android:textSize="10sp"
@@ -142,6 +143,17 @@
             android:textColor="#000"
             android:textColorHint="#000"
             android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+            android:id="@+id/spinnerTeam1Player2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:layout_marginStart="64dp"
+            android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -191,60 +203,82 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLabelTeam2" />
 
+    <Spinner
+            android:id="@+id/spinnerTeam2Player1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelTeam2" />
+
     <TextView
             android:id="@+id/tvChoosePlayer1Team2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Choose player"
-            android:textSize="10sp"
             android:textColor="#989CA7"
-            app:layout_constraintTop_toBottomOf="@+id/etTeam2Player1"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/etTeam1Player2"
             app:layout_constraintStart_toStartOf="@+id/etTeam1Player2"
-    />
-    
+            app:layout_constraintTop_toBottomOf="@+id/etTeam2Player1" />
+
     <EditText
-        android:id="@+id/etTeam2Player2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#000"
-        android:ems="10"
-        android:hint="Player 2"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/etTeam2Player1"
-        app:layout_constraintStart_toStartOf="@+id/etTeam2Player1"
-        app:layout_constraintTop_toBottomOf="@+id/etTeam2Player1" />
+            android:id="@+id/etTeam2Player2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#000"
+            android:ems="10"
+            android:hint="Player 2"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/etTeam2Player1"
+            app:layout_constraintStart_toStartOf="@+id/etTeam2Player1"
+            app:layout_constraintTop_toBottomOf="@+id/tvChoosePlayer1Team2" />
+
+    <Spinner
+            android:id="@+id/spinnerTeam2Player2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etTeam2Player2" />
 
     <TextView
             android:id="@+id/tvChoosePlayer2Team2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Choose player"
-            android:textSize="10sp"
             android:textColor="#989CA7"
-            app:layout_constraintTop_toBottomOf="@+id/etTeam2Player2"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/etTeam1Player2"
             app:layout_constraintStart_toStartOf="@+id/etTeam1Player2"
-    />
-    
-    
+            app:layout_constraintTop_toBottomOf="@+id/etTeam2Player2" />
+
+
     <ImageView
             android:id="@+id/ivNext"
             android:src="@drawable/ace"
             android:layout_width="50dp"
-            android:layout_height="50dp" 
+            android:layout_height="50dp"
             android:layout_marginBottom="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etTeam2Player2"
-            />
+    />
 
 </android.support.constraint.ConstraintLayout>
