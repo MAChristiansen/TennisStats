@@ -44,12 +44,7 @@ namespace TennisStats
             
             btnLiveMatches.Click += delegate
             {
-                // TODO : OutComment when we have a Live Matches fragment.
-                /*
-                NavigationService.NavigateToFragment(FragmentManager,
-                Activity.FindViewById<FrameLayout>(Resource.Id.fragmentContainer),
-                FragmentLiveMatches.NewInstance());
-                */
+                NavigationService.NavigateToPage(this, typeof(ActivityLiveScore));
             };
             
             btnLogOut.Click += delegate
