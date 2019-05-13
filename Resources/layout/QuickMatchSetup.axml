@@ -90,6 +90,16 @@
             app:layout_constraintBottom_toTopOf="@+id/tvChoosePlayer1Team1"
             app:layout_constraintEnd_toEndOf="@+id/etTeam1Player2"
             app:layout_constraintStart_toStartOf="@+id/etTeam1Player2" />
+
+    <Spinner
+            android:id="@+id/spinnerTeam1Player1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/tvChoosePlayer1Team1"
+            app:layout_constraintEnd_toEndOf="@+id/etTeam1Player2"
+            app:layout_constraintStart_toStartOf="@+id/etTeam1Player2" />
     
     <TextView 
             android:id="@+id/tvChoosePlayer1Team1"
