@@ -52,6 +52,8 @@ namespace TennisStats.src.Controller
         public static string GenerateRamdom6DNumber()
         {
             return new Random().Next(0, 999999).ToString("D6");
+        }
+
         public static void PutStringToPreference(Context context, string key, string text)
         {
             PreferenceManager.GetDefaultSharedPreferences(context).Edit().PutString(key, text).Commit();
