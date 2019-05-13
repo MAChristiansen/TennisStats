@@ -11,7 +11,7 @@ namespace TennisStats.src.Controller
         public static long OneMonthInMili = 2629746000;
 
         private static ISharedPreferences prefs;
-        
+
         public static AlertDialog.Builder SimpleAlert(Context context, string title, string message)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder (context);
@@ -52,6 +52,21 @@ namespace TennisStats.src.Controller
         public static string GenerateRamdom6DNumber()
         {
             return new Random().Next(0, 999999).ToString("D6");
+        }
+
+        public static void PutStringToPreference(Context context, string key, string text)
+        {
+            PreferenceManager.GetDefaultSharedPreferences(context).Edit().PutString(key, text).Commit();
+        }
+
+        public static string GetStringFromPreference(Context context, string key)
+        {
+            return PreferenceManager.GetDefaultSharedPreferences(context).GetString(key, Constants.Default);
+        }
+
+        public static void RemoveStringFromPreference(Context context, string key)
+        {
+            PreferenceManager.GetDefaultSharedPreferences(context).Edit().Remove(key).Commit();
         }
 
     }

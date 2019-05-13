@@ -15,6 +15,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using TennisStats.Model;
 using TennisStats.src.Controller;
+using TennisStats.Service;
 
 namespace TennisStats
 {
@@ -56,10 +57,11 @@ namespace TennisStats
 
             btnSaveSettings.Click += async delegate
             {
-                FirebaseClient firebaseClient = FBTables.FirebaseClient;
+                FirebaseClient firebaseClient = Constants.FirebaseClient;
                 _player.Name(etName.Text.Trim());
                 Player player = _player.build();
-                await firebaseClient.Child(FBTables.FbUser).Child(player.PlayerId).PutAsync(player);
+                await firebaseClient.Child(Constants.FbUser).Child(player.PlayerId).PutAsync(player);
+                NavigationService.NavigateToPage(this, typeof(ActivityProfilePage));
             };
         }
 
@@ -68,9 +70,9 @@ namespace TennisStats
             spinner.ItemSelected += onClubSelected;
             List<string> clubList = new List<string>();
 
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
             
-            var clubs = await firebaseClient.Child(FBTables.FbClub).OnceAsync<object>();
+            var clubs = await firebaseClient.Child(Constants.FbClub).OnceAsync<object>();
 
             foreach (var club in clubs)
             {

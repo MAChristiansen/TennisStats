@@ -29,9 +29,9 @@ namespace TennisStats
             ListView listView = FindViewById<ListView>(Resource.Id.livescore);
             Button btnUpdate = FindViewById<Button>(Resource.Id.btnUpdateLiveScore);
 
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
             
-            var matches = await firebaseClient.Child(FBTables.FbMatch).OnceAsync<Match>();
+            var matches = await firebaseClient.Child(Constants.FbMatch).OnceAsync<Match>();
             
             foreach (var match in matches)
             {
@@ -49,7 +49,7 @@ namespace TennisStats
 
         private static async Task UpdateMatchList(FirebaseClient firebaseClient, List<Match> matchList, LiveScoreAdapter liveScoreAdapter)
         {
-            var matches = await firebaseClient.Child(FBTables.FbMatch).OnceAsync<Match>();
+            var matches = await firebaseClient.Child(Constants.FbMatch).OnceAsync<Match>();
             
             liveScoreAdapter.Clear();
             

@@ -326,8 +326,8 @@ namespace TennisStats
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f08007c
-			public const int FrameLayoutStat = 2131230844;
+			// aapt resource value: 0x7f08007b
+			public const int FrameLayoutStat = 2131230843;
 			
 			// aapt resource value: 0x7f08000e
 			public const int barrier = 2131230734;
@@ -335,14 +335,14 @@ namespace TennisStats
 			// aapt resource value: 0x7f080000
 			public const int bottom = 2131230720;
 			
-			// aapt resource value: 0x7f080079
-			public const int btLastMonth = 2131230841;
-			
 			// aapt resource value: 0x7f080078
-			public const int btLastYear = 2131230840;
+			public const int btLastMonth = 2131230840;
 			
-			// aapt resource value: 0x7f08007b
-			public const int btMatch = 2131230843;
+			// aapt resource value: 0x7f080077
+			public const int btLastYear = 2131230839;
+			
+			// aapt resource value: 0x7f08007a
+			public const int btMatch = 2131230842;
 			
 			// aapt resource value: 0x7f080075
 			public const int btOverall = 2131230837;
@@ -353,8 +353,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f08002f
 			public const int btnCreateMatch = 2131230767;
 			
-			// aapt resource value: 0x7f080089
-			public const int btnDone = 2131230857;
+			// aapt resource value: 0x7f080088
+			public const int btnDone = 2131230856;
 			
 			// aapt resource value: 0x7f08006b
 			public const int btnLiveMatches = 2131230827;
@@ -386,11 +386,11 @@ namespace TennisStats
 			// aapt resource value: 0x7f080042
 			public const int btnStats = 2131230786;
 			
-			// aapt resource value: 0x7f08009c
-			public const int btnTeam1 = 2131230876;
+			// aapt resource value: 0x7f08009b
+			public const int btnTeam1 = 2131230875;
 			
-			// aapt resource value: 0x7f08009d
-			public const int btnTeam2 = 2131230877;
+			// aapt resource value: 0x7f08009c
+			public const int btnTeam2 = 2131230876;
 			
 			// aapt resource value: 0x7f08001f
 			public const int btnUpdateLiveScore = 2131230751;
@@ -407,8 +407,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f080019
 			public const int divider = 2131230745;
 			
-			// aapt resource value: 0x7f08007a
-			public const int divider13 = 2131230842;
+			// aapt resource value: 0x7f080079
+			public const int divider13 = 2131230841;
 			
 			// aapt resource value: 0x7f080076
 			public const int divider14 = 2131230838;
@@ -419,8 +419,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f080026
 			public const int divider16 = 2131230758;
 			
-			// aapt resource value: 0x7f08009a
-			public const int divider2 = 2131230874;
+			// aapt resource value: 0x7f080099
+			public const int divider2 = 2131230873;
 			
 			// aapt resource value: 0x7f08001b
 			public const int divider3 = 2131230747;
@@ -434,17 +434,17 @@ namespace TennisStats
 			// aapt resource value: 0x7f080001
 			public const int end = 2131230721;
 			
-			// aapt resource value: 0x7f080080
-			public const int etTeam1Player1 = 2131230848;
+			// aapt resource value: 0x7f08007f
+			public const int etTeam1Player1 = 2131230847;
 			
-			// aapt resource value: 0x7f080082
-			public const int etTeam1Player2 = 2131230850;
+			// aapt resource value: 0x7f080081
+			public const int etTeam1Player2 = 2131230849;
 			
-			// aapt resource value: 0x7f080085
-			public const int etTeam2Player1 = 2131230853;
+			// aapt resource value: 0x7f080084
+			public const int etTeam2Player1 = 2131230852;
 			
-			// aapt resource value: 0x7f080087
-			public const int etTeam2Player2 = 2131230855;
+			// aapt resource value: 0x7f080086
+			public const int etTeam2Player2 = 2131230854;
 			
 			// aapt resource value: 0x7f080043
 			public const int fragmentContainer = 2131230787;
@@ -455,50 +455,50 @@ namespace TennisStats
 			// aapt resource value: 0x7f080007
 			public const int invisible = 2131230727;
 			
-			// aapt resource value: 0x7f08008d
-			public const int ivAce = 2131230861;
-			
-			// aapt resource value: 0x7f080091
-			public const int ivApproach = 2131230865;
-			
-			// aapt resource value: 0x7f080099
-			public const int ivBackHand = 2131230873;
+			// aapt resource value: 0x7f08008c
+			public const int ivAce = 2131230860;
 			
 			// aapt resource value: 0x7f080090
-			public const int ivBaseline = 2131230864;
+			public const int ivApproach = 2131230864;
 			
-			// aapt resource value: 0x7f080094
-			public const int ivDropShot = 2131230868;
+			// aapt resource value: 0x7f080098
+			public const int ivBackHand = 2131230872;
 			
-			// aapt resource value: 0x7f08008b
-			public const int ivFault = 2131230859;
+			// aapt resource value: 0x7f08008f
+			public const int ivBaseline = 2131230863;
 			
-			// aapt resource value: 0x7f08008e
-			public const int ivFootFault = 2131230862;
+			// aapt resource value: 0x7f080093
+			public const int ivDropShot = 2131230867;
+			
+			// aapt resource value: 0x7f08008a
+			public const int ivFault = 2131230858;
+			
+			// aapt resource value: 0x7f08008d
+			public const int ivFootFault = 2131230861;
 			
 			// aapt resource value: 0x7f08001c
 			public const int ivForcedError = 2131230748;
 			
-			// aapt resource value: 0x7f08009b
-			public const int ivForeHand = 2131230875;
+			// aapt resource value: 0x7f08009a
+			public const int ivForeHand = 2131230874;
 			
-			// aapt resource value: 0x7f08008c
-			public const int ivInPlay = 2131230860;
+			// aapt resource value: 0x7f08008b
+			public const int ivInPlay = 2131230859;
 			
-			// aapt resource value: 0x7f080093
-			public const int ivLob = 2131230867;
+			// aapt resource value: 0x7f080092
+			public const int ivLob = 2131230866;
 			
 			// aapt resource value: 0x7f08004b
 			public const int ivNext = 2131230795;
 			
-			// aapt resource value: 0x7f080095
-			public const int ivReturn = 2131230869;
+			// aapt resource value: 0x7f080094
+			public const int ivReturn = 2131230868;
 			
-			// aapt resource value: 0x7f08008f
-			public const int ivServiceWinner = 2131230863;
+			// aapt resource value: 0x7f08008e
+			public const int ivServiceWinner = 2131230862;
 			
-			// aapt resource value: 0x7f080092
-			public const int ivSmash = 2131230866;
+			// aapt resource value: 0x7f080091
+			public const int ivSmash = 2131230865;
 			
 			// aapt resource value: 0x7f080036
 			public const int ivTeam1Serving = 2131230774;
@@ -509,14 +509,14 @@ namespace TennisStats
 			// aapt resource value: 0x7f08001d
 			public const int ivUnforcedError = 2131230749;
 			
-			// aapt resource value: 0x7f080096
-			public const int ivVolley = 2131230870;
+			// aapt resource value: 0x7f080095
+			public const int ivVolley = 2131230869;
 			
 			// aapt resource value: 0x7f08001a
 			public const int ivWinner = 2131230746;
 			
-			// aapt resource value: 0x7f08008a
-			public const int layout = 2131230858;
+			// aapt resource value: 0x7f080089
+			public const int layout = 2131230857;
 			
 			// aapt resource value: 0x7f080014
 			public const int lblCreateAccountHeader = 2131230740;
@@ -533,8 +533,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f08001e
 			public const int livescore = 2131230750;
 			
-			// aapt resource value: 0x7f080097
-			public const int lvMatchStats = 2131230871;
+			// aapt resource value: 0x7f080096
+			public const int lvMatchStats = 2131230870;
 			
 			// aapt resource value: 0x7f080012
 			public const int none = 2131230738;
@@ -584,8 +584,8 @@ namespace TennisStats
 			// aapt resource value: 0x7f080070
 			public const int switchProfileSettingsHand = 2131230832;
 			
-			// aapt resource value: 0x7f08007f
-			public const int switch_choose_server = 2131230847;
+			// aapt resource value: 0x7f08007e
+			public const int switch_choose_server = 2131230846;
 			
 			// aapt resource value: 0x7f080050
 			public const int textView14 = 2131230800;
@@ -617,17 +617,17 @@ namespace TennisStats
 			// aapt resource value: 0x7f080005
 			public const int top = 2131230725;
 			
-			// aapt resource value: 0x7f080081
-			public const int tvChoosePlayer1Team1 = 2131230849;
+			// aapt resource value: 0x7f080080
+			public const int tvChoosePlayer1Team1 = 2131230848;
 			
-			// aapt resource value: 0x7f080086
-			public const int tvChoosePlayer1Team2 = 2131230854;
+			// aapt resource value: 0x7f080085
+			public const int tvChoosePlayer1Team2 = 2131230853;
 			
-			// aapt resource value: 0x7f080083
-			public const int tvChoosePlayer2Team1 = 2131230851;
+			// aapt resource value: 0x7f080082
+			public const int tvChoosePlayer2Team1 = 2131230850;
 			
-			// aapt resource value: 0x7f080088
-			public const int tvChoosePlayer2Team2 = 2131230856;
+			// aapt resource value: 0x7f080087
+			public const int tvChoosePlayer2Team2 = 2131230855;
 			
 			// aapt resource value: 0x7f08003a
 			public const int tvGames = 2131230778;
@@ -644,20 +644,20 @@ namespace TennisStats
 			// aapt resource value: 0x7f080045
 			public const int tvLabelForm = 2131230789;
 			
+			// aapt resource value: 0x7f08007c
+			public const int tvLabelMatchType = 2131230844;
+			
 			// aapt resource value: 0x7f08007d
-			public const int tvLabelMatchType = 2131230845;
+			public const int tvLabelTeam1 = 2131230845;
 			
-			// aapt resource value: 0x7f08007e
-			public const int tvLabelTeam1 = 2131230846;
-			
-			// aapt resource value: 0x7f080084
-			public const int tvLabelTeam2 = 2131230852;
+			// aapt resource value: 0x7f080083
+			public const int tvLabelTeam2 = 2131230851;
 			
 			// aapt resource value: 0x7f080049
 			public const int tvLabelType = 2131230793;
 			
-			// aapt resource value: 0x7f080098
-			public const int tvListViewScore = 2131230872;
+			// aapt resource value: 0x7f080097
+			public const int tvListViewScore = 2131230871;
 			
 			// aapt resource value: 0x7f08003b
 			public const int tvPoints = 2131230779;
@@ -778,9 +778,6 @@ namespace TennisStats
 			
 			// aapt resource value: 0x7f08003d
 			public const int tvTeam2Sets = 2131230781;
-			
-			// aapt resource value: 0x7f080077
-			public const int txClub = 2131230839;
 			
 			// aapt resource value: 0x7f080016
 			public const int txtCreateAccountPassword = 2131230742;

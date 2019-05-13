@@ -76,7 +76,7 @@
     <Compile Include="FragmentQuickMatchSetup.cs" />
     <Compile Include="src\adapter\LiveScoreAdapter.cs" />
     <Compile Include="src\adapter\MatchStatisticsAdapter.cs" />
-    <Compile Include="src\Controller\FBTables.cs" />
+    <Compile Include="src\Controller\Constants.cs" />
     <Compile Include="src\Controller\Util.cs" />
     <Compile Include="src\enum\Enums.cs" />
     <Compile Include="src\model\Club.cs" />
@@ -109,6 +109,7 @@
     <Compile Include="FragmentUserStats.cs" />
     <Compile Include="FragmentUserMatchStats.cs" />
     <Compile Include="FragmentProfilePage.cs" />
+    <Compile Include="ActivityProfilePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

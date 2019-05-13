@@ -312,8 +312,8 @@ namespace TennisStats.src.Controller
             }
 
             //Post current match data
-            FirebaseClient firebaseClient = FBTables.FirebaseClient;
-            await firebaseClient.Child(FBTables.FBMatch).Child(match.MatchId).PutAsync(match);
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
+            await firebaseClient.Child(Constants.FBMatch).Child(match.MatchId).PutAsync(match);
         }
 
         private void UpdateMatchStatus(Match match)
