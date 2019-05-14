@@ -60,6 +60,7 @@ namespace TennisStats
                 FirebaseClient firebaseClient = Constants.FirebaseClient;
                 _player.Name(etName.Text.Trim());
                 Player player = _player.build();
+                Util.PutStringToPreference(this, Constants.UserId, player.PlayerId);
                 await firebaseClient.Child(Constants.FbUser).Child(player.PlayerId).PutAsync(player);
                 NavigationService.NavigateToPage(this, typeof(ActivityProfilePage));
             };
