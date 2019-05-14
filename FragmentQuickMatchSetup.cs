@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Firebase.Database;
 using TennisStats.Service;
 using TennisStats.src.Controller;
 using static TennisStats.Enum.MatchParticipantsEnum;
@@ -35,6 +36,8 @@ namespace TennisStats
         private TextView tvChoosePlayer1Team1, tvChoosePlayer2Team1, tvChoosePlayer1Team2, tvChoosePlayer2Team2;
 
         private Switch switchChooseServer;
+
+        private Spinner spinnerTeam1Player1, spinnerTeam1Player2, spinnerTeam2Player1, spinnerTeam2Player2;
 
         private bool isSingle = true;
 
@@ -67,6 +70,22 @@ namespace TennisStats
             tvChoosePlayer1Team2 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer1Team2);
             tvChoosePlayer2Team2 = view.FindViewById<TextView>(Resource.Id.tvChoosePlayer2Team2);
             ivNext = view.FindViewById<ImageView>(Resource.Id.ivNext);
+
+            spinnerTeam1Player1 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam1Player1);
+            spinnerTeam1Player2 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam1Player2);
+            spinnerTeam2Player1 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam2Player1);
+            spinnerTeam2Player2 = view.FindViewById<Spinner>(Resource.Id.spinnerTeam2Player2);
+            
+            PopulatePlayerList(spinnerTeam1Player1, etTeam1Player1);
+            PopulatePlayerList(spinnerTeam1Player2, etTeam1Player2);
+            PopulatePlayerList(spinnerTeam2Player1, etTeam2Player1);
+            PopulatePlayerList(spinnerTeam2Player2, etTeam2Player2);
+            
+            tvChoosePlayer1Team1.Click += delegate { UpdateUiForSpinner(spinnerTeam1Player1, etTeam1Player1, tvChoosePlayer1Team1); };
+            tvChoosePlayer1Team2.Click += delegate { UpdateUiForSpinner(spinnerTeam2Player1, etTeam2Player1, tvChoosePlayer1Team2); };
+            tvChoosePlayer2Team1.Click += delegate { UpdateUiForSpinner(spinnerTeam1Player2, etTeam1Player2, tvChoosePlayer2Team1); };
+            tvChoosePlayer2Team2.Click += delegate { UpdateUiForSpinner(spinnerTeam2Player2, etTeam2Player2, tvChoosePlayer2Team2); };
+
 
             //Match Category spinner
             sCategory.ItemSelected += spinner_ItemSelected_Match_Category;
@@ -117,6 +136,68 @@ namespace TennisStats
             };
             
             return view;
+        }
+
+        private void UpdateUiForSpinner(Spinner spinner, EditText editText, TextView textView)
+        {
+            if (editText.Visibility == ViewStates.Visible)
+            {
+                textView.Text = "Enter name yourself";
+                editText.Visibility = ViewStates.Invisible;
+                spinner.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                textView.Text = "Choose player";
+                editText.Visibility = ViewStates.Visible;
+                spinner.Visibility = ViewStates.Invisible;
+            }
+        }
+
+        private async void PopulatePlayerList(Spinner spinner, EditText editText)
+        {
+            spinner.ItemSelected += onClubSelected;
+            List<string> playerList = new List<string>();
+
+            FirebaseClient firebaseClient = Constants.FirebaseClient;
+            
+            var players = await firebaseClient.Child(Constants.FbUser).OnceAsync<object>();
+
+            foreach (var player in players)
+            {
+                playerList.Add(player.Key);
+            }
+            
+            playerList.Insert(0, "Choose player");
+
+            var adapter = new ArrayAdapter<string>(Activity, Android.Resource.Layout.SimpleListItem1, playerList);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = adapter;
+        }
+        
+        private void onClubSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+
+            if (spinner == spinnerTeam1Player1)
+            {
+                etTeam1Player1.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
+
+            if (spinner == spinnerTeam1Player2)
+            {
+                etTeam1Player2.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
+
+            if (spinner == spinnerTeam2Player1)
+            {
+                etTeam2Player1.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
+
+            if (spinner == spinnerTeam2Player2)
+            {
+                etTeam2Player2.Text = spinner.GetItemAtPosition(e.Position).ToString();
+            }
         }
         
         private void spinner_ItemSelected_Match_Category (object sender, AdapterView.ItemSelectedEventArgs e)
